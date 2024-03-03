@@ -34,7 +34,7 @@ class FoodItemAdapter(val onClickItem: ((Food) -> Unit)) :
         }
     }
 
-    fun set(list: ListFood) {
+    fun set(list: ListFood?) {
         data = list
     }
 
