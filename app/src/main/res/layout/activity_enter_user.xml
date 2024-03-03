@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/registrationuser" />
+
+
+    <ImageButton
+        android:id="@+id/buttonEnter"
+        android:layout_width="201dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="104dp"
+        android:background="@drawable/enter_orange"
+        android:onClick="enterUser"
+        android:text="Войти"
+        android:textColor="#fabe62"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="70dp"/>
+
+    <EditText
+        android:id="@+id/enterPhone2"
+        android:layout_width="380dp"
+        android:layout_height="53dp"
+        android:ems="10"
+        android:hint="Введите номер телефона"
+        android:inputType="phone"
+        android:soundEffectsEnabled="false"
+        android:textAlignment="center"
+        android:textColor="#E8DEDE"
+        android:textColorHint="#E8DEDE"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintHorizontal_bias="0.516"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.107" />
+
+    <EditText
+        android:id="@+id/enterPassword"
+        android:layout_width="380dp"
+        android:layout_height="53dp"
+        android:ems="10"
+        android:hint="Введите пароль"
+        android:soundEffectsEnabled="false"
+        android:textAlignment="center"
+        android:textColor="#E8DEDE"
+        android:textColorHint="#E8DEDE"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.209" />
+
+    <ImageView
+        android:id="@+id/buttonBackEnterUserMenu"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginHorizontal="5dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/shape_sphere"
+        android:src="@drawable/buttonback"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginVertical="14dp"
+        android:layout_marginStart="15dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
