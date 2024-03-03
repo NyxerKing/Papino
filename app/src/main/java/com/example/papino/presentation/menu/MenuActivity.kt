@@ -135,11 +135,11 @@ class MenuActivity : AppCompatActivity() {
                 }
 
                 override fun onTabUnselected(tab: TabLayout.Tab?) {
-                    Log.d("MenuActivity", "onTabUnselected ${tab?.text ?: ""}")
+                    //Log.d("MenuActivity", "onTabUnselected ${tab?.text ?: ""}")
                 }
 
                 override fun onTabReselected(tab: TabLayout.Tab?) {
-                    Log.d("MenuActivity", "onTabReselected ${tab?.text ?: ""}")
+                    //Log.d("MenuActivity", "onTabReselected ${tab?.text ?: ""}")
                 }
 
             })
