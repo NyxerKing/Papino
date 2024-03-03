@@ -27,8 +27,27 @@ class FoodItemAdapter(val onClickItem: ((Food) -> Unit)) :
             item?.let { food ->
                 name.text = food.namefood
                 detailsFood.text = food.detailsfood
-                cover.setImageResource(R.drawable.pizzatest)
-                tvSize.text = " см: ${food.sizeportion} цена: ${food.pricefood}"
+                //cover.setImageResource(R.drawable.pizzatest)
+
+                if (food.typeFoodid == "burger")
+                {
+                    cover.setImageResource(R.drawable.burger_test)
+                }
+                if (food.typeFoodid == "pizza")
+                {
+                    cover.setImageResource(R.drawable.pizzatest)
+                }
+                if (food.typeFoodid == "salad")
+                {
+                    cover.setImageResource(R.drawable.salad_test)
+                }
+
+                if (food.sizeportion == "")
+                {
+                    tvSize.text = "цена: ${food.pricefood}"
+                }
+                else
+                { tvSize.text = "${food.sizeportion} см / цена: ${food.pricefood}" }
                 root.setOnClickListener { onClickItem.invoke(food) }
             }
         }
@@ -36,6 +55,7 @@ class FoodItemAdapter(val onClickItem: ((Food) -> Unit)) :
 
     fun set(list: ListFood?) {
         data = list
+        notifyDataSetChanged()
     }
 
     class FoodItemViewHolder(val binding: ItemFoodBinding) : RecyclerView.ViewHolder(binding.root)

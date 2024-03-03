@@ -68,22 +68,60 @@
         android:id="@+id/imageViewIcon"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        app:srcCompat="@drawable/icoapp_menu_orange" />
+        app:srcCompat="@drawable/icoapp_menu_orange"
+        android:layout_marginTop="4dp"
+        />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabs"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:tabMode="scrollable"
+        app:tabTextColor="@color/orange"
+        android:layout_marginTop="8dp"
+        android:background="@color/black"
+        >
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/tab_menu_pizza" />
+            android:text="@string/tab_menu_pizza"
+            />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/tab_menu_burger" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tab_menu_salad" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tab_menu_meat" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tab_menu_sandvich" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tab_menu_soup" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tab_menu_snacks" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tab_menu_drink" />
 
     </com.google.android.material.tabs.TabLayout>
 

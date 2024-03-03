@@ -98,7 +98,7 @@ class MenuActivity : AppCompatActivity() {
                 FoodBasketModel(
                     id = foodVars.id!!,
                     name = foodVars.namefood!!,
-                    detailsFood = "Test 3",
+                    detailsFood = foodVars.detailsfood!!,
                     size = foodVars.sizeportion!!,
                     price = foodVars.pricefood!!
                 )
@@ -109,7 +109,7 @@ class MenuActivity : AppCompatActivity() {
                     FoodBasketModel(
                         id = foodVars.id!!,
                         name = foodVars.namefood!!,
-                        detailsFood = "Test 3",
+                        detailsFood = foodVars.detailsfood!!,
                         size = foodVars.sizeportion!!,
                         price = foodVars.pricefood!!
                     )
@@ -149,20 +149,26 @@ class MenuActivity : AppCompatActivity() {
 
     private fun changeTabs(typeFoodTab: String) {
         when (typeFoodTab) {
-            resources.getString(TypeFood.pizza.getResourceId()) -> {
+            resources.getString(TypeFood.pizza.getResourceId().toInt()) -> {
                 adapterMenu.set(list = getFoodToFilter(typeFood = TypeFood.pizza.getFasetFoodName()))
             }
 
-            resources.getString(TypeFood.burger.getResourceId()) -> {
-                adapterMenu.set(list = getFoodToFilter(typeFood = TypeFood.pizza.getFasetFoodName()))
+            resources.getString(TypeFood.burger.getResourceId().toInt()) -> {
+                adapterMenu.set(list = getFoodToFilter(typeFood = TypeFood.burger.getFasetFoodName()))
             }
+
+            resources.getString(TypeFood.salad.getResourceId().toInt()) -> {
+                adapterMenu.set(list = getFoodToFilter(typeFood = TypeFood.salad.getFasetFoodName()))
+            }
+
         }
     }
 
     private fun getFoodToFilter(typeFood: String): ListFood? {
-        val list = foods?.group?.filter { food -> food.typeFood == typeFood }
+        val list = foods?.group?.filter { food -> food.typeFoodid == typeFood }
         list?.let {
-            if(it.isNotEmpty()) return ListFood(group = it)
+            if(it.isNotEmpty())
+                return ListFood(group = it)
         }
         return foods
     }
