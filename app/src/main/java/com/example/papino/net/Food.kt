@@ -11,6 +11,6 @@ data class Food (
 
 
 data class ListFood (
-    val group: List<Food>
+    val group: ArrayList<Food>
 )
 
