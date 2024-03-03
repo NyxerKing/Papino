@@ -9,6 +9,7 @@ import android.view.Window
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.papino.R
 import com.example.papino.SharedKeys
 import com.example.papino.databinding.ActivityMenuBinding
 import com.example.papino.net.Food
@@ -27,10 +28,10 @@ import java.util.logging.Logger
 class MenuActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMenuBinding
-
-    private lateinit var listFoodToAdapter: ListFood
+    private var foods: ListFood? = null
 
     private val adapterMenu = FoodItemAdapter(::updateBasket)
+    private var tabSelected: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -131,7 +132,7 @@ class MenuActivity : AppCompatActivity() {
             tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab?) {
                     Log.d("MenuActivity", "onTabSelected ${tab?.text ?: ""}")
-                    //adapterMenu.set(list = )
+                    changeTabs(tab?.text.toString())
                 }
 
                 override fun onTabUnselected(tab: TabLayout.Tab?) {
@@ -146,17 +147,37 @@ class MenuActivity : AppCompatActivity() {
         }
     }
 
+    private fun changeTabs(typeFoodTab: String) {
+        when (typeFoodTab) {
+            resources.getString(TypeFood.pizza.getResourceId()) -> {
+                adapterMenu.set(list = getFoodToFilter(typeFood = TypeFood.pizza.getFasetFoodName()))
+            }
+
+            resources.getString(TypeFood.burger.getResourceId()) -> {
+                adapterMenu.set(list = getFoodToFilter(typeFood = TypeFood.pizza.getFasetFoodName()))
+            }
+        }
+    }
+
+    private fun getFoodToFilter(typeFood: String): ListFood? {
+        val list = foods?.group?.filter { food -> food.typeFood == typeFood }
+        list?.let {
+            if(it.isNotEmpty()) return ListFood(group = it)
+        }
+        return foods
+    }
+
 
     @Throws(Exception::class)
     fun getFood() {
-        val controller = ControllerFood() {
-            listFoodToAdapter = it
+        val controller = ControllerFood { listFood ->
+            foods = listFood
             setContentView(binding.root)
 
             with(binding) {
-                menuRecycler.setLayoutManager(GridLayoutManager(this@MenuActivity, 1));
+                menuRecycler.setLayoutManager(GridLayoutManager(this@MenuActivity, 1))
                 menuRecycler.adapter = adapterMenu
-                adapterMenu.set(list = listFoodToAdapter)
+                changeTabs(getString(R.string.tab_menu_pizza))
             }
         }
         controller.start()
