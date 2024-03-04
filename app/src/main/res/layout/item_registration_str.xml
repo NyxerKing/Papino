@@ -90,7 +90,7 @@
     </ImageView>
 
     <ImageButton
-        android:id="@+id/buttonSave"
+        android:id="@+id/buttonSaveRegistration"
         android:layout_width="201dp"
         android:layout_height="49dp"
         android:layout_marginStart="104dp"

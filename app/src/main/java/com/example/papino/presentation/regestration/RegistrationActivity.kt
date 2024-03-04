@@ -1,24 +1,24 @@
 package com.example.papino.presentation.regestration
 
-import android.content.Intent
+import android.content.Context
 import android.os.Bundle
-import android.view.Gravity
 import android.view.MenuItem
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
-import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.papino.MainActivity
 import com.example.papino.R
+import com.example.papino.SharedKeys
 import com.example.papino.net.ListUser
-import com.example.papino.net.User
-import com.example.papino.presentation.menu.MenuActivity
 import com.example.papino.presentation.regestration.controlles.ControllerUser
-import com.example.papino.utils.WorkWithUser
+import com.google.gson.Gson
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.UUID
+
 
 class RegistrationActivity : AppCompatActivity() {
     private lateinit var binding: RegistrationActivity
@@ -40,7 +40,7 @@ class RegistrationActivity : AppCompatActivity() {
                 or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
 
 
-        val buttonReg: ImageView = findViewById(R.id.buttonSave)
+        val buttonReg: ImageButton = findViewById(R.id.buttonSaveRegistration)
         buttonReg.setOnClickListener { checkPasswordAndSaveBase() }
 
         val buttonBack: ImageView = findViewById(R.id.buttonBackRegMenu)
@@ -50,28 +50,22 @@ class RegistrationActivity : AppCompatActivity() {
         }
     }
 
-    fun saveRegistratonUser()  : Boolean {
+    fun saveRegistratonUser(): Boolean {
 
-        val password = findViewById<EditText>(R.id.createPassword)
+
         val editSurname = findViewById<EditText>(R.id.editSurname)
         val name = findViewById<EditText>(R.id.editName)
-        val patronymic = findViewById<EditText>(R.id.createPassword)
+        val password = findViewById<EditText>(R.id.createPassword)
         val telephonenumber = findViewById<EditText>(R.id.editPhone)
-        val user = WorkWithUser(
-            editSurname.text.toString(),
-            name.text.toString(),
-            patronymic.text.toString(),
-            telephonenumber.text.toString(),
-            password = password.text.toString()
+
+        insertUser(
+            editSurname.text.toString(), name.text.toString(),
+            password.text.toString(), telephonenumber.text.toString(), "", ""
         )
-
-
-        // TODO: Слать в апи сохранение пользователя
         return true
     }
 
-    private fun checkPasswordAndSaveBase () : Boolean
-    {
+    private fun checkPasswordAndSaveBase(): Boolean {
         val password = findViewById<EditText>(R.id.createPassword).text
 
         if (password.length < 8) return false
@@ -79,16 +73,39 @@ class RegistrationActivity : AppCompatActivity() {
         if (password.filter { it.isLetter() }.filter { it.isUpperCase() }.firstOrNull() == null) return false
         if (password.filter { it.isLetter() }.filter { it.isLowerCase() }.firstOrNull() == null) return false
         if (password.filter { !it.isLetterOrDigit() }.firstOrNull() == null) return false*/
-
-        saveRegistratonUser();
-
-        return  true
+        saveRegistratonUser()
+        return true
     }
 
     @Throws(Exception::class)
-    fun insertUser(telephonenumber: String, password : String) {
-            val controller = ControllerUser() {}
-            controller.start(telephonenumber, password, false)
+    fun insertUser(
+        surname: String, name: String, password: String, telephoneNumber: String,
+        bonus: String, token: String
+    ) {
+
+        val controller = ControllerUser() {}
+        controller.start(
+            surname,
+            name,
+            telephoneNumber,
+            password,
+            "0",
+            true
+        )
+        //addUserShared()
+    }
+
+    private fun addUserShared()
+    {
+        /*val sharedPreferences = this@RegistrationActivity.getSharedPreferences(
+            SharedKeys.USER_DATA_KEY,
+            Context.MODE_PRIVATE
+        )
+
+        val editJson = Gson().toJson(user)
+        val edit = sharedPreferences.edit()
+        edit.putString(SharedKeys.BASKED_ITEM_KEY, editJson)
+        edit.commit()*/
     }
 
     override fun onContextItemSelected(item: MenuItem): Boolean {
