@@ -10,6 +10,11 @@ enum class TypeFood {
     burger {
         override fun getResourceId() = R.string.tab_menu_burger
         override fun getFasetFoodName(): String = "burger"
+    }
+    ,
+    salad {
+        override fun getResourceId() = R.string.tab_menu_salad
+        override fun getFasetFoodName(): String = "salad"
     };
 
     abstract fun getResourceId(): Int

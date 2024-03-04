@@ -1,22 +1,26 @@
 package com.example.papino.presentation.regestration
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Gravity
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.papino.R
+import com.example.papino.SharedKeys
 import com.example.papino.databinding.ActivityEnterUserBinding
 import com.example.papino.net.ListUser
 import com.example.papino.net.User
+import com.example.papino.presentation.basket.model.FoodBasketModel
 import com.example.papino.presentation.menu.MenuActivity
+import com.example.papino.presentation.menu.models.PackFoodBaskedModel
 import com.example.papino.presentation.regestration.controlles.ControllerUser
+import com.google.gson.Gson
 
 class EnterUserActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEnterUserBinding
@@ -47,7 +51,12 @@ class EnterUserActivity : AppCompatActivity() {
 
                 val telephonenumber: EditText = findViewById<EditText>(R.id.enterPhone2)
                 val password: EditText = findViewById<EditText>(R.id.enterPassword)
-                getUser(telephonenumber.getText().toString(), password.getText().toString())
+                val dateCreatedtoken: String? = "dd" // передавать с шареда?
+                getUser(
+                    telephonenumber.getText().toString(),
+                    password.getText().toString(),
+                    dateCreatedtoken!!
+                )
 
             }
 
@@ -55,14 +64,10 @@ class EnterUserActivity : AppCompatActivity() {
                 onBackPressed()
             }
         }
-
-
     }
 
-    private fun controlUserEnter(telephonenumber: String, password : String) : Boolean
-    {
-        if (telephonenumber.isNullOrEmpty() && password.isNullOrEmpty())
-        {
+    private fun controlUserEnter(telephonenumber: String, password: String): Boolean {
+        if (telephonenumber.isNullOrEmpty() && password.isNullOrEmpty()) {
             val toast = Toast.makeText(
                 applicationContext,
                 "Для входа введите номер телефона и пароль",
@@ -73,8 +78,7 @@ class EnterUserActivity : AppCompatActivity() {
             return false
         }
 
-        if (telephonenumber.isNullOrEmpty())
-        {
+        if (telephonenumber.isNullOrEmpty()) {
             val toast = Toast.makeText(
                 applicationContext,
                 "Введите номер телефона",
@@ -84,8 +88,7 @@ class EnterUserActivity : AppCompatActivity() {
             toast.show()
             return false
         }
-        if (password.isNullOrEmpty())
-        {
+        if (password.isNullOrEmpty()) {
             val toast = Toast.makeText(
                 applicationContext,
                 "Введите пароль",
@@ -99,7 +102,7 @@ class EnterUserActivity : AppCompatActivity() {
     }
 
     @Throws(Exception::class)
-    fun getUser(telephonenumber: String, password : String) {
+    fun getUser(telephonenumber: String, password: String, dateCreatedtoken: String) {
 
         if (controlUserEnter(telephonenumber, password)) {
             val controller = ControllerUser()
@@ -109,6 +112,7 @@ class EnterUserActivity : AppCompatActivity() {
                     val intent = Intent(this@EnterUserActivity, MenuActivity::class.java)
                     startActivity(intent)
                     finish()
+                    // checkUserTokenShared(callBackUser)
                 }
                 if (callBackUser.group.size < 1 || callBackUser.group.size > 1) {
                     val toast = Toast.makeText(
@@ -120,7 +124,23 @@ class EnterUserActivity : AppCompatActivity() {
                     toast.show()
                 }
             }
-            controller.start(telephonenumber, password, false)
+            controller.start("", "", telephonenumber, password, "",false)
         }
+    }
+
+
+    private fun addUserShared(user: ListUser)
+    {
+
+        if (user.group.size < 1) return
+        val sharedPreferences = this@EnterUserActivity.getSharedPreferences(
+            SharedKeys.USER_DATA_KEY,
+            Context.MODE_PRIVATE
+        )
+
+        val editJson = Gson().toJson(user)
+        val edit = sharedPreferences.edit()
+        edit.putString(SharedKeys.BASKED_ITEM_KEY, editJson)
+        edit.commit()
     }
 }

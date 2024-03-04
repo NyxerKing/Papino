@@ -9,6 +9,7 @@ import android.view.Window
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.papino.MainActivity
 import com.example.papino.R
 import com.example.papino.SharedKeys
 import com.example.papino.databinding.ActivityMenuBinding
@@ -18,6 +19,8 @@ import com.example.papino.presentation.basket.BasketActivity
 import com.example.papino.presentation.basket.model.FoodBasketModel
 import com.example.papino.presentation.menu.adapters.FoodItemAdapter
 import com.example.papino.presentation.menu.models.PackFoodBaskedModel
+import com.example.papino.presentation.regestration.EnterUserActivity
+import com.example.papino.presentation.regestration.RegistrationActivity
 import com.example.papino.presentation.regestration.controlles.ControllerFood
 import com.google.android.material.tabs.TabLayout
 import com.google.gson.Gson
@@ -48,6 +51,7 @@ class MenuActivity : AppCompatActivity() {
                 or View.SYSTEM_UI_FLAG_FULLSCREEN
                 or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
 
+
         binding = ActivityMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -59,6 +63,7 @@ class MenuActivity : AppCompatActivity() {
         binding.buttonBackActivityMenu.setOnClickListener {
             onBackPressed()
         }
+
         getFood()
         initTabs()
     }
@@ -98,7 +103,7 @@ class MenuActivity : AppCompatActivity() {
                 FoodBasketModel(
                     id = foodVars.id!!,
                     name = foodVars.namefood!!,
-                    detailsFood = "Test 3",
+                    detailsFood = foodVars.detailsfood!!,
                     size = foodVars.sizeportion!!,
                     price = foodVars.pricefood!!
                 )
@@ -109,7 +114,7 @@ class MenuActivity : AppCompatActivity() {
                     FoodBasketModel(
                         id = foodVars.id!!,
                         name = foodVars.namefood!!,
-                        detailsFood = "Test 3",
+                        detailsFood = foodVars.detailsfood!!,
                         size = foodVars.sizeportion!!,
                         price = foodVars.pricefood!!
                     )
@@ -149,20 +154,26 @@ class MenuActivity : AppCompatActivity() {
 
     private fun changeTabs(typeFoodTab: String) {
         when (typeFoodTab) {
-            resources.getString(TypeFood.pizza.getResourceId()) -> {
+            resources.getString(TypeFood.pizza.getResourceId().toInt()) -> {
                 adapterMenu.set(list = getFoodToFilter(typeFood = TypeFood.pizza.getFasetFoodName()))
             }
 
-            resources.getString(TypeFood.burger.getResourceId()) -> {
-                adapterMenu.set(list = getFoodToFilter(typeFood = TypeFood.pizza.getFasetFoodName()))
+            resources.getString(TypeFood.burger.getResourceId().toInt()) -> {
+                adapterMenu.set(list = getFoodToFilter(typeFood = TypeFood.burger.getFasetFoodName()))
             }
+
+            resources.getString(TypeFood.salad.getResourceId().toInt()) -> {
+                adapterMenu.set(list = getFoodToFilter(typeFood = TypeFood.salad.getFasetFoodName()))
+            }
+
         }
     }
 
     private fun getFoodToFilter(typeFood: String): ListFood? {
-        val list = foods?.group?.filter { food -> food.typeFood == typeFood }
+        val list = foods?.group?.filter { food -> food.typeFoodid == typeFood }
         list?.let {
-            if(it.isNotEmpty()) return ListFood(group = it)
+            if (it.isNotEmpty())
+                return ListFood(group = it)
         }
         return foods
     }

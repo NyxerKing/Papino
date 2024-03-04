@@ -11,12 +11,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 
-
-
 class ControllerUser(val callBack: (ListUser)->Unit): Callback<ListUser>
 {
     private var iUserGet: IUsers? = null
-    fun start(telephoneNumber : String, password : String, registration : Boolean)
+    fun start(surname : String, name: String, telephoneNumber : String, password : String,
+              bonus: String, registration : Boolean)
     {
         val okHttpClient: OkHttpClient = OkHttpClient.Builder()
             .connectTimeout(1, TimeUnit.MINUTES)
@@ -38,7 +37,7 @@ class ControllerUser(val callBack: (ListUser)->Unit): Callback<ListUser>
         }
         else
         {
-            call = getUser()?.getUser(telephoneNumber, password)
+            call = createUser()?.createUser(surname, name, telephoneNumber, password, bonus)
         }
         call?.enqueue(this)
     }
@@ -51,7 +50,7 @@ class ControllerUser(val callBack: (ListUser)->Unit): Callback<ListUser>
 
         }
         else {
-            System.out.println(response.errorBody())
+             var errorText = response.body().toString()
         }
     }
 
@@ -62,6 +61,11 @@ class ControllerUser(val callBack: (ListUser)->Unit): Callback<ListUser>
     }
 
     fun getUser(): IUsers?
+    {
+        return iUserGet
+    }
+
+    fun createUser(): IUsers?
     {
         return iUserGet
     }
