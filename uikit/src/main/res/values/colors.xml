@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Палитра для фона -->
+    <color name="backgroundTopColor">#262626</color>
+    <color name="backgroundBottomColor">#444444</color>
+    <color name="backgroundCardColor">#FFFFFF</color>
+    <color name="backgroundButtonColor">#F6C000</color>
+    <color name="backgroundInputColor">#353535</color>
+    <color name="backgroundMenuColor">#EEEEEE</color>
+
+    <!-- Палитра для элементов экрана -->
+    <color name="elementPrimaryColor">#FFFFFF</color>
+    <color name="elementPrimaryDarkColor">#262626</color>
+
+    <!-- Палитра для текста -->
+    <color name="textPrimaryColor">#262626</color>
+    <color name="textSecondaryColor">#FFFFFF</color>
+    <color name="text3Color">#878787</color>
+</resources>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="PaPino.Button" parent="Widget.Material3.Button">
+        <item name="backgroundTint">@color/backgroundButtonColor</item>
+        <item name="android:textColor">@color/textPrimaryColor</item>
+        <item name="cornerRadius">@dimen/d_10</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textFontWeight">600</item>
+    </style>
+</resources>
