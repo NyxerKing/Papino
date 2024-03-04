@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.papino.R
 import com.example.papino.SharedKeys
 import com.example.papino.net.ListUser
+import com.example.papino.presentation.menu.models.PackFoodBaskedModel
 import com.example.papino.presentation.regestration.controlles.ControllerUser
 import com.google.gson.Gson
 import java.text.SimpleDateFormat
@@ -22,6 +23,7 @@ import java.util.UUID
 
 class RegistrationActivity : AppCompatActivity() {
     private lateinit var binding: RegistrationActivity
+    private lateinit var callBackUser: ListUser
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,7 +62,7 @@ class RegistrationActivity : AppCompatActivity() {
 
         insertUser(
             editSurname.text.toString(), name.text.toString(),
-            password.text.toString(), telephonenumber.text.toString(), "", ""
+            password.text.toString(), telephonenumber.text.toString(), ""
         )
         return true
     }
@@ -80,10 +82,13 @@ class RegistrationActivity : AppCompatActivity() {
     @Throws(Exception::class)
     fun insertUser(
         surname: String, name: String, password: String, telephoneNumber: String,
-        bonus: String, token: String
+        bonus: String
     ) {
 
-        val controller = ControllerUser() {}
+        val controller = ControllerUser() {
+            callBackUser = it
+            addUserShared()
+        }
         controller.start(
             surname,
             name,
@@ -92,20 +97,39 @@ class RegistrationActivity : AppCompatActivity() {
             "0",
             true
         )
-        //addUserShared()
     }
 
     private fun addUserShared()
     {
-        /*val sharedPreferences = this@RegistrationActivity.getSharedPreferences(
+
+        // Записываем в шаред
+
+        val sharedPreferences = this@RegistrationActivity.getSharedPreferences(
             SharedKeys.USER_DATA_KEY,
             Context.MODE_PRIVATE
         )
 
-        val editJson = Gson().toJson(user)
+        val editJson = Gson().toJson(callBackUser.group[0].token)
         val edit = sharedPreferences.edit()
-        edit.putString(SharedKeys.BASKED_ITEM_KEY, editJson)
-        edit.commit()*/
+        edit.putString(SharedKeys.USER_ITEM_KEY, editJson)
+        edit.commit()
+
+
+        // -------------
+
+        // Считываем из шареда
+
+        /*val sharedPreferencesGet = this@RegistrationActivity.getSharedPreferences(
+            SharedKeys.USER_DATA_KEY,
+            Context.MODE_PRIVATE
+        )
+
+        val packFoodBask : ListUser?  =
+            Gson().fromJson(sharedPreferencesGet.getString(SharedKeys.USER_ITEM_KEY,  ""),
+                ListUser::class.java)
+
+
+        val gg = packFoodBask */
     }
 
     override fun onContextItemSelected(item: MenuItem): Boolean {

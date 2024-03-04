@@ -11,12 +11,12 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 
-class ControllerUser(val callBack: (ListUser)->Unit): Callback<ListUser>
-{
+class ControllerUser(val callBack: (ListUser) -> Unit) : Callback<ListUser> {
     private var iUserGet: IUsers? = null
-    fun start(surname : String, name: String, telephoneNumber : String, password : String,
-              bonus: String, registration : Boolean)
-    {
+    fun start(
+        surname: String, name: String, telephoneNumber: String, password: String,
+        bonus: String, registration: Boolean
+    ) {
         val okHttpClient: OkHttpClient = OkHttpClient.Builder()
             .connectTimeout(1, TimeUnit.MINUTES)
             .readTimeout(30, TimeUnit.SECONDS)
@@ -30,47 +30,45 @@ class ControllerUser(val callBack: (ListUser)->Unit): Callback<ListUser>
 
 
         iUserGet = retrofit.create(IUsers::class.java)
-        var call : Call<ListUser>? = null
-        if (!registration)
-        {
+        var call: Call<ListUser>? = null
+        if (!registration) {
             call = getUser()?.getUser(telephoneNumber, password)
-        }
-        else
-        {
+        } else {
             call = createUser()?.createUser(surname, name, telephoneNumber, password, bonus)
         }
         call?.enqueue(this)
     }
 
-    override fun onResponse(call: Call<ListUser>, response: Response<ListUser>)
-    {
+    override fun onResponse(call: Call<ListUser>, response: Response<ListUser>) {
         if (response.isSuccessful()) {
             val changesList = response.body()
-            if (changesList != null)  callBack.invoke(changesList)
+            if (changesList != null) callBack.invoke(changesList)
 
-        }
-        else {
-             var errorText = response.body().toString()
+            /*else
+            {
+                val token = response
+            }*/
+        } else {
+            var errorText = response.body().toString()
         }
     }
 
 
-    override fun onFailure(call: Call<ListUser>, t: Throwable)
-    {
+    override fun onFailure(call: Call<ListUser>, t: Throwable) {
         t.printStackTrace()
     }
 
-    fun getUser(): IUsers?
-    {
+    fun getUser(): IUsers? {
         return iUserGet
     }
 
-    fun createUser(): IUsers?
-    {
+    fun createUser(): IUsers? {
         return iUserGet
     }
 
-    companion object {const val BASE_URL = "http://192.168.55.7/"}
+    companion object {
+        const val BASE_URL = "http://192.168.55.7/"
+    }
 }
 
 // Рабочее с вводом пароля
