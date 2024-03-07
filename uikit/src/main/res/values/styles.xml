@@ -5,18 +5,40 @@
 
     <style name="PaPino.Button" parent="Widget.Material3.Button">
         <item name="backgroundTint">@color/backgroundButtonColor</item>
-        <item name="android:textColor">@color/textPrimaryColor</item>
         <item name="cornerRadius">@dimen/d_10</item>
-        <item name="android:textSize">16sp</item>
         <item name="android:paddingTop">@dimen/d_12</item>
         <item name="android:paddingBottom">@dimen/d_16</item>
+        <item name="android:textAppearance">@style/PaPino.TextAppearances.Button</item>
     </style>
 
     <style name="PaPino.Button.Text" parent="Widget.Material3.Button.TextButton">
-        <item name="android:textColor">@color/textSecondaryColor</item>
         <item name="cornerRadius">@dimen/d_10</item>
-        <item name="android:textSize">16sp</item>
         <item name="android:paddingTop">@dimen/d_12</item>
         <item name="android:paddingBottom">@dimen/d_16</item>
+        <item name="android:textAppearance">@style/PaPino.TextAppearances.Button.Text</item>
+    </style>
+
+    <style name="PaPino.Button.Plus">
+        <item name="android:background">@drawable/bg_rect_corner_right_10</item>
+        <item name="android:minHeight">@dimen/d_0</item>
+        <item name="android:inset">0dp</item>
+        <item name="android:padding">0dp</item>
+        <item name="cornerRadius">0dp</item>
+        <item name="android:textAppearance">@style/PaPino.TextAppearances.Button.Plus</item>
+    </style>
+
+    <style name="PaPino.Button.Minus">
+        <item name="android:background">@drawable/bg_rect_corner_left_10</item>
+        <item name="backgroundTint">@color/backgroundButtonGreyMedium</item>
+        <item name="android:minHeight">@dimen/d_0</item>
+        <item name="android:inset">0dp</item>
+        <item name="android:padding">0dp</item>
+        <item name="cornerRadius">0dp</item>
+        <item name="android:textAppearance">@style/PaPino.TextAppearances.Button.Plus</item>
+    </style>
+
+    <style name="PaPino.Button.Delete" parent="Widget.Material3.Button.TextButton">
+        <item name="android:padding">@dimen/d_10</item>
+        <item name="android:textAppearance">@style/PaPino.TextAppearances.Controller.Count</item>
     </style>
 </resources>

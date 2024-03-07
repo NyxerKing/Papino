@@ -7,19 +7,59 @@
 
     <style name="PaPino.TextAppearances.Card.Title">
         <item name="android:textColor">@color/textPrimaryColor</item>
-        <item name="android:textFontWeight" tools:ignore="NewApi">600</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textFontWeight" tools:ignore="NewApi">700</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineHeight" tools:ignore="NewApi">20sp</item>
     </style>
 
     <style name="PaPino.TextAppearances.Card.Subtitle">
         <item name="android:textColor">@color/text3Color</item>
         <item name="android:textFontWeight" tools:ignore="NewApi">600</item>
         <item name="android:textSize">10sp</item>
+        <item name="android:lineHeight" tools:ignore="NewApi">10sp</item>
     </style>
 
     <style name="PaPino.TextAppearances.Card.Price">
         <item name="android:textColor">@color/textPrimaryColor</item>
+        <item name="android:textFontWeight" tools:ignore="NewApi">600</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:lineHeight" tools:ignore="NewApi">28sp</item>
+    </style>
+
+    <style name="PaPino.TextAppearances.Card.Price.Count">
+        <item name="android:textColor">@color/textPrimaryColor</item>
+        <item name="android:textFontWeight" tools:ignore="NewApi">600</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:lineHeight" tools:ignore="NewApi">14sp</item>
+    </style>
+
+    <style name="PaPino.TextAppearances.Button">
+        <item name="android:textColor">@color/textPrimaryColor</item>
         <item name="android:textFontWeight" tools:ignore="NewApi">700</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineHeight" tools:ignore="NewApi">20sp</item>
+    </style>
+
+    <style name="PaPino.TextAppearances.Button.Text">
+        <item name="android:textColor">@color/textSecondaryColor</item>
+        <item name="android:textFontWeight" tools:ignore="NewApi">700</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineHeight" tools:ignore="NewApi">20sp</item>
+    </style>
+
+    <style name="PaPino.TextAppearances.Controller" />
+
+    <style name="PaPino.TextAppearances.Controller.Count">
+        <item name="android:textColor">@color/textPrimaryColor</item>
+        <item name="android:textFontWeight" tools:ignore="NewApi">400</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineHeight" tools:ignore="NewApi">20sp</item>
+    </style>
+
+    <style name="PaPino.TextAppearances.Button.Plus">
+        <item name="android:textColor">@color/textPrimaryColor</item>
+        <item name="android:textFontWeight" tools:ignore="NewApi">800</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:lineHeight" tools:ignore="NewApi">28sp</item>
     </style>
 </resources>

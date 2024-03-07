@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+    <ru.papino.uikit.components.Button
+        android:id="@+id/buttonDelete"
+        style="@style/PaPino.Button.Delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/uikit_delete"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ru.papino.uikit.components.Button
+        android:id="@+id/buttonMinus"
+        style="@style/PaPino.Button.Minus"
+        android:layout_width="@dimen/d_42"
+        android:layout_height="@dimen/d_0"
+        android:minWidth="@dimen/d_42"
+        android:text="@string/minus"
+        app:layout_constraintBottom_toBottomOf="@+id/textCount"
+        app:layout_constraintEnd_toStartOf="@+id/textCount"
+        app:layout_constraintTop_toTopOf="@+id/textCount" />
+
+    <TextView
+        android:id="@+id/textCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/backgroundMenuColor"
+        android:paddingHorizontal="@dimen/d_20"
+        android:paddingVertical="@dimen/d_10"
+        android:textAppearance="@style/PaPino.TextAppearances.Controller.Count"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/buttonPlus"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="2" />
+
+    <ru.papino.uikit.components.Button
+        android:id="@+id/buttonPlus"
+        style="@style/PaPino.Button.Plus"
+        android:layout_width="@dimen/d_42"
+        android:layout_height="@dimen/d_0"
+        android:minWidth="@dimen/d_42"
+        android:text="@string/plus"
+        app:layout_constraintBottom_toBottomOf="@+id/textCount"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textCount" />
+
+</merge>

@@ -8,6 +8,7 @@
     <color name="backgroundButtonColor">#F6C000</color>
     <color name="backgroundInputColor">#353535</color>
     <color name="backgroundMenuColor">#EEEEEE</color>
+    <color name="backgroundButtonGreyMedium">#E0E0E0</color>
 
     <!-- Палитра для элементов экрана -->
     <color name="elementPrimaryColor">#FFFFFF</color>
