@@ -12,37 +12,35 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/d_20">
+        android:padding="@dimen/d_14">
 
         <ImageView
             android:id="@+id/imagePreview"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:minHeight="200dp"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/pizza_pepperoni" />
+            tools:src="@drawable/pizza_pepperoni_2" />
 
         <TextView
             android:id="@+id/textTitle"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/d_20"
+            android:layout_marginStart="@dimen/d_10"
             android:textAppearance="@style/PaPino.TextAppearances.Card.Title"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imagePreview"
+            app:layout_constraintStart_toEndOf="@+id/imagePreview"
+            app:layout_constraintTop_toTopOf="@+id/imagePreview"
             tools:text="Пепперони 40 см" />
 
         <TextView
             android:id="@+id/textSubtitle"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/d_6"
+            android:layout_marginTop="@dimen/d_10"
             android:textAppearance="@style/PaPino.TextAppearances.Card.Subtitle"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textTitle"
             app:layout_constraintTop_toBottomOf="@+id/textTitle"
             tools:text="сыр моцарелла, оливковое масло, сырокопченая колбаса, перец чили, помидоры в собственном соку, орегано, сушеный базилик, чеснок, сахар, соль, молотый черный перец" />
 
@@ -50,13 +48,22 @@
             android:id="@+id/textPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/d_6"
-            android:layout_marginBottom="@dimen/d_10"
+            android:layout_marginTop="@dimen/d_10"
             android:textAppearance="@style/PaPino.TextAppearances.Card.Price"
-            app:layout_constraintBottom_toBottomOf="@+id/buttonAddCart"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/buttonAddCart"
+            app:layout_constraintTop_toBottomOf="@+id/imagePreview"
             tools:text="35 000" />
+
+        <TextView
+            android:id="@+id/textPriceCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/d_2"
+            android:textAppearance="@style/PaPino.TextAppearances.Card.Price.Count"
+            app:layout_constraintBottom_toBottomOf="@+id/textPrice"
+            app:layout_constraintStart_toEndOf="@+id/textPrice"
+            app:layout_constraintTop_toTopOf="@+id/textPrice"
+            tools:text="сум/шт" />
 
         <ru.papino.uikit.components.Button
             android:id="@+id/buttonAddCart"
@@ -64,8 +71,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/d_6"
+            android:drawableLeft="@drawable/ic_basket"
+            android:paddingHorizontal="@dimen/d_10"
+            app:layout_constraintBottom_toBottomOf="@+id/textPrice"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textSubtitle"
+            app:layout_constraintTop_toTopOf="@+id/textPrice"
             tools:text="В корзину" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -20,4 +20,9 @@
         android:id="@+id/cardMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <ru.papino.uikit.components.cards.CardBaskedComponent
+        android:id="@+id/cardBasked"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>

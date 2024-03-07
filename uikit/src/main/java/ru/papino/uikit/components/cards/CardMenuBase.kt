@@ -1,11 +1,13 @@
 package ru.papino.uikit.components.cards
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.net.Uri
 import android.util.AttributeSet
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import com.google.android.material.card.MaterialCardView
 import ru.papino.uikit.R
@@ -45,7 +47,8 @@ class CardMenuBase @JvmOverloads constructor(
      * @param title заголовок
      * @param subtitle описание
      * @param price цена
-     * @param onClick коллбэк на кнопку
+     * @param buttonColor фон кнопки
+     * @param buttonOnClick коллбэк на кнопку
      */
     fun set(
         @DrawableRes imageRes: Int? = null,
@@ -53,7 +56,8 @@ class CardMenuBase @JvmOverloads constructor(
         title: String? = null,
         subtitle: String? = null,
         price: String? = null,
-        onClick: (() -> Unit)? = null,
+        @ColorRes buttonColor: Int? = null,
+        buttonOnClick: (() -> Unit)? = null,
     ) {
         imageRes?.let {
             imagePreview.setImageResource(it)
@@ -67,6 +71,10 @@ class CardMenuBase @JvmOverloads constructor(
         subtitle?.let { textSubtitle.text = it }
         price?.let { textPrice.text = it }
 
-        onClick?.let { click -> buttonAddCart.setOnClickListener { click() } }
+        buttonColor?.let { colorInt ->
+            buttonAddCart.backgroundTintList = ColorStateList.valueOf(colorInt)
+        }
+
+        buttonOnClick?.let { click -> buttonAddCart.setOnClickListener { click() } }
     }
 }
