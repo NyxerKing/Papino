@@ -8,7 +8,10 @@ import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.papino.DBTest
 import com.example.papino.R
 import com.example.papino.SharedKeys
 import com.example.papino.databinding.ActivityMenuBinding
@@ -44,17 +47,30 @@ class MenuActivity : AppCompatActivity() {
                 or View.SYSTEM_UI_FLAG_FULLSCREEN
                 or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
 
-
         binding = ActivityMenuBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        with(binding)
+        {
+            setContentView(root)
 
-        binding.imgBasket.setOnClickListener {
-            val intent = Intent(this@MenuActivity, BasketActivity::class.java)
-            startActivity(intent)
-        }
+            imgBasket.setOnClickListener {
+                val intent = Intent(this@MenuActivity, BasketActivity::class.java)
+                startActivity(intent)
+            }
 
-        binding.buttonBackActivityMenu.setOnClickListener {
-            onBackPressed()
+            buttonBackActivityMenu.setOnClickListener {
+                onBackPressed()
+            }
+            menuRecycler.setLayoutManager(GridLayoutManager(this@MenuActivity, 1))
+            menuRecycler.adapter = adapterMenu
+
+            val itemDecorator = DividerItemDecoration(root.context, DividerItemDecoration.VERTICAL)
+            ContextCompat.getDrawable(
+                root.context,
+                R.drawable.divider_vertical
+            )?.let { drawable ->
+                itemDecorator.setDrawable(drawable)
+            }
+            menuRecycler.addItemDecoration(itemDecorator)
         }
 
         getFood()
@@ -148,7 +164,8 @@ class MenuActivity : AppCompatActivity() {
     private fun changeTabs(typeFoodTab: String) {
         when (typeFoodTab) {
             resources.getString(TypeFood.pizza.getResourceId().toInt()) -> {
-                adapterMenu.set(list = getFoodToFilter(typeFood = TypeFood.pizza.getFasetFoodName()))
+                adapterMenu.set(list = DBTest.getDataTest())
+                //adapterMenu.set(list = getFoodToFilter(typeFood = TypeFood.pizza.getFasetFoodName()))
             }
 
             resources.getString(TypeFood.burger.getResourceId().toInt()) -> {
@@ -179,8 +196,6 @@ class MenuActivity : AppCompatActivity() {
             setContentView(binding.root)
 
             with(binding) {
-                menuRecycler.setLayoutManager(GridLayoutManager(this@MenuActivity, 1))
-                menuRecycler.adapter = adapterMenu
                 changeTabs(getString(R.string.tab_menu_pizza))
             }
         }

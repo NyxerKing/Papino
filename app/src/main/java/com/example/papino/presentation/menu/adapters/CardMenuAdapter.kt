@@ -36,13 +36,16 @@ class CardMenuAdapter(private val onClickItem: (Food) -> Unit) :
         fun set(food: Food) {
             cardMenu.set(
                 imageRes = ru.papino.uikit.R.drawable.pizza_pepperoni_2,
-                title = food.namefood,
+                title = "${food.namefood} ${food.sizeportion}",
                 subtitle = food.detailsfood,
                 price = food.pricefood,
+                priceCount = cardMenu.resources.getString(ru.papino.uikit.R.string.count_text),
+                buttonText = cardMenu.context.resources.getString(ru.papino.uikit.R.string.add_to_cart),
                 buttonOnClick = {
                     onClickItem(food)
                     cardMenu.set(
-                        buttonColor = ru.papino.uikit.R.color.backgroundButtonGreyMedium
+                        buttonColor = ru.papino.uikit.R.color.backgroundButtonGreyMedium,
+                        buttonText = cardMenu.resources.getString(ru.papino.uikit.R.string.to_cart)
                     )
                 }
             )
