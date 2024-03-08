@@ -25,8 +25,8 @@ import ru.papino.uikit.components.Button
  */
 class CardMenuBase @JvmOverloads constructor(
     context: Context,
-    attrs: AttributeSet,
-    defStyleAttr: Int
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
 ) : MaterialCardView(context, attrs, defStyleAttr) {
 
     init {
