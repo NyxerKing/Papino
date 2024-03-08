@@ -9,7 +9,6 @@ import android.view.Window
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.papino.MainActivity
 import com.example.papino.R
 import com.example.papino.SharedKeys
 import com.example.papino.databinding.ActivityMenuBinding
@@ -17,24 +16,18 @@ import com.example.papino.net.Food
 import com.example.papino.net.ListFood
 import com.example.papino.presentation.basket.BasketActivity
 import com.example.papino.presentation.basket.model.FoodBasketModel
-import com.example.papino.presentation.menu.adapters.FoodItemAdapter
+import com.example.papino.presentation.menu.adapters.CardMenuAdapter
 import com.example.papino.presentation.menu.models.PackFoodBaskedModel
-import com.example.papino.presentation.regestration.EnterUserActivity
-import com.example.papino.presentation.regestration.RegistrationActivity
 import com.example.papino.presentation.regestration.controlles.ControllerFood
 import com.google.android.material.tabs.TabLayout
 import com.google.gson.Gson
-import java.util.logging.Logger
-
-//var count = 0;
 
 class MenuActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMenuBinding
     private var foods: ListFood? = null
 
-    private val adapterMenu = FoodItemAdapter(::updateBasket)
-    private var tabSelected: String? = null
+    private val adapterMenu = CardMenuAdapter(::updateBasket)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -110,7 +103,7 @@ class MenuActivity : AppCompatActivity() {
             )
         } else {
             pack = PackFoodBaskedModel(
-                dataList = listOf<FoodBasketModel>(
+                dataList = listOf(
                     FoodBasketModel(
                         id = foodVars.id!!,
                         name = foodVars.namefood!!,
