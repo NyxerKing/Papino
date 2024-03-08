@@ -68,25 +68,22 @@
         android:id="@+id/imageViewIcon"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        app:srcCompat="@drawable/icoapp_menu_orange"
         android:layout_marginTop="4dp"
-        />
+        app:srcCompat="@drawable/icoapp_menu_orange" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabMode="scrollable"
-        app:tabTextColor="@color/orange"
         android:layout_marginTop="8dp"
         android:background="@color/black"
-        >
+        app:tabMode="scrollable"
+        app:tabTextColor="@color/orange">
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/tab_menu_pizza"
-            />
+            android:text="@string/tab_menu_pizza" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
@@ -129,7 +126,8 @@
         android:id="@+id/menuRecycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="5dp">
+        android:layout_marginTop="5dp"
+        android:paddingHorizontal="@dimen/d_10">
 
     </androidx.recyclerview.widget.RecyclerView>
 
