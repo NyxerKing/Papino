@@ -54,9 +54,6 @@ dependencies {
     implementation("com.github.sparrow007:carouselrecyclerview:1.2.6")
 
     implementation("com.squareup.okhttp3:okhttp:4.10.0")
-
-    implementation ("com.squareup.picasso:picasso:2.71828")
-
-    implementation("io.coil-kt:coil:2.3.0")
+    implementation("io.coil-kt:coil:2.6.0")
 
 }

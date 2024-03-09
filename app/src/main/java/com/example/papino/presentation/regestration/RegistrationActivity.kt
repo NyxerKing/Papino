@@ -13,7 +13,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.papino.R
-import com.example.papino.SharedKeys
+import com.example.papino.core.sharedPref.SharedKeys
 import com.example.papino.net.ListUser
 import com.example.papino.presentation.regestration.controlles.ControllerUser
 import com.google.gson.Gson

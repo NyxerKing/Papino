@@ -1,7 +1,5 @@
 package com.example.papino.presentation.basket.model
 
-import com.example.papino.presentation.menu.models.FoodVarsModel
-
 data class FoodBasketModel(
     var id: Int,
     val name: String,

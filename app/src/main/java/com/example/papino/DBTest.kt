@@ -12,39 +12,44 @@ object DBTest {
                 sizeportion = "40 см",
                 pricefood = "35 000",
                 detailsfood = "сыр моцарелла, оливковое масло, сырокопченая колбаса, перец чили, помидоры в собственном соку, орегано, сушеный базилик, чеснок, сахар, соль, молотый черный перец",
-                typeFoodid = "pizza"
+                typeFoodid = "pizza",
+                uriImageFood = "https://dodopizza-a.akamaihd.net/static/Img/Products/f8bcc0d18f5a4817a720a159f0f8c37c_292x292.webp"
             ),
             Food(
-                id = 1,
+                id = 2,
                 namefood = "Пепперони",
                 sizeportion = "40 см",
                 pricefood = "35 000",
                 detailsfood = "сыр моцарелла, оливковое масло, сырокопченая колбаса, перец чили, помидоры в собственном соку, орегано, сушеный базилик, чеснок, сахар, соль, молотый черный перец",
-                typeFoodid = "pizza"
+                typeFoodid = "pizza",
+                uriImageFood = "https://dodopizza-a.akamaihd.net/static/Img/Products/f8bcc0d18f5a4817a720a159f0f8c37c_292x292.webp"
             ),
             Food(
-                id = 1,
+                id = 3,
                 namefood = "Пепперони",
                 sizeportion = "40 см",
                 pricefood = "35 000",
                 detailsfood = "сыр моцарелла, оливковое масло, сырокопченая колбаса, перец чили, помидоры в собственном соку, орегано, сушеный базилик, чеснок, сахар, соль, молотый черный перец",
-                typeFoodid = "pizza"
+                typeFoodid = "pizza",
+                uriImageFood = "https://dodopizza-a.akamaihd.net/static/Img/Products/f8bcc0d18f5a4817a720a159f0f8c37c_292x292.webp"
             ),
             Food(
-                id = 1,
+                id = 4,
                 namefood = "Пепперони",
                 sizeportion = "40 см",
                 pricefood = "35 000",
                 detailsfood = "сыр моцарелла, оливковое масло, сырокопченая колбаса, перец чили, помидоры в собственном соку, орегано, сушеный базилик, чеснок, сахар, соль, молотый черный перец",
-                typeFoodid = "pizza"
+                typeFoodid = "pizza",
+                uriImageFood = "https://dodopizza-a.akamaihd.net/static/Img/Products/f8bcc0d18f5a4817a720a159f0f8c37c_292x292.webp"
             ),
             Food(
-                id = 1,
+                id = 5,
                 namefood = "Пепперони",
                 sizeportion = "40 см",
                 pricefood = "35 000",
                 detailsfood = "сыр моцарелла, оливковое масло, сырокопченая колбаса, перец чили, помидоры в собственном соку, орегано, сушеный базилик, чеснок, сахар, соль, молотый черный перец",
-                typeFoodid = "pizza"
+                typeFoodid = "pizza",
+                uriImageFood = "https://dodopizza-a.akamaihd.net/static/Img/Products/f8bcc0d18f5a4817a720a159f0f8c37c_292x292.webp"
             )
         )
     )

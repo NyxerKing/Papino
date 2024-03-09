@@ -1,6 +1,7 @@
 package ru.papino.uikit.components.cards
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.util.AttributeSet
 import android.util.TypedValue
@@ -56,6 +57,7 @@ class CardMenuBase @JvmOverloads constructor(
      *
      * @param imageRes картинка из ресурсов
      * @param imageUrl картинка из ссылки
+     * @param imageDrawable картинка из drawable
      * @param title заголовок
      * @param subtitle описание
      * @param price цена
@@ -67,6 +69,7 @@ class CardMenuBase @JvmOverloads constructor(
     fun set(
         @DrawableRes imageRes: Int? = null,
         imageUrl: String? = null,
+        imageDrawable: Drawable? = null,
         title: String? = null,
         subtitle: String? = null,
         price: String? = null,
@@ -75,12 +78,16 @@ class CardMenuBase @JvmOverloads constructor(
         @ColorRes buttonColor: Int? = null,
         buttonOnClick: (() -> Unit)? = null,
     ) {
+        imageUrl?.let {
+            imagePreview.setImageURI(Uri.parse(it))
+        }
+
         imageRes?.let {
             imagePreview.setImageResource(it)
-        } ?: run {
-            imageUrl?.let {
-                imagePreview.setImageURI(Uri.parse(it))
-            }
+        }
+
+        imageDrawable?.let {
+            imagePreview.setImageDrawable(it)
         }
 
         title?.let { textTitle.text = it }

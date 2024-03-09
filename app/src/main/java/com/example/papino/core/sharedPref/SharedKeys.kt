@@ -1,4 +1,4 @@
-package com.example.papino
+package com.example.papino.core.sharedPref
 
 object SharedKeys {
 
