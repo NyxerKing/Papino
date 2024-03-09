@@ -1,0 +1,490 @@
+{
+  "group": [
+    {
+      "id": 1,
+      "namefood": "Пепперони",
+      "sizeportion": "40 см",
+      "pricefood": 65000,
+      "detailsfood": "Острая разновидность итало-американского происхождения, приготовленна и приправленная паприкой или разновидностями перца чили",
+      "typeFoodid": "pizza",
+      "uriImageFood": "http://192.168.55.7/Images/pizzaPepperoni.png"
+    },
+    {
+      "id": 2,
+      "namefood": "Пепперони",
+      "sizeportion": "25 см",
+      "pricefood": 37000,
+      "detailsfood": "Острая разновидность итало-американского происхождения, приготовленна и приправленная паприкой или разновидностями перца чили",
+      "typeFoodid": "pizza",
+      "uriImageFood": "http://192.168.55.7/Images/pizzaPepperoni.png"
+    },
+    {
+      "id": 3,
+      "namefood": "Ветчина с грибами",
+      "sizeportion": "25 см",
+      "pricefood": 47000,
+      "detailsfood": "Итальянская пицца, приготовленная из запеченной ветчины, грибов, помидоров и сыра моцарелла.",
+      "typeFoodid": "pizza",
+      "uriImageFood": "http://192.168.55.7/Images/hamMushrooms.png"
+    },
+    {
+      "id": 4,
+      "namefood": "Ветчина с грибами",
+      "sizeportion": "40 см",
+      "pricefood": 67000,
+      "detailsfood": "Итальянская пицца, приготовленная из запеченной ветчины, грибов, помидоров и сыра моцарелла.",
+      "typeFoodid": "pizza",
+      "uriImageFood": "http://192.168.55.7/Images/hamMushrooms.png"
+    },
+    {
+      "id": 5,
+      "namefood": "Пицца Маргарита",
+      "sizeportion": "40 см",
+      "pricefood": 55000,
+      "detailsfood": "Пицца, округлой формы с приподнятым краем, украшенная измельченными вручную очищенными помидорами, моцареллой, листьями зелени.",
+      "typeFoodid": "pizza",
+      "uriImageFood": "http://192.168.55.7/Images/margarita.png"
+    },
+    {
+      "id": 6,
+      "namefood": "Пицца Маргарита",
+      "sizeportion": "25 см",
+      "pricefood": 30000,
+      "detailsfood": "Пицца, округлой формы с приподнятым краем, украшенная измельченными вручную очищенными помидорами, моцареллой, листьями зелени.",
+      "typeFoodid": "pizza",
+      "uriImageFood": "http://192.168.55.7/Images/margarita.png"
+    },
+    {
+      "id": 7,
+      "namefood": "Пицца 4 сезона",
+      "sizeportion": "25 см",
+      "pricefood": 40000,
+      "detailsfood": "",
+      "typeFoodid": "pizza",
+      "uriImageFood": "http://192.168.55.7/Images/pizza4sezon.png"
+    },
+    {
+      "id": 8,
+      "namefood": "Пицца 4 сезона",
+      "sizeportion": "40 см",
+      "pricefood": 74000,
+      "detailsfood": "",
+      "typeFoodid": "pizza",
+      "uriImageFood": "http://192.168.55.7/Images/pizza4sezon.png"
+    },
+    {
+      "id": 9,
+      "namefood": "Пицца Сырная",
+      "sizeportion": "40 см",
+      "pricefood": 55000,
+      "detailsfood": "",
+      "typeFoodid": "pizza",
+      "uriImageFood": "http://192.168.55.7/Images/pizzaCheese.png"
+    },
+    {
+      "id": 10,
+      "namefood": "Пицца Сырная",
+      "sizeportion": "25 см",
+      "pricefood": 30000,
+      "detailsfood": "",
+      "typeFoodid": "pizza",
+      "uriImageFood": "http://192.168.55.7/Images/pizzaCheese.png"
+    },
+    {
+      "id": 11,
+      "namefood": "Пицца Ассорти",
+      "sizeportion": "25 см",
+      "pricefood": 40000,
+      "detailsfood": "",
+      "typeFoodid": "pizza",
+      "uriImageFood": "http://192.168.55.7/Images/pizzaAssorted.png"
+    },
+    {
+      "id": 12,
+      "namefood": "Пицца Ассорти",
+      "sizeportion": "40 см",
+      "pricefood": 70000,
+      "detailsfood": "",
+      "typeFoodid": "pizza",
+      "uriImageFood": "http://192.168.55.7/Images/pizzaAssorted.png"
+    },
+    {
+      "id": 13,
+      "namefood": "Пицца курица с грибами",
+      "sizeportion": "40 см",
+      "pricefood": 68000,
+      "detailsfood": "",
+      "typeFoodid": "pizza",
+      "uriImageFood": "http://192.168.55.7/Images/chickenMushrooms.png"
+    },
+    {
+      "id": 14,
+      "namefood": "Пицца курица с грибами",
+      "sizeportion": "25 см",
+      "pricefood": 38000,
+      "detailsfood": "",
+      "typeFoodid": "pizza",
+      "uriImageFood": "http://192.168.55.7/Images/chickenMushrooms.png"
+    },
+    {
+      "id": 15,
+      "namefood": "Пицца мясо с грибами",
+      "sizeportion": "25 см",
+      "pricefood": 43000,
+      "detailsfood": "",
+      "typeFoodid": "pizza",
+      "uriImageFood": "http://192.168.55.7/Images/meatMushrooms.png"
+    },
+    {
+      "id": 16,
+      "namefood": "Пицца мясо с грибами",
+      "sizeportion": "40 см",
+      "pricefood": 75000,
+      "detailsfood": "",
+      "typeFoodid": "pizza",
+      "uriImageFood": "http://192.168.55.7/Images/meatMushrooms.png"
+    },
+    {
+      "id": 17,
+      "namefood": "Пицца сладкая",
+      "sizeportion": "40 см",
+      "pricefood": 85000,
+      "detailsfood": "",
+      "typeFoodid": "pizza",
+      "uriImageFood": "http://192.168.55.7/Images/sweetPizza.png"
+    },
+    {
+      "id": 18,
+      "namefood": "Пицца сладкая",
+      "sizeportion": "25 см",
+      "pricefood": 45000,
+      "detailsfood": "",
+      "typeFoodid": "pizza",
+      "uriImageFood": "http://192.168.55.7/Images/sweetPizza.png"
+    },
+    {
+      "id": 19,
+      "namefood": "Пицца 50/50",
+      "sizeportion": "25 см",
+      "pricefood": 40000,
+      "detailsfood": "",
+      "typeFoodid": "pizza",
+      "uriImageFood": "http://192.168.55.7/Images/pizza5050.png"
+    },
+    {
+      "id": 20,
+      "namefood": "Пицца 50/50",
+      "sizeportion": "40 см",
+      "pricefood": 70000,
+      "detailsfood": "",
+      "typeFoodid": "pizza",
+      "uriImageFood": "http://192.168.55.7/Images/pizza5050.png"
+    },
+    {
+      "id": 21,
+      "namefood": "Пицца шашлык",
+      "sizeportion": "40 см",
+      "pricefood": 68000,
+      "detailsfood": "",
+      "typeFoodid": "pizza",
+      "uriImageFood": "http://192.168.55.7/Images/pizzaShashkik.png"
+    },
+    {
+      "id": 22,
+      "namefood": "Пицца шашлык",
+      "sizeportion": "25 см",
+      "pricefood": 40000,
+      "detailsfood": "",
+      "typeFoodid": "pizza",
+      "uriImageFood": "http://192.168.55.7/Images/pizzaShashkik.png"
+    },
+    {
+      "id": 23,
+      "namefood": "Пицца казы",
+      "sizeportion": "25 см",
+      "pricefood": 47000,
+      "detailsfood": "",
+      "typeFoodid": "pizza",
+      "uriImageFood": "http://192.168.55.7/Images/pizzaKazi.png"
+    },
+    {
+      "id": 24,
+      "namefood": "Пицца казы",
+      "sizeportion": "40 см",
+      "pricefood": 77000,
+      "detailsfood": "",
+      "typeFoodid": "pizza",
+      "uriImageFood": "http://192.168.55.7/Images/pizzaKazi.png"
+    },
+    {
+      "id": 25,
+      "namefood": "Гамбургер",
+      "sizeportion": "",
+      "pricefood": 25000,
+      "detailsfood": "",
+      "typeFoodid": "burger",
+      "uriImageFood": "http://192.168.55.7/Images/burger.png"
+    },
+    {
+      "id": 26,
+      "namefood": "Чиз-бургер",
+      "sizeportion": "",
+      "pricefood": 28000,
+      "detailsfood": "",
+      "typeFoodid": "burger",
+      "uriImageFood": "http://192.168.55.7/Images/cheeseBurger.png"
+    },
+    {
+      "id": 27,
+      "namefood": "Оливье",
+      "sizeportion": "",
+      "pricefood": 25000,
+      "detailsfood": "Картофель, морковь, солёные огурцы, вареная колбаса, яйца, горошек, майонез",
+      "typeFoodid": "salad",
+      "uriImageFood": "http://192.168.55.7/Images/olive.png"
+    },
+    {
+      "id": 28,
+      "namefood": "Салат Аристократ",
+      "sizeportion": "",
+      "pricefood": 28000,
+      "detailsfood": "Мясо говядины, мясо куриное, зеленый горох, свежие огурцы, сыр янтарь, соус, зелень.",
+      "typeFoodid": "salad",
+      "uriImageFood": "http://192.168.55.7/Images/saladAristocrat.png"
+    },
+    {
+      "id": 29,
+      "namefood": "Фунчоза",
+      "sizeportion": "",
+      "pricefood": 21000,
+      "detailsfood": "Фунчоза, помидор, огурцы, обжаренное мясо говяжье, соус",
+      "typeFoodid": "salad",
+      "uriImageFood": "http://192.168.55.7/Images/funchoza.png"
+    },
+    {
+      "id": 30,
+      "namefood": "Мужской салат",
+      "sizeportion": "",
+      "pricefood": 30000,
+      "detailsfood": "Мясо говяжье, мясо куриное, мясо индейки, колбаса варёная, колбаса копченая, казы, зелёный горошек, майонез",
+      "typeFoodid": "salad",
+      "uriImageFood": "http://192.168.55.7/Images/menSalad.png"
+    },
+    {
+      "id": 31,
+      "namefood": "Донар",
+      "sizeportion": "",
+      "pricefood": 30000,
+      "detailsfood": "",
+      "typeFoodid": "sendwich",
+      "uriImageFood": "http://192.168.55.7/Images/donar.png"
+    },
+    {
+      "id": 32,
+      "namefood": "Хачапури с фисташками",
+      "sizeportion": "",
+      "pricefood": 43000,
+      "detailsfood": "",
+      "typeFoodid": "sendwich",
+      "uriImageFood": "http://192.168.55.7/Images/hachapuriPistachios.png"
+    },
+    {
+      "id": 33,
+      "namefood": "Лаваш Дурум",
+      "sizeportion": "",
+      "pricefood": 35000,
+      "detailsfood": "",
+      "typeFoodid": "sendwich",
+      "uriImageFood": "http://192.168.55.7/Images/lavashDurum.png"
+    },
+    {
+      "id": 34,
+      "namefood": "Лаваш Сармабайте",
+      "sizeportion": "",
+      "pricefood": 40000,
+      "detailsfood": "",
+      "typeFoodid": "sendwich",
+      "uriImageFood": "http://192.168.55.7/Images/lavashSarambayte.png"
+    },
+    {
+      "id": 35,
+      "namefood": "Чикен лаваш",
+      "sizeportion": "",
+      "pricefood": 28000,
+      "detailsfood": "",
+      "typeFoodid": "sendwich",
+      "uriImageFood": "http://192.168.55.7/Images/lavashChiken.png"
+    },
+    {
+      "id": 36,
+      "namefood": "Клаб сендвич с мясом",
+      "sizeportion": "",
+      "pricefood": 35000,
+      "detailsfood": "",
+      "typeFoodid": "sendwich",
+      "uriImageFood": "http://192.168.55.7/Images/klabSendwichMeat.png"
+    },
+    {
+      "id": 37,
+      "namefood": "Клаб сендвич куриный",
+      "sizeportion": "",
+      "pricefood": 33000,
+      "detailsfood": "",
+      "typeFoodid": "sendwich",
+      "uriImageFood": "http://192.168.55.7/Images/klabSendwichChiken.png"
+    },
+    {
+      "id": 38,
+      "namefood": "Пиде с мёдом",
+      "sizeportion": "",
+      "pricefood": 35000,
+      "detailsfood": "",
+      "typeFoodid": "sendwich",
+      "uriImageFood": "http://192.168.55.7/Images/pideHoney.png"
+    },
+    {
+      "id": 39,
+      "namefood": "Пиде с фаршем",
+      "sizeportion": "",
+      "pricefood": 40000,
+      "detailsfood": "",
+      "typeFoodid": "sendwich",
+      "uriImageFood": "http://192.168.55.7/Images/pideMincedMeat.png"
+    },
+    {
+      "id": 40,
+      "namefood": "Шурпа с фрикадельками",
+      "sizeportion": "",
+      "pricefood": 16000,
+      "detailsfood": "",
+      "typeFoodid": "soup",
+      "uriImageFood": "http://192.168.55.7/Images/shurpaMeatBalls.png"
+    },
+    {
+      "id": 41,
+      "namefood": "Шашлык кусковой говядина",
+      "sizeportion": "125 гр",
+      "pricefood": 17000,
+      "detailsfood": "",
+      "typeFoodid": "shashlik",
+      "uriImageFood": "http://192.168.55.7/Images/shashlikGovyadina.png"
+    },
+    {
+      "id": 42,
+      "namefood": "Шашлык кусковой говядина",
+      "sizeportion": "200 гр",
+      "pricefood": 35000,
+      "detailsfood": "",
+      "typeFoodid": "shashlik",
+      "uriImageFood": "http://192.168.55.7/Images/shashlikGovyadina.png"
+    },
+    {
+      "id": 43,
+      "namefood": "Шашлык баранина",
+      "sizeportion": "125 гр",
+      "pricefood": 17000,
+      "detailsfood": "",
+      "typeFoodid": "shashlik",
+      "uriImageFood": "http://192.168.55.7/Images/shashlikBaranina.png"
+    },
+    {
+      "id": 44,
+      "namefood": "Шашлык баранина",
+      "sizeportion": "200 гр",
+      "pricefood": 35000,
+      "detailsfood": "",
+      "typeFoodid": "shashlik",
+      "uriImageFood": "http://192.168.55.7/Images/shashlikBaranina.png"
+    },
+    {
+      "id": 45,
+      "namefood": "Крылышки барбекю",
+      "sizeportion": "1 кг",
+      "pricefood": 60000,
+      "detailsfood": "",
+      "typeFoodid": "shashlik",
+      "uriImageFood": "http://192.168.55.7/Images/wingsBarbecue.png"
+    },
+    {
+      "id": 46,
+      "namefood": "Шашлык куриный",
+      "sizeportion": "150 гр",
+      "pricefood": 15000,
+      "detailsfood": "",
+      "typeFoodid": "shashlik",
+      "uriImageFood": "http://192.168.55.7/Images/shashlikChiken.png"
+    },
+    {
+      "id": 47,
+      "namefood": "Шурпа",
+      "sizeportion": "",
+      "pricefood": 16000,
+      "detailsfood": "",
+      "typeFoodid": "soup",
+      "uriImageFood": "http://192.168.55.7/Images/shurpa.png"
+    },
+    {
+      "id": 48,
+      "namefood": "Шашлык фаршированный",
+      "sizeportion": "125 гр",
+      "pricefood": 15000,
+      "detailsfood": "",
+      "typeFoodid": "shashlik",
+      "uriImageFood": "http://192.168.55.7/Images/shashlikMincedMeat.png"
+    },
+    {
+      "id": 49,
+      "namefood": "Шашлык фаршированный",
+      "sizeportion": "200 гр",
+      "pricefood": 30000,
+      "detailsfood": "",
+      "typeFoodid": "shashlik",
+      "uriImageFood": "http://192.168.55.7/Images/shashlikMincedMeat.png"
+    },
+    {
+      "id": 50,
+      "namefood": "Хлеб",
+      "sizeportion": "",
+      "pricefood": 5000,
+      "detailsfood": "",
+      "typeFoodid": "bread",
+      "uriImageFood": "http://192.168.55.7/Images/bread.png"
+    },
+    {
+      "id": 51,
+      "namefood": "Хлеб ассорти",
+      "sizeportion": "",
+      "pricefood": 15000,
+      "detailsfood": "",
+      "typeFoodid": "bread",
+      "uriImageFood": "http://192.168.55.7/Images/breadAssorted.png"
+    },
+    {
+      "id": 52,
+      "namefood": "Луковые кольца",
+      "sizeportion": "150 гр",
+      "pricefood": 16000,
+      "detailsfood": "",
+      "typeFoodid": "snack",
+      "uriImageFood": "http://192.168.55.7/Images/onionRings.png"
+    },
+    {
+      "id": 53,
+      "namefood": "Картошка по деревенски",
+      "sizeportion": "150 гр",
+      "pricefood": 14000,
+      "detailsfood": "",
+      "typeFoodid": "snack",
+      "uriImageFood": "http://192.168.55.7/Images/potatoVilage.png"
+    },
+    {
+      "id": 54,
+      "namefood": "Картошка фри",
+      "sizeportion": "150 гр",
+      "pricefood": 12000,
+      "detailsfood": "",
+      "typeFoodid": "snack",
+      "uriImageFood": "http://192.168.55.7/Images/potatoFries.png"
+    }
+  ]
+}
