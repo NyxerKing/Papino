@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.papino.DBTest
 import com.example.papino.R
 import com.example.papino.core.sharedPref.SharedKeys
 import com.example.papino.databinding.ActivityMenuBinding
@@ -154,8 +155,8 @@ class MenuActivity : AppCompatActivity() {
     private fun changeTabs(typeFoodTab: String) {
         val list = when (typeFoodTab) {
             resources.getString(TypeFood.pizza.getResourceId()) -> {
-                //DBTest.getDataTest()
-                getFoodToFilter(typeFood = TypeFood.pizza.getFasetFoodName())
+                DBTest.getDataTest()
+                //getFoodToFilter(typeFood = TypeFood.pizza.getFasetFoodName())
             }
 
             resources.getString(TypeFood.burger.getResourceId()) -> {

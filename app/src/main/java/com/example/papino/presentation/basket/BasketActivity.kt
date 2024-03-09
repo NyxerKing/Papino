@@ -23,7 +23,8 @@ class BasketActivity : AppCompatActivity() {
 
     private lateinit var binding: AcitivityBasketBinding
 
-    private lateinit var sharedPreferences : SharedPreferences
+    private lateinit var sharedPreferences: SharedPreferences
+    private var dataBasket: PackFoodBaskedModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,22 +53,24 @@ class BasketActivity : AppCompatActivity() {
             basketRecyclerView.setLayoutManager(liner);
         }
 
-        val packFoodBask : PackFoodBaskedModel?  =
-            Gson().fromJson(sharedPreferences.getString(SharedKeys.BASKED_ITEM_KEY,  ""),
-                PackFoodBaskedModel::class.java)
 
-        if (packFoodBask != null) {
-            binding.basketRecyclerView.adapter = BasketItemAdapter(packFoodBask.dataList, ::onItemClickDelete)
-        }
-        else
-        {
-            val toast = Toast.makeText(
-                applicationContext,
-                "Ваша корзина пуста. Перейдите в меню",
-                Toast.LENGTH_SHORT
-            )
-            toast.setGravity(Gravity.CENTER, 0, 0)
-            toast.show()
+        Gson().fromJson(
+            sharedPreferences.getString(SharedKeys.BASKED_ITEM_KEY, ""),
+            PackFoodBaskedModel::class.java
+        ).let { pack ->
+            dataBasket = pack
+            dataBasket?.dataList?.let { list ->
+                initUI(basketFoods = list)
+                binding.basketRecyclerView.adapter = BasketItemAdapter(list, ::onItemClickDelete)
+            } ?: run {
+                val toast = Toast.makeText(
+                    applicationContext,
+                    "Ваша корзина пуста. Перейдите в меню",
+                    Toast.LENGTH_SHORT
+                )
+                toast.setGravity(Gravity.CENTER, 0, 0)
+                toast.show()
+            }
         }
 
         binding.buttonBackActivityMenu.setOnClickListener {
@@ -76,10 +79,12 @@ class BasketActivity : AppCompatActivity() {
     }
 
 
-    private fun onItemClickDelete(item : FoodBasketModel) {
-        val packFoodBask : PackFoodBaskedModel?  =
-            Gson().fromJson(sharedPreferences.getString(SharedKeys.BASKED_ITEM_KEY,  ""),
-                PackFoodBaskedModel::class.java)
+    private fun onItemClickDelete(item: FoodBasketModel) {
+        val packFoodBask: PackFoodBaskedModel? =
+            Gson().fromJson(
+                sharedPreferences.getString(SharedKeys.BASKED_ITEM_KEY, ""),
+                PackFoodBaskedModel::class.java
+            )
 
         if (packFoodBask != null) {
             packFoodBask.dataList.remove(item)
@@ -90,7 +95,33 @@ class BasketActivity : AppCompatActivity() {
         }
     }
 
-    private fun onSubmit() {
+    private fun initUI(basketFoods: List<FoodBasketModel>) {
+        with(binding) {
+            titleOrderFood.text =
+                resources.getString(
+                    ru.papino.uikit.R.string.insert_products,
+                    basketFoods.size.toString()
+                )
 
+            titleOrderFoodSum.text = resources.getString(
+                ru.papino.uikit.R.string.insert_sum,
+                basketFoods.sumOf { food -> food.price.replace(" ", "").toInt() }.toString()
+            )
+
+            //todo скидки нет
+            titleOrderDiscountSum.text = resources.getString(
+                ru.papino.uikit.R.string.insert_sum,
+                "0"
+            )
+
+            toPaySum.text = resources.getString(
+                ru.papino.uikit.R.string.insert_sum,
+                basketFoods.sumOf { food -> food.price.replace(" ", "").toInt() }.toString()
+            )
+
+            buttonCheckout.setOnClickListener {
+                //todo логика оформления заказа
+            }
+        }
     }
 }

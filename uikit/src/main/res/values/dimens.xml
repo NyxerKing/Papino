@@ -9,5 +9,6 @@
     <dimen name="d_16">16dp</dimen>
     <dimen name="d_20">20dp</dimen>
     <dimen name="d_32">32dp</dimen>
+    <dimen name="d_40">40dp</dimen>
     <dimen name="d_42">42dp</dimen>
 </resources>
