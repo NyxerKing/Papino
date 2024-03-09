@@ -4,94 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/main_logo_orange"
+    android:background="@drawable/bg_rect_base"
     >
 
 
-    <ImageButton
-        android:id="@+id/buttonEnterUserMenu"
-        android:layout_width="201dp"
-        android:layout_height="49dp"
-        android:background="@drawable/enter_orange"
-        android:textColor="#fabe62"
-        android:tooltipText="Войти"
+    <ImageView
+        android:id="@+id/mainActivityPizza"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/main_activity_pizza"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginBottom="70dp"/>
+        android:scaleType="fitEnd"
+        />
 
-    <ImageButton
-        android:id="@+id/buttonRegistrationMenu"
-        android:layout_width="201dp"
-        android:layout_height="49dp"
-        android:background="@drawable/registration_orange"
-        android:text="Зарегистрироваться"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ImageView
+        android:id="@+id/mainActivityLogo"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:orientation="vertical"
-        tools:ignore="MissingConstraints">
-
-        <ImageView
-            android:id="@+id/imgCabinetMaiMenu"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginHorizontal="5dp"
-            android:background="@drawable/shape_sphere"
-            android:src="@drawable/cabinet"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginVertical="14dp"
-            android:layout_marginStart="15dp"/>
-
-        <ImageView
-            android:id="@+id/imgBasketMainActivity"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginHorizontal="5dp"
-            android:background="@drawable/shape_sphere"
-            android:src="@drawable/menu_restoran"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-
-            android:layout_marginVertical="14dp"
-            android:layout_marginEnd="15dp"/>
-
-        <TextView
-            android:id="@+id/textViewTextMenu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Меню"
-            android:textColor="@color/white"
-            android:textSize="15sp"
-            android:textStyle="bold|italic"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/imgBasketMainActivity"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginRight="10dp"/>
-
-        <TextView
-            android:id="@+id/textViewtextLK"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="Профиль"
-            android:textColor="@color/white"
-            android:textSize="15sp"
-            android:textStyle="bold|italic"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@+id/imgCabinetMaiMenu"
-            app:layout_constraintTop_toTopOf="parent"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
+        android:layout_height="60dp"
+        app:srcCompat="@drawable/main_menu_logo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginBottom="80dp"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>
