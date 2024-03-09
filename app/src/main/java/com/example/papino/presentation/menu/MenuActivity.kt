@@ -11,9 +11,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.papino.DBTest
 import com.example.papino.R
+import com.example.papino.core.sharedPref.CoreSharedPreferences
 import com.example.papino.core.sharedPref.SharedKeys
+import com.example.papino.data.datasource.local.LocalDataSource
+import com.example.papino.data.datasource.net.NetDataSource
+import com.example.papino.data.repository.MenuRepository
 import com.example.papino.databinding.ActivityMenuBinding
 import com.example.papino.net.ListFood
 import com.example.papino.presentation.basket.BasketActivity
@@ -32,9 +35,17 @@ class MenuActivity : AppCompatActivity() {
 
     private val mapperFood = FoodMapper()
     private val adapterMenu = CardMenuAdapter(::updateBasket)
+    private lateinit var coreSP: CoreSharedPreferences
+    private lateinit var menuRepository: MenuRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        coreSP = CoreSharedPreferences(context = this)
+        menuRepository = MenuRepository(
+            localDS = LocalDataSource.getInstance(resources),
+            netDS = NetDataSource.getInstance()
+        )
+
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         getWindow().setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -76,28 +87,14 @@ class MenuActivity : AppCompatActivity() {
 
         getFood()
         initTabs()
+
+        //todo временное получение данныъ из json
+        initLocalMenu()
     }
 
     override fun onStart() {
         super.onStart()
-        val sharedPreferences = this@MenuActivity.getSharedPreferences(
-            SharedKeys.BASKED_DATA_KEY,
-            Context.MODE_PRIVATE
-        )
-
-        val pack: PackFoodBaskedModel? =
-            Gson().fromJson(
-                sharedPreferences.getString(SharedKeys.BASKED_ITEM_KEY, ""),
-                PackFoodBaskedModel::class.java
-            )
-
-        if (pack != null) {
-            binding.tvBasketCount.text = "+ ${pack.dataList.size}"
-
-            adapterMenu.checkInBasket(
-                listBasketId = mapperFood.toUI(pack).map { foodUI -> foodUI.id }
-            )
-        }
+        updateUI()
     }
 
     private fun updateBasket(foodVars: FoodUI) {
@@ -155,8 +152,7 @@ class MenuActivity : AppCompatActivity() {
     private fun changeTabs(typeFoodTab: String) {
         val list = when (typeFoodTab) {
             resources.getString(TypeFood.pizza.getResourceId()) -> {
-                DBTest.getDataTest()
-                //getFoodToFilter(typeFood = TypeFood.pizza.getFasetFoodName())
+                getFoodToFilter(typeFood = TypeFood.pizza.getFasetFoodName())
             }
 
             resources.getString(TypeFood.burger.getResourceId()) -> {
@@ -190,7 +186,10 @@ class MenuActivity : AppCompatActivity() {
             else -> null
         }
 
-        list?.let { adapterMenu.set(mapperFood.toUI(it)) }
+        list?.let {
+            adapterMenu.set(mapperFood.toUI(it))
+            updateUI()
+        }
     }
 
     private fun getFoodToFilter(typeFood: String): ListFood? {
@@ -211,5 +210,21 @@ class MenuActivity : AppCompatActivity() {
             changeTabs(getString(R.string.tab_menu_pizza))
         }
         controller.start()
+    }
+
+    private fun initLocalMenu() {
+        foods = menuRepository.getMenu()
+        changeTabs(getString(R.string.tab_menu_pizza))
+    }
+
+    private fun updateUI() {
+        coreSP.getBasket()
+            ?.let { basket ->
+                binding.tvBasketCount.text = "+ ${basket.dataList.size}"
+
+                adapterMenu.checkInBasket(
+                    listBasketId = mapperFood.toUI(basket).map { foodUI -> foodUI.id }
+                )
+            }
     }
 }
