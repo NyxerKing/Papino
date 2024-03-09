@@ -69,9 +69,6 @@ class MenuActivity : AppCompatActivity() {
                 startActivity(intent)
             }
 
-            buttonBackActivityMenu.setOnClickListener {
-                onBackPressed()
-            }
             menuRecycler.setLayoutManager(GridLayoutManager(this@MenuActivity, 1))
             menuRecycler.adapter = adapterMenu
 
@@ -85,11 +82,12 @@ class MenuActivity : AppCompatActivity() {
             menuRecycler.addItemDecoration(itemDecorator)
         }
 
-        getFood()
-        initTabs()
+        //getFood()
+
 
         //todo временное получение данныъ из json
         initLocalMenu()
+        initTabs()
     }
 
     override fun onStart() {

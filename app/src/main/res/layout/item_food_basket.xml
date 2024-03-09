@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="164dp"
         android:orientation="horizontal"
-        android:background="@drawable/plainitemfood"
+        android:background="@drawable/bg_rect_base"
         android:padding="6dp">
 
 

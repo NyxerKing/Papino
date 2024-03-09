@@ -3,6 +3,7 @@ package com.example.papino
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
@@ -10,8 +11,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.papino.core.sharedPref.SharedKeys
 import com.example.papino.databinding.ActivityMainBinding
 import com.example.papino.presentation.menu.MenuActivity
-import com.example.papino.presentation.regestration.EnterUserActivity
-import com.example.papino.presentation.regestration.RegistrationActivity
 import com.google.gson.Gson
 
 
@@ -41,7 +40,18 @@ class MainActivity : AppCompatActivity() {
         )
         sharedPreferencesClear.edit().clear().commit();
 
-        with(binding) {
+        object : CountDownTimer(2500, 1000) {
+            override fun onFinish() {
+                val intent = Intent(this@MainActivity, MenuActivity::class.java)
+                startActivity(intent)
+            }
+
+            override fun onTick(millisUntilFinished: Long) {
+                // millisUntilFinished    The amount of time until finished.
+            }
+        }.start()
+
+        /*with(binding) {
             buttonEnterUserMenu.setOnClickListener {
                 val intent = Intent(this@MainActivity, EnterUserActivity::class.java)
                 startActivity(intent)
@@ -57,7 +67,7 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
             }
             checkUserTokenShared()
-        }
+        }*/
     }
 
     private fun checkUserTokenShared()
