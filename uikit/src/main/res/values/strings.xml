@@ -8,4 +8,12 @@
     <string name="minus">-</string>
     <string name="uikit_delete">Удалить</string>
     <string name="count_text">сум/шт</string>
+    <string name="your_order">Ваш заказ</string>
+    <string name="checkout">Оформить заказ</string>
+    <string name="address">Адрес:</string>
+    <string name="discount">Скидка</string>
+    <string name="to_pay">К оплате</string>
+
+    <string name="insert_products">Товары (%1$s)</string>
+    <string name="insert_sum">%1$s сум</string>
 </resources>
