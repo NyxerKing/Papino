@@ -11,15 +11,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.papino.DBTest
 import com.example.papino.R
-import com.example.papino.SharedKeys
+import com.example.papino.core.sharedPref.SharedKeys
 import com.example.papino.databinding.ActivityMenuBinding
-import com.example.papino.net.Food
 import com.example.papino.net.ListFood
 import com.example.papino.presentation.basket.BasketActivity
-import com.example.papino.presentation.basket.model.FoodBasketModel
+import com.example.papino.presentation.mappers.FoodMapper
 import com.example.papino.presentation.menu.adapters.CardMenuAdapter
+import com.example.papino.presentation.menu.models.FoodUI
 import com.example.papino.presentation.menu.models.PackFoodBaskedModel
 import com.example.papino.presentation.regestration.controlles.ControllerFood
 import com.google.android.material.tabs.TabLayout
@@ -30,11 +29,12 @@ class MenuActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMenuBinding
     private var foods: ListFood? = null
 
+    private val mapperFood = FoodMapper()
     private val adapterMenu = CardMenuAdapter(::updateBasket)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        requestWindowFeature(Window.FEATURE_NO_TITLE)
         getWindow().setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN
@@ -92,14 +92,18 @@ class MenuActivity : AppCompatActivity() {
 
         if (pack != null) {
             binding.tvBasketCount.text = "+ ${pack.dataList.size}"
+
+            adapterMenu.checkInBasket(
+                listBasketId = mapperFood.toUI(pack).map { foodUI -> foodUI.id }
+            )
         }
     }
 
-    private fun updateBasket(foodVars: Food) {
+    private fun updateBasket(foodVars: FoodUI) {
         addBasket(foodVars)
     }
 
-    private fun addBasket(foodVars: Food) {
+    private fun addBasket(foodVars: FoodUI) {
         val sharedPreferences = this@MenuActivity.getSharedPreferences(
             SharedKeys.BASKED_DATA_KEY,
             Context.MODE_PRIVATE
@@ -108,28 +112,10 @@ class MenuActivity : AppCompatActivity() {
         val json = sharedPreferences.getString(SharedKeys.BASKED_ITEM_KEY, "")
         if (json?.isNotEmpty() == true) {
             pack = Gson().fromJson(json, PackFoodBaskedModel::class.java)
-            pack.dataList.add(
-                FoodBasketModel(
-                    id = foodVars.id!!,
-                    name = foodVars.namefood!!,
-                    detailsFood = foodVars.detailsfood!!,
-                    size = foodVars.sizeportion!!,
-                    price = foodVars.pricefood!!,
-                    uriImageFood = foodVars.uriImageFood!!
-                )
-            )
+            pack.dataList.add(mapperFood.toBasketUI(foodUI = foodVars))
         } else {
             pack = PackFoodBaskedModel(
-                dataList = listOf(
-                    FoodBasketModel(
-                        id = foodVars.id!!,
-                        name = foodVars.namefood!!,
-                        detailsFood = foodVars.detailsfood!!,
-                        size = foodVars.sizeportion!!,
-                        price = foodVars.pricefood!!,
-                        uriImageFood = foodVars.uriImageFood!!
-                    )
-                ).toMutableList()
+                dataList = listOf(mapperFood.toBasketUI(foodUI = foodVars)).toMutableList()
             )
         }
 
@@ -141,6 +127,8 @@ class MenuActivity : AppCompatActivity() {
         val edit = sharedPreferences.edit()
         edit.putString(SharedKeys.BASKED_ITEM_KEY, editJson)
         edit.commit()
+
+        foodVars.isInBasket = true
     }
 
     private fun initTabs() {
@@ -164,44 +152,44 @@ class MenuActivity : AppCompatActivity() {
     }
 
     private fun changeTabs(typeFoodTab: String) {
-        when (typeFoodTab) {
-            resources.getString(TypeFood.pizza.getResourceId().toInt()) -> {
-                //adapterMenu.set(list = DBTest.getDataTest())
-                adapterMenu.set(list = getFoodToFilter(typeFood = TypeFood.pizza.getFasetFoodName()))
+        val list = when (typeFoodTab) {
+            resources.getString(TypeFood.pizza.getResourceId()) -> {
+                //DBTest.getDataTest()
+                getFoodToFilter(typeFood = TypeFood.pizza.getFasetFoodName())
             }
 
-            resources.getString(TypeFood.burger.getResourceId().toInt()) -> {
-                adapterMenu.set(list = getFoodToFilter(typeFood = TypeFood.burger.getFasetFoodName()))
+            resources.getString(TypeFood.burger.getResourceId()) -> {
+                getFoodToFilter(typeFood = TypeFood.burger.getFasetFoodName())
             }
 
-            resources.getString(TypeFood.salad.getResourceId().toInt()) -> {
-                adapterMenu.set(list = getFoodToFilter(typeFood = TypeFood.salad.getFasetFoodName()))
+            resources.getString(TypeFood.salad.getResourceId()) -> {
+                getFoodToFilter(typeFood = TypeFood.salad.getFasetFoodName())
             }
 
-            resources.getString(TypeFood.shashlik.getResourceId().toInt()) -> {
-                adapterMenu.set(list = getFoodToFilter(typeFood = TypeFood.shashlik.getFasetFoodName()))
+            resources.getString(TypeFood.shashlik.getResourceId()) -> {
+                getFoodToFilter(typeFood = TypeFood.shashlik.getFasetFoodName())
             }
 
-            resources.getString(TypeFood.sendwich.getResourceId().toInt()) -> {
-                adapterMenu.set(list = getFoodToFilter(typeFood = TypeFood.sendwich.getFasetFoodName()))
+            resources.getString(TypeFood.sendwich.getResourceId()) -> {
+                getFoodToFilter(typeFood = TypeFood.sendwich.getFasetFoodName())
             }
 
-            resources.getString(TypeFood.snack.getResourceId().toInt()) -> {
-                adapterMenu.set(list = getFoodToFilter(typeFood = TypeFood.snack.getFasetFoodName()))
+            resources.getString(TypeFood.snack.getResourceId()) -> {
+                getFoodToFilter(typeFood = TypeFood.snack.getFasetFoodName())
             }
 
-            /* resources.getString(TypeFood.drink.getResourceId().toInt()) -> {
-                adapterMenu.set(list = getFoodToFilter(typeFood = TypeFood.drink.getFasetFoodName()))
-            }*/
-
-            resources.getString(TypeFood.bread.getResourceId().toInt()) -> {
-                adapterMenu.set(list = getFoodToFilter(typeFood = TypeFood.bread.getFasetFoodName()))
+            resources.getString(TypeFood.bread.getResourceId()) -> {
+                getFoodToFilter(typeFood = TypeFood.bread.getFasetFoodName())
             }
 
-            resources.getString(TypeFood.soup.getResourceId().toInt()) -> {
-                adapterMenu.set(list = getFoodToFilter(typeFood = TypeFood.soup.getFasetFoodName()))
+            resources.getString(TypeFood.soup.getResourceId()) -> {
+                getFoodToFilter(typeFood = TypeFood.soup.getFasetFoodName())
             }
+
+            else -> null
         }
+
+        list?.let { adapterMenu.set(mapperFood.toUI(it)) }
     }
 
     private fun getFoodToFilter(typeFood: String): ListFood? {
@@ -219,10 +207,7 @@ class MenuActivity : AppCompatActivity() {
         val controller = ControllerFood { listFood ->
             foods = listFood
             setContentView(binding.root)
-
-            with(binding) {
-                changeTabs(getString(R.string.tab_menu_pizza))
-            }
+            changeTabs(getString(R.string.tab_menu_pizza))
         }
         controller.start()
     }

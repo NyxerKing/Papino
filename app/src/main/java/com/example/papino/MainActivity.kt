@@ -7,14 +7,12 @@ import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import com.example.papino.core.sharedPref.SharedKeys
 import com.example.papino.databinding.ActivityMainBinding
-import com.example.papino.net.ListUser
 import com.example.papino.presentation.menu.MenuActivity
-import com.example.papino.presentation.menu.models.ImageList
 import com.example.papino.presentation.regestration.EnterUserActivity
 import com.example.papino.presentation.regestration.RegistrationActivity
 import com.google.gson.Gson
-import java.net.URI
 
 
 class MainActivity : AppCompatActivity() {

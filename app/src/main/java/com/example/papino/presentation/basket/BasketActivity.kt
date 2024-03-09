@@ -1,26 +1,19 @@
 package com.example.papino.presentation.basket
 
 import android.content.Context
-import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Gravity
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.papino.MainActivity
-import com.example.papino.R
-import com.example.papino.SharedKeys
+import com.example.papino.core.sharedPref.SharedKeys
 import com.example.papino.databinding.AcitivityBasketBinding
 import com.example.papino.presentation.basket.adapters.BasketItemAdapter
 import com.example.papino.presentation.basket.model.FoodBasketModel
-import com.example.papino.presentation.menu.MenuActivity
 import com.example.papino.presentation.menu.models.PackFoodBaskedModel
 import com.google.gson.Gson
 
