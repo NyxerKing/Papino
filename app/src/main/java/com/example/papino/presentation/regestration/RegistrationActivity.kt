@@ -2,6 +2,7 @@ package com.example.papino.presentation.regestration
 
 import android.content.Context
 import android.os.Bundle
+import android.view.Gravity
 import android.view.MenuItem
 import android.view.View
 import android.view.Window
@@ -9,16 +10,13 @@ import android.view.WindowManager
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.papino.R
 import com.example.papino.SharedKeys
 import com.example.papino.net.ListUser
-import com.example.papino.presentation.menu.models.PackFoodBaskedModel
 import com.example.papino.presentation.regestration.controlles.ControllerUser
 import com.google.gson.Gson
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.UUID
 
 
 class RegistrationActivity : AppCompatActivity() {
@@ -85,10 +83,31 @@ class RegistrationActivity : AppCompatActivity() {
         bonus: String
     ) {
 
-        val controller = ControllerUser() {
-            callBackUser = it
-            addUserShared()
-        }
+        val messageCallBack: String
+        val controller = ControllerUser(
+            callBack = { callBack, string ->
+                callBackUser = callBack
+                if (callBackUser != null) {
+                    addUserShared()
+                    val toast = Toast.makeText(
+                        applicationContext,
+                        "Пользователь создан. Добро пожаловать в Papino, " + callBackUser.group[0].name,
+                        Toast.LENGTH_LONG
+                    )
+                    toast.setGravity(Gravity.CENTER, 0, 0)
+                    toast.show()
+                }
+            },
+            callBackError = {
+                val toast = Toast.makeText(
+                    applicationContext,
+                    "flkgpgopdhfgh;pfg.h/, " + it.message,
+                    Toast.LENGTH_LONG
+                )
+                toast.setGravity(Gravity.CENTER, 0, 0)
+                toast.show()
+            }
+        )
         controller.start(
             surname,
             name,
@@ -99,16 +118,13 @@ class RegistrationActivity : AppCompatActivity() {
         )
     }
 
-    private fun addUserShared()
-    {
-
+    private fun addUserShared() {
         // Записываем в шаред
 
         val sharedPreferences = this@RegistrationActivity.getSharedPreferences(
             SharedKeys.USER_DATA_KEY,
             Context.MODE_PRIVATE
         )
-
         val editJson = Gson().toJson(callBackUser.group[0].token)
         val edit = sharedPreferences.edit()
         edit.putString(SharedKeys.USER_ITEM_KEY, editJson)
@@ -119,17 +135,17 @@ class RegistrationActivity : AppCompatActivity() {
 
         // Считываем из шареда
 
-        /*val sharedPreferencesGet = this@RegistrationActivity.getSharedPreferences(
+        /* val sharedPreferencesGet = this@RegistrationActivity.getSharedPreferences(
             SharedKeys.USER_DATA_KEY,
             Context.MODE_PRIVATE
         )
 
-        val packFoodBask : ListUser?  =
-            Gson().fromJson(sharedPreferencesGet.getString(SharedKeys.USER_ITEM_KEY,  ""),
-                ListUser::class.java)
+        val getTokenUser : String?
+        getTokenUser = sharedPreferencesGet.getString(SharedKeys.USER_ITEM_KEY,  "")*/
 
+        /*Gson().fromJson(sharedPreferencesGet.getString(SharedKeys.USER_ITEM_KEY,  ""),
+            ListUser::class.java)*/
 
-        val gg = packFoodBask */
     }
 
     override fun onContextItemSelected(item: MenuItem): Boolean {

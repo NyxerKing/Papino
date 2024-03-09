@@ -51,11 +51,9 @@ class EnterUserActivity : AppCompatActivity() {
 
                 val telephonenumber: EditText = findViewById<EditText>(R.id.enterPhone2)
                 val password: EditText = findViewById<EditText>(R.id.enterPassword)
-                val dateCreatedtoken: String? = "dd" // передавать с шареда?
                 getUser(
                     telephonenumber.getText().toString(),
-                    password.getText().toString(),
-                    dateCreatedtoken!!
+                    password.getText().toString()
                 )
 
             }
@@ -71,7 +69,7 @@ class EnterUserActivity : AppCompatActivity() {
             val toast = Toast.makeText(
                 applicationContext,
                 "Для входа введите номер телефона и пароль",
-                Toast.LENGTH_SHORT
+                Toast.LENGTH_LONG
             )
             toast.setGravity(Gravity.CENTER, 0, 0)
             toast.show()
@@ -82,7 +80,7 @@ class EnterUserActivity : AppCompatActivity() {
             val toast = Toast.makeText(
                 applicationContext,
                 "Введите номер телефона",
-                Toast.LENGTH_SHORT
+                Toast.LENGTH_LONG
             )
             toast.setGravity(Gravity.CENTER, 0, 0)
             toast.show()
@@ -92,7 +90,7 @@ class EnterUserActivity : AppCompatActivity() {
             val toast = Toast.makeText(
                 applicationContext,
                 "Введите пароль",
-                Toast.LENGTH_SHORT
+                Toast.LENGTH_LONG
             )
             toast.setGravity(Gravity.CENTER, 0, 0)
             toast.show()
@@ -102,28 +100,23 @@ class EnterUserActivity : AppCompatActivity() {
     }
 
     @Throws(Exception::class)
-    fun getUser(telephonenumber: String, password: String, dateCreatedtoken: String) {
+    fun getUser(telephonenumber: String, password: String) {
 
         if (controlUserEnter(telephonenumber, password)) {
-            val controller = ControllerUser()
-            {
-                callBackUser = it
+            val controller = ControllerUser(
+                callBack = {  callBack, string ->
+                    callBackUser = callBack
                 if (callBackUser.group.size == 1) {
                     val intent = Intent(this@EnterUserActivity, MenuActivity::class.java)
+                    messageForUser(true)
                     startActivity(intent)
                     finish()
-                    // checkUserTokenShared(callBackUser)
                 }
                 if (callBackUser.group.size < 1 || callBackUser.group.size > 1) {
-                    val toast = Toast.makeText(
-                        applicationContext,
-                        "Пользователь не найден",
-                        Toast.LENGTH_SHORT
-                    )
-                    toast.setGravity(Gravity.CENTER, 0, 0)
-                    toast.show()
+                    messageForUser(false)
                 }
-            }
+            } , callBackError = {}
+            )
             controller.start("", "", telephonenumber, password, "",false)
         }
     }
@@ -142,5 +135,31 @@ class EnterUserActivity : AppCompatActivity() {
         val edit = sharedPreferences.edit()
         edit.putString(SharedKeys.BASKED_ITEM_KEY, editJson)
         edit.commit()
+    }
+
+
+    private fun messageForUser(enterUser : Boolean)
+    {
+        if (enterUser)
+        {
+            val toast = Toast.makeText(
+                applicationContext,
+                "Добро пожаловать в Papino, " + callBackUser.group[0].name,
+                Toast.LENGTH_LONG
+            )
+            toast.setGravity(Gravity.CENTER, 0, 0)
+            toast.show()
+        }
+        else
+        {
+            val toast = Toast.makeText(
+                applicationContext,
+                "Пользователь не найден",
+                Toast.LENGTH_LONG
+            )
+            toast.setGravity(Gravity.CENTER, 0, 0)
+            toast.show()
+
+        }
     }
 }

@@ -3,6 +3,7 @@ package com.example.papino.presentation.menu.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.example.papino.R
 import com.example.papino.databinding.ItemFoodBinding
 import com.example.papino.net.Food
@@ -27,20 +28,7 @@ class FoodItemAdapter(val onClickItem: ((Food) -> Unit)) :
             item?.let { food ->
                 name.text = food.namefood
                 detailsFood.text = food.detailsfood
-                //cover.setImageResource(R.drawable.pizzatest)
-
-                if (food.typeFoodid == "burger")
-                {
-                    cover.setImageResource(R.drawable.burger_test)
-                }
-                if (food.typeFoodid == "pizza")
-                {
-                    cover.setImageResource(R.drawable.pizzatest)
-                }
-                if (food.typeFoodid == "salad")
-                {
-                    cover.setImageResource(R.drawable.salad_test)
-                }
+                cover.load(food.uriImageFood)
 
                 if (food.sizeportion == "")
                 {

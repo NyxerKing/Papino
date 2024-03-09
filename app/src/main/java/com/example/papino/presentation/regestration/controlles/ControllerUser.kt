@@ -8,15 +8,20 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.lang.Exception
 import java.util.concurrent.TimeUnit
 
 
-class ControllerUser(val callBack: (ListUser) -> Unit) : Callback<ListUser> {
+class ControllerUser(val callBack: (ListUser, String) -> Unit , val callBackError: (t: Throwable) -> Unit) : Callback<ListUser>  {
     private var iUserGet: IUsers? = null
+    lateinit var messageCallBack : String
+    var errorMessage : String? = ""
+
     fun start(
         surname: String, name: String, telephoneNumber: String, password: String,
         bonus: String, registration: Boolean
-    ) {
+    )  : String
+    {
         val okHttpClient: OkHttpClient = OkHttpClient.Builder()
             .connectTimeout(1, TimeUnit.MINUTES)
             .readTimeout(30, TimeUnit.SECONDS)
@@ -37,25 +42,23 @@ class ControllerUser(val callBack: (ListUser) -> Unit) : Callback<ListUser> {
             call = createUser()?.createUser(surname, name, telephoneNumber, password, bonus)
         }
         call?.enqueue(this)
+        return errorMessage!!
     }
 
     override fun onResponse(call: Call<ListUser>, response: Response<ListUser>) {
         if (response.isSuccessful()) {
             val changesList = response.body()
-            if (changesList != null) callBack.invoke(changesList)
-
-            /*else
-            {
-                val token = response
-            }*/
+            messageCallBack = response.message()
+            if (changesList != null) callBack.invoke(changesList, messageCallBack)
         } else {
             var errorText = response.body().toString()
+            messageCallBack = errorText
         }
     }
 
 
-    override fun onFailure(call: Call<ListUser>, t: Throwable) {
-        t.printStackTrace()
+    override fun onFailure(call: Call<ListUser>, t: Throwable)  {
+        callBackError.invoke(t)
     }
 
     fun getUser(): IUsers? {

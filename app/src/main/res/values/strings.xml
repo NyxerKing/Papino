@@ -9,5 +9,6 @@
     <string name="tab_menu_soup">Суп</string>
     <string name="tab_menu_snacks">Закуски</string>
     <string name="tab_menu_drink">Напитки</string>
+    <string name="tab_menu_bread">Хлеб</string>
 
 </resources>
