@@ -14,6 +14,7 @@ import com.example.papino.presentation.menu.models.ImageList
 import com.example.papino.presentation.regestration.EnterUserActivity
 import com.example.papino.presentation.regestration.RegistrationActivity
 import com.google.gson.Gson
+import java.net.URI
 
 
 class MainActivity : AppCompatActivity() {

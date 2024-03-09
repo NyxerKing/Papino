@@ -1,15 +1,14 @@
 package com.example.papino.presentation.basket.adapters
 
+import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.papino.R
+import coil.load
 import com.example.papino.databinding.ItemFoodBasketBinding
-import com.example.papino.databinding.ItemFoodBinding
 import com.example.papino.presentation.basket.model.FoodBasketModel
-import com.example.papino.presentation.menu.models.FoodModel
-import com.example.papino.presentation.menu.models.FoodVarsModel
-import com.example.papino.presentation.menu.models.PackFoodBaskedModel
+
 
 class BasketItemAdapter(
     list: List<FoodBasketModel>,
@@ -32,7 +31,7 @@ class BasketItemAdapter(
             itemNameBasket.text = food.name
             itemtvSizeBasket.text = "см: ${food.size} цена: ${food.price}"
             itemDetailsFood.text = food.detailsFood
-            cover.setImageResource(R.drawable.pizzatest)
+            cover.load(food.uriImageFood)
             imageView2.setOnClickListener { deleteItemFoodBasket(food) }
         }
     }

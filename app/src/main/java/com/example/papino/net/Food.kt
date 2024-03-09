@@ -6,7 +6,8 @@ data class Food (
     val sizeportion: String? = null,
     val pricefood : String? = null,
     val detailsfood : String? = null,
-    val typeFoodid : String? = null
+    val typeFoodid : String? = null,
+    val uriImageFood: String? = null
 )
 
 

@@ -114,7 +114,8 @@ class MenuActivity : AppCompatActivity() {
                     name = foodVars.namefood!!,
                     detailsFood = foodVars.detailsfood!!,
                     size = foodVars.sizeportion!!,
-                    price = foodVars.pricefood!!
+                    price = foodVars.pricefood!!,
+                    uriImageFood = foodVars.uriImageFood!!
                 )
             )
         } else {
@@ -125,7 +126,8 @@ class MenuActivity : AppCompatActivity() {
                         name = foodVars.namefood!!,
                         detailsFood = foodVars.detailsfood!!,
                         size = foodVars.sizeportion!!,
-                        price = foodVars.pricefood!!
+                        price = foodVars.pricefood!!,
+                        uriImageFood = foodVars.uriImageFood!!
                     )
                 ).toMutableList()
             )
@@ -164,8 +166,8 @@ class MenuActivity : AppCompatActivity() {
     private fun changeTabs(typeFoodTab: String) {
         when (typeFoodTab) {
             resources.getString(TypeFood.pizza.getResourceId().toInt()) -> {
-                adapterMenu.set(list = DBTest.getDataTest())
-                //adapterMenu.set(list = getFoodToFilter(typeFood = TypeFood.pizza.getFasetFoodName()))
+                //adapterMenu.set(list = DBTest.getDataTest())
+                adapterMenu.set(list = getFoodToFilter(typeFood = TypeFood.pizza.getFasetFoodName()))
             }
 
             resources.getString(TypeFood.burger.getResourceId().toInt()) -> {
@@ -176,6 +178,29 @@ class MenuActivity : AppCompatActivity() {
                 adapterMenu.set(list = getFoodToFilter(typeFood = TypeFood.salad.getFasetFoodName()))
             }
 
+            resources.getString(TypeFood.shashlik.getResourceId().toInt()) -> {
+                adapterMenu.set(list = getFoodToFilter(typeFood = TypeFood.shashlik.getFasetFoodName()))
+            }
+
+            resources.getString(TypeFood.sendwich.getResourceId().toInt()) -> {
+                adapterMenu.set(list = getFoodToFilter(typeFood = TypeFood.sendwich.getFasetFoodName()))
+            }
+
+            resources.getString(TypeFood.snack.getResourceId().toInt()) -> {
+                adapterMenu.set(list = getFoodToFilter(typeFood = TypeFood.snack.getFasetFoodName()))
+            }
+
+            /* resources.getString(TypeFood.drink.getResourceId().toInt()) -> {
+                adapterMenu.set(list = getFoodToFilter(typeFood = TypeFood.drink.getFasetFoodName()))
+            }*/
+
+            resources.getString(TypeFood.bread.getResourceId().toInt()) -> {
+                adapterMenu.set(list = getFoodToFilter(typeFood = TypeFood.bread.getFasetFoodName()))
+            }
+
+            resources.getString(TypeFood.soup.getResourceId().toInt()) -> {
+                adapterMenu.set(list = getFoodToFilter(typeFood = TypeFood.soup.getFasetFoodName()))
+            }
         }
     }
 
