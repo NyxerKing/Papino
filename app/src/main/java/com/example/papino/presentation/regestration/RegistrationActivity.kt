@@ -1,6 +1,5 @@
 package com.example.papino.presentation.regestration
 
-import android.content.Context
 import android.os.Bundle
 import android.view.Gravity
 import android.view.MenuItem
@@ -8,52 +7,38 @@ import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.papino.App
 import com.example.papino.R
-import com.example.papino.core.sharedPref.SharedKeys
+import com.example.papino.core.sharedPref.CoreSharedPreferences
+import com.example.papino.databinding.ActivityRegistrationBinding
 import com.example.papino.net.ListUser
 import com.example.papino.presentation.regestration.controlles.ControllerUser
-import com.google.gson.Gson
 
 
 class RegistrationActivity : AppCompatActivity() {
-    private lateinit var binding: RegistrationActivity
+
+    private lateinit var binding: ActivityRegistrationBinding
     private lateinit var callBackUser: ListUser
+    private lateinit var coreSP: CoreSharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        initFullMode()
         super.onCreate(savedInstanceState)
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(
-            WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN
-        );
-        setContentView(R.layout.item_registration_str)
 
-        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                or View.SYSTEM_UI_FLAG_FULLSCREEN
-                or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
+        coreSP = CoreSharedPreferences(this)
 
+        binding = ActivityRegistrationBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val buttonReg: ImageButton = findViewById(R.id.buttonSaveRegistration)
-        buttonReg.setOnClickListener { checkPasswordAndSaveBase() }
-
-        val buttonBack: ImageView = findViewById(R.id.buttonBackRegMenu)
-
-        buttonBack.setOnClickListener {
-            onBackPressed()
+        with(binding) {
+            buttonSaveRegistration.setOnClickListener { checkPasswordAndSaveBase() }
+            buttonBackRegMenu.setOnClickListener { onBackPressed() }
         }
     }
 
-    fun saveRegistratonUser(): Boolean {
-
-
+    private fun saveRegistratonUser(): Boolean {
         val editSurname = findViewById<EditText>(R.id.editSurname)
         val name = findViewById<EditText>(R.id.editName)
         val password = findViewById<EditText>(R.id.createPassword)
@@ -65,7 +50,6 @@ class RegistrationActivity : AppCompatActivity() {
         )
         return true
     }
-
     private fun checkPasswordAndSaveBase(): Boolean {
         val password = findViewById<EditText>(R.id.createPassword).text
 
@@ -122,33 +106,9 @@ class RegistrationActivity : AppCompatActivity() {
     }
 
     private fun addUserShared() {
-        // Записываем в шаред
-
-        val sharedPreferences = this@RegistrationActivity.getSharedPreferences(
-            SharedKeys.USER_DATA_KEY,
-            Context.MODE_PRIVATE
-        )
-        val editJson = Gson().toJson(callBackUser.group[0].token)
-        val edit = sharedPreferences.edit()
-        edit.putString(SharedKeys.USER_ITEM_KEY, editJson)
-        edit.commit()
-
-
-        // -------------
-
-        // Считываем из шареда
-
-        /* val sharedPreferencesGet = this@RegistrationActivity.getSharedPreferences(
-            SharedKeys.USER_DATA_KEY,
-            Context.MODE_PRIVATE
-        )
-
-        val getTokenUser : String?
-        getTokenUser = sharedPreferencesGet.getString(SharedKeys.USER_ITEM_KEY,  "")*/
-
-        /*Gson().fromJson(sharedPreferencesGet.getString(SharedKeys.USER_ITEM_KEY,  ""),
-            ListUser::class.java)*/
-
+        callBackUser.group.first().token?.let {
+            coreSP.setToken(it)
+        }
     }
 
     override fun onContextItemSelected(item: MenuItem): Boolean {
@@ -160,4 +120,20 @@ class RegistrationActivity : AppCompatActivity() {
         }
         return super.onContextItemSelected(item)
     }
+
+    private fun initFullMode() {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN
+        )
+
+        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                or View.SYSTEM_UI_FLAG_FULLSCREEN
+                or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
+    }
+
 }

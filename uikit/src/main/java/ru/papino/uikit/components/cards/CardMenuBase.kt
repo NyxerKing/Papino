@@ -6,6 +6,7 @@ import android.net.Uri
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.ColorRes
@@ -50,6 +51,9 @@ class CardMenuBase @JvmOverloads constructor(
 
         setCardBackgroundColor(resources.getColor(R.color.backgroundCardColor, context.theme))
         strokeWidth = 0
+
+        layoutParams =
+            LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
     }
 
     /**

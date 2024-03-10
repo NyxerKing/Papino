@@ -3,7 +3,6 @@ package com.example.papino.presentation.menu.adapters
 import android.annotation.SuppressLint
 import android.graphics.drawable.Drawable
 import android.view.ViewGroup
-import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import coil.imageLoader
 import coil.request.ImageRequest
@@ -55,6 +54,11 @@ class CardMenuAdapter(private val onClickItem: (FoodUI) -> Unit) :
                 .data(food.linkCover)
                 .target(onSuccess = { coverDrawable ->
                         initCard(food = food, drawable = coverDrawable)
+                }, onStart = {
+                    initCard(
+                        food = food,
+                        drawable = cardMenu.resources.getDrawable(ru.papino.uikit.R.drawable.pizza_pepperoni_2)
+                    )
                     })
                 .build()
 

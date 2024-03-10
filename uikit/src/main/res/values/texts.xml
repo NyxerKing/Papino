@@ -71,4 +71,13 @@
         <item name="android:textSize">20sp</item>
         <item name="android:lineHeight" tools:ignore="NewApi">28sp</item>
     </style>
+
+    <style name="PaPino.TextAppearances.Menu" />
+
+    <style name="PaPino.TextAppearances.Menu.Title">
+        <item name="android:textColor">@color/textPrimaryColor</item>
+        <item name="android:textFontWeight" tools:ignore="NewApi">700</item>
+        <item name="android:textSize">26sp</item>
+        <item name="android:lineHeight" tools:ignore="NewApi">36sp</item>
+    </style>
 </resources>

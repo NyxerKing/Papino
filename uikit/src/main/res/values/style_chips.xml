@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="PaPino.Chips" parent="Widget.MaterialComponents.Chip.Choice" />
+
+    <style name="PaPino.Chips.Menu">
+        <item name="chipGroupStyle">@style/PaPino.Chips.Group</item>
+        <item name="chipStyle">@style/PaPino.Chips.Item</item>
+    </style>
+
+    <style name="PaPino.Chips.Group">
+        <item name="singleSelection">true</item>
+    </style>
+
+    <style name="PaPino.Chips.Item">
+        <item name="chipBackgroundColor">@color/selector_menu_chips</item>
+        <item name="chipSurfaceColor">@color/selector_menu_chips</item>
+        <item name="chipStrokeWidth">0dp</item>
+        <item name="chipIconVisible">false</item>
+        <item name="chipIcon">@null</item>
+        <item name="android:textColor">@color/textPrimaryColor</item>
+        <item name="chipCornerRadius">@dimen/d_16</item>
+        <item name="android:textAppearance">@style/PaPino.TextAppearances.Controller.Count</item>
+    </style>
+</resources>
