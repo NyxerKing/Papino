@@ -25,9 +25,11 @@ class CardBaskedComponent @JvmOverloads constructor(
 
     fun set(
         data: Data? = null
-    ) {
+    )
+    {
         data?.run {
-            title?.let { textTitle.text = it }
+            title?.let { textTitle.text = it
+            }
 
             price?.let { textPrice.text = it }
 

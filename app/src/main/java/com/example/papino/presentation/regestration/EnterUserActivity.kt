@@ -10,6 +10,7 @@ import android.view.WindowManager
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.papino.App
 import com.example.papino.R
 import com.example.papino.core.sharedPref.SharedKeys
 import com.example.papino.databinding.ActivityEnterUserBinding
@@ -104,6 +105,8 @@ class EnterUserActivity : AppCompatActivity() {
                     callBackUser = callBack
                 if (callBackUser.group.size == 1) {
                     val intent = Intent(this@EnterUserActivity, MenuActivity::class.java)
+                    val setUser : App? = null
+                    setUser?.setUser(callBackUser.group[0])
                     messageForUser(true)
                     startActivity(intent)
                     finish()
