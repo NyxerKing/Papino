@@ -22,7 +22,7 @@ import com.example.papino.presentation.menu.adapters.CardMenuAdapter
 import com.example.papino.presentation.menu.models.FoodUI
 import com.example.papino.presentation.menu.models.PackFoodBaskedModel
 import com.google.android.material.chip.Chip
-import com.example.papino.presentation.regestration.EnterUserActivity
+import ru.papino.uikit.components.navigation.NavigationItem
 
 class MenuActivity : AppCompatActivity() {
 
@@ -49,15 +49,16 @@ class MenuActivity : AppCompatActivity() {
 
         with(binding)
         {
-            /*imgBasket.setOnClickListener {
-                val intent = Intent(this@MenuActivity, BasketActivity::class.java)
-                startActivity(intent)
-            }
-
-            imgCabinet.setOnClickListener {
-                val intent = Intent(this@MenuActivity, EnterUserActivity::class.java)
-                startActivity(intent)
-            }*/
+            navigation.setSelected(NavigationItem.MENU)
+            navigation.set(
+                onClickBasket = {
+                    val intent = Intent(this@MenuActivity, BasketActivity::class.java)
+                    startActivity(intent)
+                },
+                onClickProfile = {
+                    // todo профиль
+                }
+            )
 
             nameUserHello.text = "Петров Иван"
             countBonusUser.text = "327 бонусов"
@@ -183,13 +184,13 @@ class MenuActivity : AppCompatActivity() {
             if (selectMenuItem?.isNotEmpty() == true) titleMenu.text = selectMenuItem
         }
 
-        /*coreSP.getBasket()
+        coreSP.getBasket()
             ?.let { basket ->
-                binding.tvBasketCount.text = "+ ${basket.dataList.size}"
+                binding.navigation.setBasketCount(basket.dataList.size)
 
                 adapterMenu.checkInBasket(
                     listBasketId = mapperFood.toUI(basket).map { foodUI -> foodUI.id }
                 )
-            }*/
+            }
     }
 }
