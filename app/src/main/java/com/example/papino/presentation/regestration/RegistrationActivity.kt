@@ -12,6 +12,7 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.papino.App
 import com.example.papino.R
 import com.example.papino.core.sharedPref.SharedKeys
 import com.example.papino.net.ListUser
@@ -89,6 +90,8 @@ class RegistrationActivity : AppCompatActivity() {
                 callBackUser = callBack
                 if (callBackUser != null) {
                     addUserShared()
+                    val setUser : App? = null
+                    setUser?.setUser(callBackUser.group[0])
                     val toast = Toast.makeText(
                         applicationContext,
                         "Пользователь создан. Добро пожаловать в Papino, " + callBackUser.group[0].name,

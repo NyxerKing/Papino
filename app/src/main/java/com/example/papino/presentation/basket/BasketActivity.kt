@@ -10,6 +10,7 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.papino.App
 import com.example.papino.core.sharedPref.SharedKeys
 import com.example.papino.databinding.AcitivityBasketBinding
 import com.example.papino.presentation.basket.adapters.BasketItemAdapter
@@ -120,7 +121,8 @@ class BasketActivity : AppCompatActivity() {
             )
 
             buttonCheckout.setOnClickListener {
-                //todo логика оформления заказа
+                 val user : App? = null
+                 user?.getUser()
             }
         }
     }

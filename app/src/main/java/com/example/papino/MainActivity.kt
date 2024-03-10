@@ -44,6 +44,7 @@ class MainActivity : AppCompatActivity() {
             override fun onFinish() {
                 val intent = Intent(this@MainActivity, MenuActivity::class.java)
                 startActivity(intent)
+                finish()
             }
 
             override fun onTick(millisUntilFinished: Long) {
@@ -68,6 +69,7 @@ class MainActivity : AppCompatActivity() {
             }
             checkUserTokenShared()
         }*/
+
     }
 
     private fun checkUserTokenShared()
