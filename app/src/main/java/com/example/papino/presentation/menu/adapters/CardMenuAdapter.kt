@@ -55,10 +55,10 @@ class CardMenuAdapter(private val onClickItem: (FoodUI) -> Unit) :
                 .target(onSuccess = { coverDrawable ->
                         initCard(food = food, drawable = coverDrawable)
                 }, onStart = {
-                    /*initCard(
+                    initCard(
                         food = food,
                         drawable = cardMenu.resources.getDrawable(ru.papino.uikit.R.drawable.pizza_pepperoni_2)
-                    )*/
+                    )
                     })
                 .build()
 
