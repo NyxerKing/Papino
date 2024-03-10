@@ -23,6 +23,7 @@ import com.example.papino.presentation.menu.models.FoodUI
 import com.example.papino.presentation.menu.models.PackFoodBaskedModel
 import com.google.android.material.chip.Chip
 import ru.papino.uikit.components.navigation.NavigationItem
+import com.example.papino.presentation.regestration.EnterUserActivity
 
 class MenuActivity : AppCompatActivity() {
 
@@ -59,6 +60,18 @@ class MenuActivity : AppCompatActivity() {
                     // todo профиль
                 }
             )
+            /*imgBasket.setOnClickListener {
+                val intent = Intent(this@MenuActivity, BasketActivity::class.java)
+                startActivity(intent)
+            }
+
+            imgCabinet.setOnClickListener {
+                val intent = Intent(this@MenuActivity, EnterUserActivity::class.java)
+                startActivity(intent)
+            }*/
+
+            nameUserHello.text = "Петров Иван"
+            countBonusUser.text = "327 бонусов"
 
             menuRecycler.setLayoutManager(LinearLayoutManager(this@MenuActivity))
             menuRecycler.adapter = adapterMenu
@@ -181,13 +194,13 @@ class MenuActivity : AppCompatActivity() {
             if (selectMenuItem?.isNotEmpty() == true) titleMenu.text = selectMenuItem
         }
 
-        coreSP.getBasket()
+        /*coreSP.getBasket()
             ?.let { basket ->
                 binding.navigation.setBasketCount(basket.dataList.size)
 
                 adapterMenu.checkInBasket(
                     listBasketId = mapperFood.toUI(basket).map { foodUI -> foodUI.id }
                 )
-            }
+            }*/
     }
 }

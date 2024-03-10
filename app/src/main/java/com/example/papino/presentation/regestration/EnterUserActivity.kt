@@ -102,9 +102,8 @@ class EnterUserActivity : AppCompatActivity() {
                     callBackUser = callBack
                 if (callBackUser.group.size == 1) {
                     val intent = Intent(this@EnterUserActivity, MenuActivity::class.java)
-                    val setUser : App? = null
-                    setUser?.setUser(callBackUser.group[0])
                     messageForUser(true)
+                    setUser(callBackUser.group.first())
                     startActivity(intent)
                     finish()
                 }
