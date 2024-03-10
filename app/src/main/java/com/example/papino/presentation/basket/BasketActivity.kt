@@ -12,6 +12,7 @@ import com.example.papino.core.sharedPref.CoreSharedPreferences
 import com.example.papino.databinding.AcitivityBasketBinding
 import com.example.papino.presentation.basket.adapters.BasketItemAdapter
 import com.example.papino.presentation.basket.model.FoodBasketModel
+import ru.papino.uikit.components.navigation.NavigationItem
 
 
 class BasketActivity : AppCompatActivity() {
@@ -28,7 +29,13 @@ class BasketActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         with(binding) {
-            buttonBackActivityMenu.setOnClickListener { onBackPressed() }
+            navigation.setSelected(NavigationItem.BASKET)
+            navigation.set(
+                onClickMenu = { onBackPressed() },
+                onClickProfile = {
+                    // todo профиль
+                }
+            )
             basketRecyclerView.setLayoutManager(LinearLayoutManager(this@BasketActivity))
 
             coreSP.getBasket().let { pack ->
@@ -78,6 +85,8 @@ class BasketActivity : AppCompatActivity() {
 
     private fun initUI(basketFoods: List<FoodBasketModel>) {
         with(binding) {
+            navigation.setBasketCount(basketFoods.size)
+
             titleOrderFood.text =
                 resources.getString(
                     ru.papino.uikit.R.string.insert_products,

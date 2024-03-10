@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_rect_corder_top_15"
+    android:paddingHorizontal="@dimen/d_10"
+    android:paddingTop="@dimen/d_10"
+    android:paddingBottom="@dimen/d_30"
+    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+    <TextView
+        android:id="@+id/menuView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawablePadding="@dimen/d_6"
+        android:paddingHorizontal="@dimen/d_16"
+        android:text="@string/menu_text"
+        android:textAppearance="@style/PaPino.TextAppearances.Navigation.Text"
+        app:drawableTint="@color/backgroundCardColor"
+        app:drawableTopCompat="@drawable/ic_16_menu"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/basketView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawablePadding="@dimen/d_6"
+        android:paddingHorizontal="@dimen/d_16"
+        android:text="@string/basket_text"
+        android:textAppearance="@style/PaPino.TextAppearances.Navigation.Text"
+        app:drawableTint="@color/backgroundCardColor"
+        app:drawableTopCompat="@drawable/ic_16_basket"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/profileView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawablePadding="@dimen/d_6"
+        android:paddingHorizontal="@dimen/d_16"
+        android:text="@string/profile_text"
+        android:textAppearance="@style/PaPino.TextAppearances.Navigation.Text"
+        app:drawableTint="@color/backgroundCardColor"
+        app:drawableTopCompat="@drawable/ic_16_profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</merge>

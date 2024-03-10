@@ -13,6 +13,10 @@
     <string name="address">Адрес:</string>
     <string name="discount">Скидка</string>
     <string name="to_pay">К оплате</string>
+    <string name="menu_text">Меню</string>
+    <string name="basket_text">Корзина</string>
+    <string name="basket_count_text">Корзина (%1$s)</string>
+    <string name="profile_text">Профиль</string>
 
     <string name="insert_products">Товары (%1$s)</string>
     <string name="insert_sum">%1$s сум</string>

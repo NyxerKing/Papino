@@ -1,57 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_rect_base"
-    android:orientation="vertical">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/tvBasketCount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="5dp"
-            android:textColor="@color/orange"
-            app:layout_constraintBottom_toBottomOf="@+id/imgBasket"
-            app:layout_constraintRight_toLeftOf="@+id/imgBasket"
-            app:layout_constraintTop_toTopOf="@+id/imgBasket"
-            tools:text="+10" />
-
-        <ImageView
-            android:id="@+id/imgBasket"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginHorizontal="5dp"
-            android:layout_marginVertical="14dp"
-            android:layout_marginEnd="15dp"
-            android:background="@drawable/shape_sphere"
-            android:src="@drawable/shopping_basket_24px"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <ImageView
-        android:id="@+id/imageViewIcon"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginTop="4dp"
-        app:srcCompat="@drawable/icoapp_menu_orange" />
+    android:background="@color/backgroundMenuColor">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/backgroundMenuColor"
-        android:orientation="vertical">
+        android:layout_height="0dp"
+        android:background="@drawable/bg_rect_base"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/navigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <HorizontalScrollView
+        <ImageView
+            android:id="@+id/imageViewIcon"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="4dp"
+            app:srcCompat="@drawable/icoapp_menu_orange" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/backgroundMenuColor"
+            android:orientation="vertical">
+
+            <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scrollbars="none">
@@ -103,20 +81,29 @@
             </com.google.android.material.chip.ChipGroup>
         </HorizontalScrollView>
 
-        <TextView
-            android:id="@+id/titleMenu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/d_20"
-            android:layout_marginBottom="@dimen/d_10"
-            android:textAppearance="@style/PaPino.TextAppearances.Menu.Title"
-            tools:text="Пицца" />
+            <TextView
+                android:id="@+id/titleMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/d_20"
+                android:layout_marginBottom="@dimen/d_10"
+                android:textAppearance="@style/PaPino.TextAppearances.Menu.Title"
+                tools:text="Пицца" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/menuRecycler"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="5dp"
-        android:paddingHorizontal="@dimen/d_10" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/menuRecycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
+                android:paddingHorizontal="@dimen/d_10" />
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+
+    <ru.papino.uikit.components.navigation.NavigationComponent
+        android:id="@+id/navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

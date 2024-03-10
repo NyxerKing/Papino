@@ -22,6 +22,7 @@ import com.example.papino.presentation.menu.adapters.CardMenuAdapter
 import com.example.papino.presentation.menu.models.FoodUI
 import com.example.papino.presentation.menu.models.PackFoodBaskedModel
 import com.google.android.material.chip.Chip
+import ru.papino.uikit.components.navigation.NavigationItem
 
 class MenuActivity : AppCompatActivity() {
 
@@ -48,10 +49,16 @@ class MenuActivity : AppCompatActivity() {
 
         with(binding)
         {
-            imgBasket.setOnClickListener {
-                val intent = Intent(this@MenuActivity, BasketActivity::class.java)
-                startActivity(intent)
-            }
+            navigation.setSelected(NavigationItem.MENU)
+            navigation.set(
+                onClickBasket = {
+                    val intent = Intent(this@MenuActivity, BasketActivity::class.java)
+                    startActivity(intent)
+                },
+                onClickProfile = {
+                    // todo профиль
+                }
+            )
 
             menuRecycler.setLayoutManager(LinearLayoutManager(this@MenuActivity))
             menuRecycler.adapter = adapterMenu
@@ -176,7 +183,7 @@ class MenuActivity : AppCompatActivity() {
 
         coreSP.getBasket()
             ?.let { basket ->
-                binding.tvBasketCount.text = "+ ${basket.dataList.size}"
+                binding.navigation.setBasketCount(basket.dataList.size)
 
                 adapterMenu.checkInBasket(
                     listBasketId = mapperFood.toUI(basket).map { foodUI -> foodUI.id }

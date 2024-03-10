@@ -80,4 +80,20 @@
         <item name="android:textSize">26sp</item>
         <item name="android:lineHeight" tools:ignore="NewApi">36sp</item>
     </style>
+
+    <style name="PaPino.TextAppearances.Navigation" />
+
+    <style name="PaPino.TextAppearances.Navigation.Text">
+        <item name="android:textColor">@color/backgroundCardColor</item>
+        <item name="android:textFontWeight" tools:ignore="NewApi">400</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:lineHeight" tools:ignore="NewApi">14sp</item>
+    </style>
+
+    <style name="PaPino.TextAppearances.Navigation.Text.Selected">
+        <item name="android:textColor">@color/backgroundButtonColor</item>
+        <item name="android:textFontWeight" tools:ignore="NewApi">700</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:lineHeight" tools:ignore="NewApi">14sp</item>
+    </style>
 </resources>
