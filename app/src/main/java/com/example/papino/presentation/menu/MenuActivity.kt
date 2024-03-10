@@ -1,19 +1,16 @@
 package com.example.papino.presentation.menu
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.papino.R
 import com.example.papino.core.sharedPref.CoreSharedPreferences
-import com.example.papino.core.sharedPref.SharedKeys
 import com.example.papino.data.datasource.local.LocalDataSource
 import com.example.papino.data.datasource.net.NetDataSource
 import com.example.papino.data.repository.MenuRepository
@@ -24,21 +21,21 @@ import com.example.papino.presentation.mappers.FoodMapper
 import com.example.papino.presentation.menu.adapters.CardMenuAdapter
 import com.example.papino.presentation.menu.models.FoodUI
 import com.example.papino.presentation.menu.models.PackFoodBaskedModel
-import com.example.papino.presentation.regestration.controlles.ControllerFood
-import com.google.android.material.tabs.TabLayout
-import com.google.gson.Gson
+import com.google.android.material.chip.Chip
 
 class MenuActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMenuBinding
-    private var foods: ListFood? = null
-
-    private val mapperFood = FoodMapper()
-    private val adapterMenu = CardMenuAdapter(::updateBasket)
     private lateinit var coreSP: CoreSharedPreferences
     private lateinit var menuRepository: MenuRepository
 
+    private val mapperFood = FoodMapper()
+    private val adapterMenu = CardMenuAdapter(::updateBasket)
+
+    private var foods: ListFood? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        initFullMode()
         super.onCreate(savedInstanceState)
         coreSP = CoreSharedPreferences(context = this)
         menuRepository = MenuRepository(
@@ -46,30 +43,17 @@ class MenuActivity : AppCompatActivity() {
             netDS = NetDataSource.getInstance()
         )
 
-        requestWindowFeature(Window.FEATURE_NO_TITLE)
-        getWindow().setFlags(
-            WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN
-        );
-
-        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                or View.SYSTEM_UI_FLAG_FULLSCREEN
-                or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
-
         binding = ActivityMenuBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         with(binding)
         {
-            setContentView(root)
-
             imgBasket.setOnClickListener {
                 val intent = Intent(this@MenuActivity, BasketActivity::class.java)
                 startActivity(intent)
             }
 
-            menuRecycler.setLayoutManager(GridLayoutManager(this@MenuActivity, 1))
+            menuRecycler.setLayoutManager(LinearLayoutManager(this@MenuActivity))
             menuRecycler.adapter = adapterMenu
 
             val itemDecorator = DividerItemDecoration(root.context, DividerItemDecoration.VERTICAL)
@@ -80,71 +64,52 @@ class MenuActivity : AppCompatActivity() {
                 itemDecorator.setDrawable(drawable)
             }
             menuRecycler.addItemDecoration(itemDecorator)
+
+            chipGroupMenu.setOnCheckedStateChangeListener { chipGroup, ints ->
+                val index = ints.first()
+                val item = chipGroup.findViewById<Chip>(index)
+                val tab = item.text.toString()
+                changeTabs(typeFoodTab = tab)
+            }
         }
 
-        //getFood()
-
-
-        //todo временное получение данныъ из json
-        initLocalMenu()
-        initTabs()
+        initMenu()
     }
 
     override fun onStart() {
         super.onStart()
-        updateUI()
+        updateUI(getString(R.string.tab_menu_pizza))
     }
 
+    private fun initFullMode() {
+        requestWindowFeature(Window.FEATURE_NO_TITLE)
+        getWindow().setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN
+        )
+
+        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                or View.SYSTEM_UI_FLAG_FULLSCREEN
+                or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
+    }
     private fun updateBasket(foodVars: FoodUI) {
         addBasket(foodVars)
     }
 
     private fun addBasket(foodVars: FoodUI) {
-        val sharedPreferences = this@MenuActivity.getSharedPreferences(
-            SharedKeys.BASKED_DATA_KEY,
-            Context.MODE_PRIVATE
-        )
-        var pack: PackFoodBaskedModel? = null
-        val json = sharedPreferences.getString(SharedKeys.BASKED_ITEM_KEY, "")
-        if (json?.isNotEmpty() == true) {
-            pack = Gson().fromJson(json, PackFoodBaskedModel::class.java)
-            pack.dataList.add(mapperFood.toBasketUI(foodUI = foodVars))
-        } else {
-            pack = PackFoodBaskedModel(
+        val pack =
+            coreSP.getBasket()?.apply {
+                dataList.add(mapperFood.toBasketUI(foodUI = foodVars))
+            } ?: PackFoodBaskedModel(
                 dataList = listOf(mapperFood.toBasketUI(foodUI = foodVars)).toMutableList()
             )
-        }
 
-        if (pack != null) {
-            binding.tvBasketCount.text = "+ ${pack.dataList.size}"
-        }
+        coreSP.setBasket(data = pack)
 
-        val editJson = Gson().toJson(pack)
-        val edit = sharedPreferences.edit()
-        edit.putString(SharedKeys.BASKED_ITEM_KEY, editJson)
-        edit.commit()
-
-        foodVars.isInBasket = true
-    }
-
-    private fun initTabs() {
-        with(binding) {
-            tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-                override fun onTabSelected(tab: TabLayout.Tab?) {
-                    Log.d("MenuActivity", "onTabSelected ${tab?.text ?: ""}")
-                    changeTabs(tab?.text.toString())
-                }
-
-                override fun onTabUnselected(tab: TabLayout.Tab?) {
-                    //Log.d("MenuActivity", "onTabUnselected ${tab?.text ?: ""}")
-                }
-
-                override fun onTabReselected(tab: TabLayout.Tab?) {
-                    //Log.d("MenuActivity", "onTabReselected ${tab?.text ?: ""}")
-                }
-
-            })
-        }
+        updateUI()
     }
 
     private fun changeTabs(typeFoodTab: String) {
@@ -186,7 +151,7 @@ class MenuActivity : AppCompatActivity() {
 
         list?.let {
             adapterMenu.set(mapperFood.toUI(it))
-            updateUI()
+            updateUI(selectMenuItem = typeFoodTab)
         }
     }
 
@@ -199,23 +164,16 @@ class MenuActivity : AppCompatActivity() {
         return foods
     }
 
-
-    @Throws(Exception::class)
-    fun getFood() {
-        val controller = ControllerFood { listFood ->
-            foods = listFood
-            setContentView(binding.root)
-            changeTabs(getString(R.string.tab_menu_pizza))
-        }
-        controller.start()
-    }
-
-    private fun initLocalMenu() {
+    private fun initMenu() {
         foods = menuRepository.getMenu()
         changeTabs(getString(R.string.tab_menu_pizza))
     }
 
-    private fun updateUI() {
+    private fun updateUI(selectMenuItem: String? = null) {
+        with(binding) {
+            if (selectMenuItem?.isNotEmpty() == true) titleMenu.text = selectMenuItem
+        }
+
         coreSP.getBasket()
             ?.let { basket ->
                 binding.tvBasketCount.text = "+ ${basket.dataList.size}"
