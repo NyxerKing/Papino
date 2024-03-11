@@ -76,10 +76,12 @@ class MenuActivity : AppCompatActivity() {
             menuRecycler.addItemDecoration(itemDecorator)
 
             chipGroupMenu.setOnCheckedStateChangeListener { chipGroup, ints ->
-                val index = ints.first()
-                val item = chipGroup.findViewById<Chip>(index)
-                val tab = item.text.toString()
-                changeTabs(typeFoodTab = tab)
+                if (ints.isNotEmpty()) {
+                    val index = ints.first()
+                    val item = chipGroup.findViewById<Chip>(index)
+                    val tab = item.text.toString()
+                    changeTabs(typeFoodTab = tab)
+                }
             }
         }
 
