@@ -12,6 +12,7 @@ import ru.papino.uikit.components.cards.CardMenuBase
 class CardMenuAdapter(private val onClickItem: (FoodUI) -> Unit) :
     RecyclerView.Adapter<CardMenuAdapter.AdapterHolder>() {
 
+    val startUrlImageFood = "http://nyxerapi.somee.com/"
     private var elements: List<FoodUI>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdapterHolder {
@@ -51,7 +52,7 @@ class CardMenuAdapter(private val onClickItem: (FoodUI) -> Unit) :
         fun set(food: FoodUI) {
             val imageLoader = cardMenu.context.imageLoader
             val request = ImageRequest.Builder(cardMenu.context)
-                .data(food.linkCover)
+                .data(startUrlImageFood + food.linkCover)
                 .target(onSuccess = { coverDrawable ->
                         initCard(food = food, drawable = coverDrawable)
                 }, onStart = {

@@ -40,13 +40,11 @@ class BasketActivity : AppCompatActivity() {
         with(binding) {
             navigation.setSelected(NavigationItem.BASKET)
             navigation.set(
-                onClickMenu = {
-                    val intent = Intent(this@BasketActivity, MenuActivity::class.java)
-                    startActivity(intent)
+                    onClickMenu = {onBackPressed()
                 },
-                onClickProfile = {
-                    val intent = Intent(this@BasketActivity, EnterUserActivity::class.java)
-                    startActivity(intent)
+                    onClickProfile = {
+                        val intent = Intent(this@BasketActivity, EnterUserActivity::class.java)
+                        startActivity(intent)
                 }
             )
             basketMapper = BasketMapper(resources)
@@ -64,6 +62,9 @@ class BasketActivity : AppCompatActivity() {
                     initUI(basketFoods = list)
                 } ?: run { showError() }
             }
+
+            nameUserHelloBasket.text = "Петров Иван"
+            countBonusUserBasket.text = "327 бонусов"
         }
     }
 
