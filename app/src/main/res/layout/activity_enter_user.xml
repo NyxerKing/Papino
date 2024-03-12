@@ -91,7 +91,7 @@
 
     <ru.papino.uikit.components.Button
         android:id="@+id/buttonRegistration"
-        style="@style/PaPino.ButtonJopaton"
+        style="@style/PaPino.Button.Text"
         android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:text="@string/registration"
