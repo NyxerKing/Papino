@@ -21,6 +21,7 @@ import com.example.papino.presentation.mappers.FoodMapper
 import com.example.papino.presentation.menu.adapters.CardMenuAdapter
 import com.example.papino.presentation.menu.models.FoodUI
 import com.example.papino.presentation.menu.models.PackFoodBaskedModel
+import com.example.papino.presentation.regestration.EnterUserActivity
 import com.google.android.material.chip.Chip
 import ru.papino.uikit.components.navigation.NavigationItem
 
@@ -56,7 +57,8 @@ class MenuActivity : AppCompatActivity() {
                     startActivity(intent)
                 },
                 onClickProfile = {
-                    // todo профиль
+                    val intent = Intent(this@MenuActivity, EnterUserActivity::class.java)
+                    startActivity(intent)
                 }
             )
 

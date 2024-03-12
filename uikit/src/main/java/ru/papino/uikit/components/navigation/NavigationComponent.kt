@@ -38,9 +38,9 @@ class NavigationComponent @JvmOverloads constructor(
         onClickBasket: (() -> Unit)? = null,
         onClickProfile: (() -> Unit)? = null
     ) {
-        onClickMenu?.let { click -> menuView.setOnClickListener { click() } }
-        onClickBasket?.let { click -> basketView.setOnClickListener { click() } }
-        onClickProfile?.let { click -> profileView.setOnClickListener { click() } }
+        onClickMenu?.let { click -> menuView.setOnClickListener { click() }}
+        onClickBasket?.let { click -> basketView.setOnClickListener { click() }}
+        onClickProfile?.let { click -> profileView.setOnClickListener { click() }}
     }
 
     fun setBasketCount(count: Int) {
