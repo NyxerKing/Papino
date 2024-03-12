@@ -6,7 +6,6 @@ import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.papino.R
@@ -21,6 +20,7 @@ import com.example.papino.presentation.mappers.FoodMapper
 import com.example.papino.presentation.menu.adapters.CardMenuAdapter
 import com.example.papino.presentation.menu.models.FoodUI
 import com.example.papino.presentation.menu.models.PackFoodBaskedModel
+import com.example.papino.presentation.recycler.decorations.MenuDividerItemDecoration
 import com.example.papino.presentation.regestration.EnterUserActivity
 import com.google.android.material.chip.Chip
 import ru.papino.uikit.components.navigation.NavigationItem
@@ -67,15 +67,12 @@ class MenuActivity : AppCompatActivity() {
 
             menuRecycler.setLayoutManager(LinearLayoutManager(this@MenuActivity))
             menuRecycler.adapter = adapterMenu
-
-            val itemDecorator = DividerItemDecoration(root.context, DividerItemDecoration.VERTICAL)
-            ContextCompat.getDrawable(
-                root.context,
-                R.drawable.divider_vertical
-            )?.let { drawable ->
-                itemDecorator.setDrawable(drawable)
-            }
-            menuRecycler.addItemDecoration(itemDecorator)
+            menuRecycler.addItemDecoration(
+                MenuDividerItemDecoration(
+                    root.context,
+                    DividerItemDecoration.VERTICAL
+                )
+            )
 
             chipGroupMenu.setOnCheckedStateChangeListener { chipGroup, ints ->
                 if (ints.isNotEmpty()) {

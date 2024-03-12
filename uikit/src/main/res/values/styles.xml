@@ -40,5 +40,6 @@
     <style name="PaPino.Button.Delete" parent="Widget.Material3.Button.TextButton">
         <item name="android:padding">@dimen/d_10</item>
         <item name="android:textAppearance">@style/PaPino.TextAppearances.Controller.Count</item>
+        <item name="android:textColor">@color/backgroundTopColor</item>
     </style>
 </resources>

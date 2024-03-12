@@ -8,12 +8,15 @@ import android.view.Window
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.papino.core.sharedPref.CoreSharedPreferences
 import com.example.papino.databinding.AcitivityBasketBinding
-import com.example.papino.presentation.basket.adapters.BasketItemAdapter
+import com.example.papino.presentation.basket.adapters.CardBasketAdapter
+import com.example.papino.presentation.basket.mappers.BasketMapper
 import com.example.papino.presentation.basket.model.FoodBasketModel
+import com.example.papino.presentation.basket.model.FoodBasketUI
 import com.example.papino.presentation.menu.MenuActivity
+import com.example.papino.presentation.recycler.decorations.MenuDividerItemDecoration
 import com.example.papino.presentation.regestration.EnterUserActivity
 import ru.papino.uikit.components.navigation.NavigationItem
 
@@ -22,6 +25,9 @@ class BasketActivity : AppCompatActivity() {
 
     private lateinit var binding: AcitivityBasketBinding
     private lateinit var coreSP: CoreSharedPreferences
+
+    private var basketAdapter: CardBasketAdapter? = null
+    private lateinit var basketMapper: BasketMapper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         initFullMode()
@@ -43,13 +49,19 @@ class BasketActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
             )
-            basketRecyclerView.setLayoutManager(LinearLayoutManager(this@BasketActivity))
+            basketMapper = BasketMapper(resources)
+            basketAdapter = CardBasketAdapter(basketMapper)
+            basketRecyclerView.adapter = basketAdapter
+            basketRecyclerView.addItemDecoration(
+                MenuDividerItemDecoration(
+                    root.context,
+                    DividerItemDecoration.VERTICAL
+                )
+            )
 
             coreSP.getBasket().let { pack ->
                 pack?.dataList?.let { list ->
                     initUI(basketFoods = list)
-                    binding.basketRecyclerView.adapter =
-                        BasketItemAdapter(list, ::onItemClickDelete)
                 } ?: run { showError() }
             }
         }
@@ -81,9 +93,30 @@ class BasketActivity : AppCompatActivity() {
     }
 
 
-    private fun onItemClickDelete(item: FoodBasketModel) {
+    private fun onItemClickDelete(item: FoodBasketUI) {
         coreSP.getBasket()?.apply {
-            dataList.remove(item)
+            dataList.removeAll { element -> element.id == item.id }
+        }?.run {
+            coreSP.setBasket(this)
+            initUI(basketFoods = this.dataList)
+        }
+    }
+
+    private fun onItemMinusClick(item: FoodBasketUI) {
+        coreSP.getBasket()?.apply {
+            val firstIndex = dataList.indexOfFirst { model -> model.id == item.id }
+            dataList.removeAt(firstIndex)
+        }?.run {
+            coreSP.setBasket(this)
+            initUI(basketFoods = this.dataList)
+        }
+    }
+
+    private fun onItemPlusClick(item: FoodBasketUI) {
+        coreSP.getBasket()?.apply {
+            val firstIndex = dataList.indexOfFirst { model -> model.id == item.id }
+            val copy = dataList[firstIndex].copy()
+            dataList.add(copy)
         }?.run {
             coreSP.setBasket(this)
             initUI(basketFoods = this.dataList)
@@ -91,31 +124,33 @@ class BasketActivity : AppCompatActivity() {
     }
 
     private fun initUI(basketFoods: List<FoodBasketModel>) {
+        basketAdapter?.set(
+            list = basketMapper.toListUI(basketFoods),
+            deleteOnClick = ::onItemClickDelete,
+            minusOnClick = ::onItemMinusClick,
+            plusOnClick = ::onItemPlusClick
+        )
+
         with(binding) {
             navigation.setBasketCount(basketFoods.size)
-
             titleOrderFood.text =
                 resources.getString(
                     ru.papino.uikit.R.string.insert_products,
                     basketFoods.size.toString()
                 )
-
             titleOrderFoodSum.text = resources.getString(
                 ru.papino.uikit.R.string.insert_sum,
                 basketFoods.sumOf { food -> food.price.replace(" ", "").toInt() }.toString()
             )
-
             //todo скидки нет
             titleOrderDiscountSum.text = resources.getString(
                 ru.papino.uikit.R.string.insert_sum,
                 "0"
             )
-
             toPaySum.text = resources.getString(
                 ru.papino.uikit.R.string.insert_sum,
                 basketFoods.sumOf { food -> food.price.replace(" ", "").toInt() }.toString()
             )
-
             buttonCheckout.setOnClickListener {
                 // todo оформить заказ
             }

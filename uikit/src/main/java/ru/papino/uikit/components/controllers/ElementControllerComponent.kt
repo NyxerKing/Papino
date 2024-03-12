@@ -10,8 +10,8 @@ import ru.papino.uikit.components.Button
 
 class ElementControllerComponent @JvmOverloads constructor(
     context: Context,
-    attrs: AttributeSet,
-    defStyleAttr: Int
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
     init {
