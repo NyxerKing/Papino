@@ -16,6 +16,7 @@
         <item name="android:paddingTop">@dimen/d_12</item>
         <item name="android:paddingBottom">@dimen/d_16</item>
         <item name="android:textAppearance">@style/PaPino.TextAppearances.Button.Text</item>
+        <item name="android:textColor">@color/textSecondaryColor</item>
     </style>
 
     <style name="PaPino.Button.Plus">
