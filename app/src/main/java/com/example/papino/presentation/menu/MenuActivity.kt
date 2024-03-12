@@ -176,7 +176,11 @@ class MenuActivity : AppCompatActivity() {
     }
 
     private fun initMenu() {
-        foods = menuRepository.getMenu()
+        menuRepository.getMenu(::initGetMenu, ::initGetMenu)
+    }
+
+    private fun initGetMenu(list: ListFood) {
+        foods = list
         changeTabs(getString(R.string.tab_menu_pizza))
     }
 
