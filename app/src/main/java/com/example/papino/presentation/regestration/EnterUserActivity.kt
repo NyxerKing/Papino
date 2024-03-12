@@ -47,12 +47,8 @@ class EnterUserActivity : AppCompatActivity() {
 
             navigationEnterUser.setSelected(NavigationItem.PROFILE)
             navigationEnterUser.set(
-                onClickMenu = {
-                    val intent = Intent(this@EnterUserActivity, MenuActivity::class.java)
-                    startActivity(intent)},
-                onClickBasket = {
-                    val intent = Intent(this@EnterUserActivity, BasketActivity::class.java)
-                    startActivity(intent)
+                    onClickMenu = {onBackPressed()},
+                    onClickBasket = {onBackPressed()
                 }
             )
 
