@@ -1,5 +1,6 @@
 package com.example.papino.presentation.basket
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Gravity
 import android.view.View
@@ -12,6 +13,8 @@ import com.example.papino.core.sharedPref.CoreSharedPreferences
 import com.example.papino.databinding.AcitivityBasketBinding
 import com.example.papino.presentation.basket.adapters.BasketItemAdapter
 import com.example.papino.presentation.basket.model.FoodBasketModel
+import com.example.papino.presentation.menu.MenuActivity
+import com.example.papino.presentation.regestration.EnterUserActivity
 import ru.papino.uikit.components.navigation.NavigationItem
 
 
@@ -31,9 +34,13 @@ class BasketActivity : AppCompatActivity() {
         with(binding) {
             navigation.setSelected(NavigationItem.BASKET)
             navigation.set(
-                onClickMenu = { onBackPressed() },
+                onClickMenu = {
+                    val intent = Intent(this@BasketActivity, MenuActivity::class.java)
+                    startActivity(intent)
+                },
                 onClickProfile = {
-                    // todo профиль
+                    val intent = Intent(this@BasketActivity, EnterUserActivity::class.java)
+                    startActivity(intent)
                 }
             )
             basketRecyclerView.setLayoutManager(LinearLayoutManager(this@BasketActivity))
