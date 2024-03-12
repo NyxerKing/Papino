@@ -5,19 +5,30 @@ import com.example.papino.data.datasource.net.MenuService
 import com.example.papino.data.datasource.net.NetDataSource
 import com.example.papino.net.ListFood
 import com.google.gson.Gson
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MenuRepository(
     private val localDS: LocalDataSource,
     private val netDS: NetDataSource
 ) {
 
-    fun getMenu(): ListFood {
+    fun getMenu(callResponse: (ListFood) -> Unit, callError: (ListFood) -> Unit) {
         val menuService = netDS.getRetrofit().create(MenuService::class.java)
-        return try {
-            val menuNet = menuService.getMenu().execute()
-            menuNet.body() ?: Gson().fromJson(localDS.getData(), ListFood::class.java)
-        } catch (ex: Exception) {
-            Gson().fromJson(localDS.getData(), ListFood::class.java)
-        }
+        menuService.getMenu().enqueue(object : Callback<ListFood> {
+            override fun onResponse(call: Call<ListFood>, response: Response<ListFood>) {
+                callResponse(
+                    response.body() ?: Gson().fromJson(
+                        localDS.getData(),
+                        ListFood::class.java
+                    )
+                )
+            }
+
+            override fun onFailure(call: Call<ListFood>, t: Throwable) {
+                callError(Gson().fromJson(localDS.getData(), ListFood::class.java))
+            }
+        })
     }
 }
