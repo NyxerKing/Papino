@@ -13,6 +13,8 @@ class CardMenuAdapter(private val onClickItem: (FoodUI) -> Unit) :
     RecyclerView.Adapter<CardMenuAdapter.AdapterHolder>() {
 
     val startUrlImageFood = "http://nyxerapi.somee.com/"
+    //val startUrlImageFood = ""
+    //val startUrlImageFood = "http://192.168.55.7/"
     private var elements: List<FoodUI>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdapterHolder {

@@ -75,7 +75,7 @@ class RegistrationActivity : AppCompatActivity() {
                 if (callBackUser != null) {
                     addUserShared()
                     val setUser : App? = null
-                    setUser?.setUser(callBackUser.group[0])
+                    setUser?.setUser(callBackUser.group.first())
                     val toast = Toast.makeText(
                         applicationContext,
                         "Пользователь создан. Добро пожаловать в Papino, " + callBackUser.group[0].name,

@@ -1,5 +1,6 @@
 package com.example.papino.presentation.basket
 
+import android.app.Application
 import android.content.Intent
 import android.os.Bundle
 import android.view.Gravity
@@ -9,8 +10,10 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
+import com.example.papino.App
 import com.example.papino.core.sharedPref.CoreSharedPreferences
 import com.example.papino.databinding.AcitivityBasketBinding
+import com.example.papino.net.User
 import com.example.papino.presentation.basket.adapters.CardBasketAdapter
 import com.example.papino.presentation.basket.mappers.BasketMapper
 import com.example.papino.presentation.basket.model.FoodBasketModel
@@ -40,11 +43,12 @@ class BasketActivity : AppCompatActivity() {
         with(binding) {
             navigation.setSelected(NavigationItem.BASKET)
             navigation.set(
-                    onClickMenu = {onBackPressed()
+                onClickMenu = {
+                    onBackPressed()
                 },
-                    onClickProfile = {
-                        val intent = Intent(this@BasketActivity, EnterUserActivity::class.java)
-                        startActivity(intent)
+                onClickProfile = {
+                    val intent = Intent(this@BasketActivity, EnterUserActivity::class.java)
+                    startActivity(intent)
                 }
             )
             basketMapper = BasketMapper(resources)
@@ -63,8 +67,16 @@ class BasketActivity : AppCompatActivity() {
                 } ?: run { showError() }
             }
 
-            nameUserHelloBasket.text = "Петров Иван"
-            countBonusUserBasket.text = "327 бонусов"
+            if (getUser()?.surname.isNullOrEmpty())
+            {
+                nameUserHelloBasket.text = ""
+                countBonusUserBasket.text = ""
+            }
+            else
+            {
+                nameUserHelloBasket.text = getUser()?.surname + " " + getUser()?.name
+                countBonusUserBasket.text = "Количество доступных бонусов" + getUser()?.bonus
+            }
         }
     }
 
@@ -157,4 +169,8 @@ class BasketActivity : AppCompatActivity() {
             }
         }
     }
+
+    private fun getUser(): User? =
+        (application as App).getUser()
 }
+

@@ -70,7 +70,8 @@ class ControllerUser(val callBack: (ListUser, String) -> Unit , val callBackErro
     }
 
     companion object {
-        const val BASE_URL = "http://192.168.55.7/"
+        //const val BASE_URL = "http://192.168.55.7/"
+        const val BASE_URL = "http://nyxerapi.somee.com/"
     }
 }
 
