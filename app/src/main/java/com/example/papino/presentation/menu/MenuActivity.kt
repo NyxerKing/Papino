@@ -8,6 +8,7 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.papino.App
 import com.example.papino.R
 import com.example.papino.core.sharedPref.CoreSharedPreferences
 import com.example.papino.data.datasource.local.LocalDataSource
@@ -15,6 +16,7 @@ import com.example.papino.data.datasource.net.NetDataSource
 import com.example.papino.data.repository.MenuRepository
 import com.example.papino.databinding.ActivityMenuBinding
 import com.example.papino.net.ListFood
+import com.example.papino.net.User
 import com.example.papino.presentation.basket.BasketActivity
 import com.example.papino.presentation.mappers.FoodMapper
 import com.example.papino.presentation.menu.adapters.CardMenuAdapter
@@ -63,8 +65,17 @@ class MenuActivity : AppCompatActivity() {
                 }
             )
 
-            nameUserHello.text = "Петров Иван"
-            countBonusUser.text = "327 бонусов"
+            if (getUser()?.surname.isNullOrEmpty())
+            {
+                nameUserHello.text = ""
+                countBonusUser.text = ""
+            }
+            else
+            {
+                nameUserHello.text = getUser()?.surname + " " + getUser()?.name
+                countBonusUser.text = "Количество доступных бонусов" + getUser()?.bonus
+            }
+
 
             menuRecycler.setLayoutManager(LinearLayoutManager(this@MenuActivity))
             menuRecycler.adapter = adapterMenu
@@ -199,4 +210,7 @@ class MenuActivity : AppCompatActivity() {
                 )
             }
     }
+
+    private fun getUser(): User? =
+        (application as App).getUser()
 }

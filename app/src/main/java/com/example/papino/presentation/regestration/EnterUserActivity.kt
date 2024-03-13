@@ -124,7 +124,10 @@ class EnterUserActivity : AppCompatActivity() {
                 if (callBackUser.group.size < 1 || callBackUser.group.size > 1) {
                     messageForUser(false)
                 }
-            } , callBackError = {}
+            } ,
+                callBackError = {
+
+                }
             )
             controller.start("", "", telephonenumber, password, "",false)
         }
