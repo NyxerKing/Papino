@@ -1,7 +1,6 @@
 package com.example.papino
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
@@ -10,7 +9,7 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.example.papino.core.sharedPref.SharedKeys
 import com.example.papino.databinding.ActivityMainBinding
-import com.example.papino.presentation.menu.MenuActivity
+import ru.papino.restaurant.RestaurantActivity
 
 
 class MainActivity : AppCompatActivity() {
@@ -30,10 +29,10 @@ class MainActivity : AppCompatActivity() {
         )
         sharedPreferencesClear.edit().clear().commit();
 
-        object : CountDownTimer(2500, 1000) {
+        object : CountDownTimer(500, 1000) {
             override fun onFinish() {
-                val intent = Intent(this@MainActivity, MenuActivity::class.java)
-                startActivity(intent)
+                //val intent = Intent(this@MainActivity, MenuActivity::class.java)
+                startActivity(RestaurantActivity.newIntent(this@MainActivity))
                 finish()
             }
 

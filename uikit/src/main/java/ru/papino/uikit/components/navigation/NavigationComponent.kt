@@ -34,13 +34,13 @@ class NavigationComponent @JvmOverloads constructor(
     }
 
     fun set(
-        onClickMenu: (() -> Unit)? = null,
-        onClickBasket: (() -> Unit)? = null,
-        onClickProfile: (() -> Unit)? = null
+        onClickMenu: ((NavigationItem) -> Unit)? = null,
+        onClickBasket: ((NavigationItem) -> Unit)? = null,
+        onClickProfile: ((NavigationItem) -> Unit)? = null
     ) {
-        onClickMenu?.let { click -> menuView.setOnClickListener { click() }}
-        onClickBasket?.let { click -> basketView.setOnClickListener { click() }}
-        onClickProfile?.let { click -> profileView.setOnClickListener { click() }}
+        onClickMenu?.let { click -> menuView.setOnClickListener { click(NavigationItem.MENU) } }
+        onClickBasket?.let { click -> basketView.setOnClickListener { click(NavigationItem.BASKET) } }
+        onClickProfile?.let { click -> profileView.setOnClickListener { click(NavigationItem.PROFILE) } }
     }
 
     fun setBasketCount(count: Int) {
@@ -48,6 +48,10 @@ class NavigationComponent @JvmOverloads constructor(
     }
 
     fun setSelected(itemSelect: NavigationItem) {
+        setDefaultStyle(menuView)
+        setDefaultStyle(basketView)
+        setDefaultStyle(profileView)
+
         val view = when (itemSelect) {
             NavigationItem.MENU -> menuView
 
@@ -60,6 +64,14 @@ class NavigationComponent @JvmOverloads constructor(
         TextViewCompat.setCompoundDrawableTintList(
             view,
             ColorStateList.valueOf(resources.getColor(R.color.backgroundButtonColor, context.theme))
+        )
+    }
+
+    private fun setDefaultStyle(view: TextView) {
+        view.setTextAppearance(R.style.PaPino_TextAppearances_Navigation_Text)
+        TextViewCompat.setCompoundDrawableTintList(
+            view,
+            ColorStateList.valueOf(resources.getColor(R.color.backgroundCardColor, context.theme))
         )
     }
 }

@@ -1,14 +1,15 @@
-package com.example.papino.data.datasource.local
+package ru.papino.restaurant.data.datasource.local.impl
 
 import android.content.res.Resources
+import ru.papino.restaurant.R
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.io.StringWriter
 
-class LocalDataSource private constructor(private val resource: Resources) {
+internal class LocalDataSource private constructor(private val resource: Resources) {
 
     fun getData(): String {
-        val inputStream = resource.openRawResource(ru.papino.restaurant.R.raw.data_menu)
+        val inputStream = resource.openRawResource(R.raw.data_menu)
         val writer = StringWriter()
         val buffer = CharArray(1024)
         inputStream.use { rawData ->

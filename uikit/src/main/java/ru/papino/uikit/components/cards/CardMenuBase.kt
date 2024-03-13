@@ -56,6 +56,25 @@ class CardMenuBase @JvmOverloads constructor(
             LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
     }
 
+    fun setType(type: MenuButtonType) {
+        var buttonText: String
+        var buttonColor: Int
+        when (type) {
+            MenuButtonType.BASE -> {
+                buttonText = resources.getString(ru.papino.uikit.R.string.add_to_cart)
+                buttonColor = ru.papino.uikit.R.color.backgroundButtonColor
+            }
+
+            MenuButtonType.BASKET -> {
+                buttonText = resources.getString(ru.papino.uikit.R.string.to_cart)
+                buttonColor = ru.papino.uikit.R.color.backgroundButtonGreyMedium
+            }
+        }
+
+        buttonAddCart.text = buttonText
+        buttonAddCart.setBackgroundColor(resources.getColor(buttonColor, context.theme))
+    }
+
     /**
      * Установить параметры
      *
@@ -111,4 +130,9 @@ class CardMenuBase @JvmOverloads constructor(
     companion object {
         private const val CORNER_RADIUS = 10f
     }
+}
+
+enum class MenuButtonType {
+    BASE,
+    BASKET
 }

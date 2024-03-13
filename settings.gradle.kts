@@ -16,3 +16,4 @@ dependencyResolutionManagement {
 rootProject.name = "Papino"
 include(":app")
 include(":uikit")
+include(":restaurant")
