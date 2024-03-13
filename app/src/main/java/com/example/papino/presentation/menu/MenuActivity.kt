@@ -73,7 +73,7 @@ class MenuActivity : AppCompatActivity() {
             else
             {
                 nameUserHello.text = getUser()?.surname + " " + getUser()?.name
-                countBonusUser.text = "Количество доступных бонусов" + getUser()?.bonus
+                countBonusUser.text = "Бонусы: " + getUser()?.bonus
             }
 
 

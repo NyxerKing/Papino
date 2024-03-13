@@ -75,7 +75,7 @@ class BasketActivity : AppCompatActivity() {
             else
             {
                 nameUserHelloBasket.text = getUser()?.surname + " " + getUser()?.name
-                countBonusUserBasket.text = "Количество доступных бонусов" + getUser()?.bonus
+                countBonusUserBasket.text = "Бонусы: " + getUser()?.bonus
             }
         }
     }
