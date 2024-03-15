@@ -107,7 +107,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/titleOrderFood"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/titleOrderFood"
-            tools:text="105 000 сум" />
+            tools:text="105 000" />
 
         <TextView
             android:id="@+id/titleOrderDiscount"
@@ -129,7 +129,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/titleOrderDiscount"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/titleOrderDiscount"
-            tools:text="15 000 сум" />
+            tools:text="15 000" />
 
         <Space
             android:id="@+id/space1"
@@ -160,7 +160,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/titleToPay"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/titleToPay"
-            tools:text="90 000 сум" />
+            tools:text="90 000" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/inputLayout"
@@ -181,7 +181,7 @@
                 android:id="@+id/inputEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Зарафшан, 7-й микрорайон, 20"
+                android:text="Город, микрорайон, дом, квартира"
                 android:textAppearance="@style/PaPino.TextAppearances.Card.Title"
                 android:textColor="@color/textPrimaryColor" />
 
@@ -197,6 +197,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/inputLayout" />
+
+        <Switch
+            android:id="@+id/switchBonus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Списать бонусы"
+            app:layout_constraintTop_toBottomOf="@+id/titleToPay"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/inputLayout"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ru.papino.uikit.components.navigation.NavigationComponent

@@ -51,8 +51,6 @@ class EnterUserActivity : AppCompatActivity() {
                     onClickBasket = {onBackPressed()
                 }
             )
-
-            //buttonBackEnterUserMenu.setOnClickListener { onBackPressed() }
         }
     }
 
@@ -126,7 +124,11 @@ class EnterUserActivity : AppCompatActivity() {
                 }
             } ,
                 callBackError = {
-
+                    val toast = Toast.makeText(
+                        applicationContext,
+                        "Ведутся технические работы.",
+                        Toast.LENGTH_LONG
+                    )
                 }
             )
             controller.start("", "", telephonenumber, password, "",false)
@@ -137,7 +139,7 @@ class EnterUserActivity : AppCompatActivity() {
         if (enterUser) {
             val toast = Toast.makeText(
                 applicationContext,
-                "Добро пожаловать в Papino, " + callBackUser.group[0].name,
+                "Добро пожаловать в Papino, " + callBackUser.group.first().name,
                 Toast.LENGTH_LONG
             )
             toast.setGravity(Gravity.CENTER, 0, 0)

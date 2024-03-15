@@ -6,7 +6,7 @@ data class User(
     var name: String? = null,
     val telephoneNumber: String? = null,
     val password: String? = null,
-    val bonus: String? = null,
+    val bonus: String,
     val token: String? = null
 )
 

@@ -9,6 +9,7 @@ import android.view.Window
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.papino.App
 import com.example.papino.core.sharedPref.CoreSharedPreferences
@@ -61,19 +62,25 @@ class BasketActivity : AppCompatActivity() {
                 )
             )
 
+            switchBonus.setOnClickListener {
+                coreSP.getBasket().let { pack ->
+                    pack?.dataList?.let { list ->
+                        initUI(basketFoods = list)
+                    } ?: run { showError() }
+                }
+            }
+
             coreSP.getBasket().let { pack ->
                 pack?.dataList?.let { list ->
                     initUI(basketFoods = list)
                 } ?: run { showError() }
             }
 
-            if (getUser()?.surname.isNullOrEmpty())
-            {
+            if (getUser()?.surname.isNullOrEmpty()) {
                 nameUserHelloBasket.text = ""
                 countBonusUserBasket.text = ""
-            }
-            else
-            {
+                switchBonus.isVisible = false
+            } else {
                 nameUserHelloBasket.text = getUser()?.surname + " " + getUser()?.name
                 countBonusUserBasket.text = "Бонусы: " + getUser()?.bonus
             }
@@ -136,6 +143,13 @@ class BasketActivity : AppCompatActivity() {
         }
     }
 
+    private fun discountClick() : Int
+    {
+        val summDiscount = getUser()?.bonus!!.toInt()
+        return summDiscount
+    }
+
+
     private fun initUI(basketFoods: List<FoodBasketModel>) {
         basketAdapter?.set(
             list = basketMapper.toListUI(basketFoods),
@@ -151,21 +165,46 @@ class BasketActivity : AppCompatActivity() {
                     ru.papino.uikit.R.string.insert_products,
                     basketFoods.size.toString()
                 )
+
             titleOrderFoodSum.text = resources.getString(
                 ru.papino.uikit.R.string.insert_sum,
                 basketFoods.sumOf { food -> food.price.replace(" ", "").toInt() }.toString()
             )
-            //todo скидки нет
-            titleOrderDiscountSum.text = resources.getString(
-                ru.papino.uikit.R.string.insert_sum,
-                "0"
-            )
+            var summDiscount = 0
+            if(switchBonus.isChecked) {
+                summDiscount = discountClick()
+                titleOrderDiscountSum.text = summDiscount.toString()
+                titleOrderDiscountSum.isVisible = true
+            }
+            else
+            {
+                titleOrderDiscountSum.text = ""
+                titleOrderDiscountSum.isVisible = false
+            }
+
             toPaySum.text = resources.getString(
                 ru.papino.uikit.R.string.insert_sum,
-                basketFoods.sumOf { food -> food.price.replace(" ", "").toInt() }.toString()
+                (basketFoods.sumOf { food -> food.price.replace(" ", "").toInt()} - summDiscount).toString()
             )
             buttonCheckout.setOnClickListener {
-                // todo оформить заказ
+                if (getUser()?.surname.isNullOrEmpty()) {
+                    val toast = Toast.makeText(
+                        applicationContext,
+                        "Для оформления заказа, Вам нужно войти в систему",
+                        Toast.LENGTH_SHORT
+                    )
+                    toast.show()
+                    return@setOnClickListener
+                }
+                if (inputEditText.text.toString() == "Город, микрорайон, дом, квартира" || inputEditText.text.isNullOrEmpty()) {
+                    val toast = Toast.makeText(
+                        applicationContext,
+                        "Для оформления заказа, Вам нужно ввести адрес",
+                        Toast.LENGTH_SHORT
+                    )
+                    toast.show()
+                    return@setOnClickListener
+                }
             }
         }
     }
