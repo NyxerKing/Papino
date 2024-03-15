@@ -53,7 +53,7 @@ class RegistrationActivity : AppCompatActivity() {
     private fun checkPasswordAndSaveBase(): Boolean {
         val password = findViewById<EditText>(R.id.createPassword).text
 
-        if (password.length < 8) return false
+        if (password.length < 5) return false
         /*if (password.filter { it.isDigit() }.firstOrNull() == null) return false
         if (password.filter { it.isLetter() }.filter { it.isUpperCase() }.firstOrNull() == null) return false
         if (password.filter { it.isLetter() }.filter { it.isLowerCase() }.firstOrNull() == null) return false
@@ -88,7 +88,7 @@ class RegistrationActivity : AppCompatActivity() {
             callBackError = {
                 val toast = Toast.makeText(
                     applicationContext,
-                    "flkgpgopdhfgh;pfg.h/, " + it.message,
+                    "Ведутся технические работы.",
                     Toast.LENGTH_LONG
                 )
                 toast.setGravity(Gravity.CENTER, 0, 0)
