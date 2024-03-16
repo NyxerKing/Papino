@@ -19,6 +19,31 @@ internal class BasketViewModel(
         loadBasket()
     }
 
+    fun deleteProduct(model: BasketUIModel) {
+        viewModelScope.launch {
+            basketRepository.delete(model.id)
+            loadBasket()
+        }
+    }
+
+    fun minusProduct(model: BasketUIModel) {
+        viewModelScope.launch {
+            if (model.count == 1) {
+                basketRepository.delete(model.id)
+            } else {
+                basketRepository.update(model.id, model.count - 1)
+            }
+            loadBasket()
+        }
+    }
+
+    fun plusProduct(model: BasketUIModel) {
+        viewModelScope.launch {
+            basketRepository.update(model.id, model.count + 1)
+            loadBasket()
+        }
+    }
+
     private fun loadBasket() {
         viewModelScope.launch {
             val list = mutableListOf<BasketUIModel>()

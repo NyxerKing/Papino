@@ -13,7 +13,7 @@ internal interface BasketRepository {
 
     suspend fun add(product: ProductModel)
 
-    suspend fun delete(product: ProductModel)
+    suspend fun delete(id: Int)
 
     suspend fun update(id: Int, count: Int)
 

@@ -43,10 +43,10 @@ internal class BasketRepositoryImpl(
         }
     }
 
-    override suspend fun delete(product: ProductModel) {
+    override suspend fun delete(id: Int) {
         withContext(Dispatchers.IO) {
-            basketDao.delete(roomBasketMapper.toEntity(product))
-            _changeBasket.emit(product.id ?: 0)
+            basketDao.delete(id)
+            _changeBasket.emit(id)
         }
     }
 

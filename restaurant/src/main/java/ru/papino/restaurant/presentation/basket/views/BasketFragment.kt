@@ -59,10 +59,15 @@ internal class BasketFragment : Fragment() {
     }
 
     private fun updateUI(basket: List<BasketUIModel>) {
-        basketAdapter.set(list = basket)
+        basketAdapter.set(
+            list = basket,
+            viewModel::deleteProduct,
+            viewModel::minusProduct,
+            viewModel::plusProduct
+        )
 
         with(binding) {
-            val sum = basket.sumOf { product -> product.price.toPrice() }.toString()
+            val sum = basket.sumOf { product -> product.price.toPrice() * product.count }.toString()
 
             titleOrderFoodSum.text = sum
             toPaySum.text = sum

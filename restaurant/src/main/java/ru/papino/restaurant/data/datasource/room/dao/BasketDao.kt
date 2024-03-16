@@ -1,7 +1,6 @@
 package ru.papino.restaurant.data.datasource.room.dao
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import ru.papino.restaurant.data.datasource.room.models.BasketProductEntity
@@ -21,8 +20,8 @@ internal interface BasketDao {
     @Insert(entity = BasketProductEntity::class)
     fun insert(products: BasketProductEntity)
 
-    @Delete
-    fun delete(user: BasketProductEntity)
+    @Query("DELETE FROM baskets WHERE id = :id")
+    fun delete(id: Int)
 
     @Query("UPDATE baskets SET count = :count WHERE id = :id")
     fun update(id: Int, count: Int)
