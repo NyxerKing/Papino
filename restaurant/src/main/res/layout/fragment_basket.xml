@@ -12,7 +12,6 @@
         android:background="@drawable/bg_rect_base"
         android:gravity="center"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/basketRecyclerView"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -53,149 +52,157 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/basketRecyclerView"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:paddingHorizontal="@dimen/d_10"
-        android:paddingTop="@dimen/d_14"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toTopOf="@+id/orderForm"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/topMenu" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/orderForm"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/d_10"
-        android:isScrollContainer="true"
-        android:padding="@dimen/d_20"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/topMenu">
 
-        <TextView
-            android:id="@+id/titleOrder"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/your_order"
-            android:textAppearance="@style/PaPino.TextAppearances.Basket.Title"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/titleOrderFood"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/d_10"
-            android:textAppearance="@style/PaPino.TextAppearances.Controller.Count"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/titleOrder"
-            tools:text="Товары (3)" />
-
-        <TextView
-            android:id="@+id/titleOrderFoodSum"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/d_10"
-            android:textAppearance="@style/PaPino.TextAppearances.Controller.Count"
-            app:layout_constraintBottom_toBottomOf="@+id/titleOrderFood"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/titleOrderFood"
-            tools:text="105 000 сум" />
-
-        <TextView
-            android:id="@+id/titleOrderDiscount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/d_10"
-            android:text="@string/discount"
-            android:textAppearance="@style/PaPino.TextAppearances.Controller.Count"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/titleOrderFood"
-            tools:text="Скидка" />
-
-        <TextView
-            android:id="@+id/titleOrderDiscountSum"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/d_10"
-            android:textAppearance="@style/PaPino.TextAppearances.Controller.Count"
-            app:layout_constraintBottom_toBottomOf="@+id/titleOrderDiscount"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/titleOrderDiscount"
-            tools:text="15 000 сум" />
-
-        <Space
-            android:id="@+id/space1"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/d_2"
-            android:layout_marginTop="@dimen/d_20"
-            android:background="@color/backgroundButtonGreyMedium"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/titleOrderDiscount" />
-
-        <TextView
-            android:id="@+id/titleToPay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/d_20"
-            android:text="@string/to_pay"
-            android:textAppearance="@style/PaPino.TextAppearances.Controller.Count"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/space1" />
-
-        <TextView
-            android:id="@+id/toPaySum"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/d_10"
-            android:textAppearance="@style/PaPino.TextAppearances.Card.Title"
-            app:layout_constraintBottom_toBottomOf="@+id/titleToPay"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/titleToPay"
-            tools:text="90 000 сум" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/inputLayout"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/orderForm"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/d_40"
-            android:background="@drawable/bg_rect_grey_10"
-            android:hint="@string/address"
-            android:paddingTop="@dimen/d_10"
-            app:boxBackgroundMode="none"
-            app:hintTextAppearance="@style/PaPino.TextAppearances.Card.Subtitle"
-            app:hintTextColor="@color/text3Color"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toPaySum">
+            android:layout_height="match_parent"
+            android:isScrollContainer="true">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inputEditText"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/basketRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginHorizontal="@dimen/d_10"
+                android:layout_weight="1"
+                android:paddingTop="@dimen/d_14"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/titleOrder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/d_30"
+                android:layout_marginTop="@dimen/d_30"
+                android:text="@string/your_order"
+                android:textAppearance="@style/PaPino.TextAppearances.Basket.Title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/basketRecyclerView" />
+
+            <TextView
+                android:id="@+id/titleOrderFood"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/d_10"
+                android:textAppearance="@style/PaPino.TextAppearances.Controller.Count"
+                app:layout_constraintStart_toStartOf="@+id/titleOrder"
+                app:layout_constraintTop_toBottomOf="@+id/titleOrder"
+                tools:text="Товары (3)" />
+
+            <TextView
+                android:id="@+id/titleOrderFoodSum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/d_10"
+                android:layout_marginEnd="@dimen/d_30"
+                android:textAppearance="@style/PaPino.TextAppearances.Controller.Count"
+                app:layout_constraintBottom_toBottomOf="@+id/titleOrderFood"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/titleOrderFood"
+                tools:text="105 000 сум" />
+
+            <TextView
+                android:id="@+id/titleOrderDiscount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/d_10"
+                android:text="@string/discount"
+                android:textAppearance="@style/PaPino.TextAppearances.Controller.Count"
+                app:layout_constraintStart_toStartOf="@+id/titleOrder"
+                app:layout_constraintTop_toBottomOf="@+id/titleOrderFood"
+                tools:text="Скидка" />
+
+            <TextView
+                android:id="@+id/titleOrderDiscountSum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/d_10"
+                android:textAppearance="@style/PaPino.TextAppearances.Controller.Count"
+                app:layout_constraintBottom_toBottomOf="@+id/titleOrderDiscount"
+                app:layout_constraintEnd_toEndOf="@+id/titleOrderFoodSum"
+                app:layout_constraintTop_toTopOf="@+id/titleOrderDiscount"
+                tools:text="15 000 сум" />
+
+            <Space
+                android:id="@+id/space1"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/d_2"
+                android:layout_marginTop="@dimen/d_20"
+                android:background="@color/backgroundButtonGreyMedium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/titleOrderDiscount" />
+
+            <TextView
+                android:id="@+id/titleToPay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/d_20"
+                android:text="@string/to_pay"
+                android:textAppearance="@style/PaPino.TextAppearances.Controller.Count"
+                app:layout_constraintStart_toStartOf="@+id/titleOrder"
+                app:layout_constraintTop_toBottomOf="@+id/space1" />
+
+            <TextView
+                android:id="@+id/toPaySum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/d_10"
+                android:textAppearance="@style/PaPino.TextAppearances.Card.Title"
+                app:layout_constraintBottom_toBottomOf="@+id/titleToPay"
+                app:layout_constraintEnd_toEndOf="@+id/titleOrderFoodSum"
+                app:layout_constraintTop_toTopOf="@+id/titleToPay"
+                tools:text="90 000 сум" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Зарафшан, 7-й микрорайон, 20"
-                android:textAppearance="@style/PaPino.TextAppearances.Card.Title"
-                android:textColor="@color/textPrimaryColor" />
+                android:layout_marginHorizontal="@dimen/d_30"
+                android:layout_marginTop="@dimen/d_40"
+                android:background="@drawable/bg_rect_grey_10"
+                android:hint="@string/address"
+                android:paddingTop="@dimen/d_10"
+                app:boxBackgroundMode="none"
+                app:hintTextAppearance="@style/PaPino.TextAppearances.Card.Subtitle"
+                app:hintTextColor="@color/text3Color"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toPaySum">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/PaPino.TextAppearances.Card.Title"
+                    android:textColor="@color/textPrimaryColor"
+                    tools:text="Зарафшан, 7-й микрорайон, 20" />
 
-        <ru.papino.uikit.components.Button
-            android:id="@+id/buttonCheckout"
-            style="@style/PaPino.Button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/d_20"
-            android:text="@string/checkout"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/inputLayout" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <ru.papino.uikit.components.Button
+                android:id="@+id/buttonCheckout"
+                style="@style/PaPino.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/d_30"
+                android:layout_marginTop="@dimen/d_20"
+                android:text="@string/checkout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/inputLayout" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

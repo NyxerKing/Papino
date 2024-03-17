@@ -22,4 +22,6 @@
     <string name="insert_sum">%1$s сум</string>
     <string name="insert_sum_count">%1$s сум/шт</string>
     <string name="insert_count_sum_all">%1$s шт - %2$s сум</string>
+
+    <string name="description_cover">Изображение</string>
 </resources>

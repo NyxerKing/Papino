@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
+import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.card.MaterialCardView
 import ru.papino.uikit.R
 import ru.papino.uikit.components.Button
@@ -41,6 +42,7 @@ class CardMenuBase @JvmOverloads constructor(
     private val textPrice = findViewById<TextView>(R.id.textPrice)
     private val textPriceCount = findViewById<TextView>(R.id.textPriceCount)
     private val buttonAddCart = findViewById<Button>(R.id.buttonAddCart)
+    private val shimmerImage = findViewById<ShimmerFrameLayout>(R.id.shimmerImagePreview)
 
     init {
         this.radius = TypedValue.applyDimension(
@@ -54,6 +56,16 @@ class CardMenuBase @JvmOverloads constructor(
 
         layoutParams =
             LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+    }
+
+    fun showShimmer() {
+        shimmerImage.startShimmer()
+        shimmerImage.visibility = VISIBLE
+    }
+
+    fun hideShimmer() {
+        shimmerImage.stopShimmer()
+        shimmerImage.visibility = GONE
     }
 
     fun setType(type: MenuButtonType) {

@@ -28,7 +28,9 @@ android {
 }
 
 dependencies {
+    val shimmer = "0.5.0"
 
+    implementation("com.facebook.shimmer:shimmer:$shimmer")
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")

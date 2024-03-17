@@ -92,9 +92,12 @@ internal class MenuFragment : Fragment() {
                         chipGroup.findViewById<ru.papino.uikit.components.Chip<ProductTypeUIModel>>(
                             index
                         )
+                    titleMenu.text = item.getModel()?.title
                     item.getModel()?.let { viewModel.filterProducts(it) }
                 }
             }
+
+            titleMenu.text = productTypes?.first()?.title
         }
     }
 

@@ -35,12 +35,12 @@ internal class MenuAdapter(
     inner class MenuAdapterHolder(private val cardMenu: CardMenuBase) :
         RecyclerView.ViewHolder(cardMenu) {
         fun set(product: ProductUIModel) {
+            initView(product = product, drawable = null)
+
             product.linkCover?.let { url ->
                 imageLoader.getDrawable(context = cardMenu.context, url) { drawable ->
                     drawable?.let { cover ->
                         initView(product = product, drawable = cover)
-                    } ?: run {
-                        initView(product = product, drawable = null)
                     }
                 }
             }
@@ -68,6 +68,8 @@ internal class MenuAdapter(
                         setType(MenuButtonType.BASKET)
                     }
                 )
+
+                if (drawable == null) showShimmer() else hideShimmer()
             }
         }
     }

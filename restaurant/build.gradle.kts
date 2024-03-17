@@ -37,8 +37,6 @@ dependencies {
     val retrofit = "2.9.0"
     val gson = "2.9.0"
     val lifecycleviewmodel = "2.7.0"
-    val fragment = "1.6.2"
-    val navigationfragment = "1.0.0"
     val corektx = "1.12.0"
     val appcompat = "1.6.1"
     val constraintlayout = "2.1.4"
@@ -60,16 +58,8 @@ dependencies {
     kapt("androidx.room:room-compiler:$room_version")
     implementation("androidx.room:room-ktx:$room_version")
 
-    // optional - Kotlin Extensions and Coroutines support for Room
-    implementation("androidx.room:room-ktx:$room_version")
-
     implementation("androidx.core:core-ktx:$corektx")
     implementation("androidx.appcompat:appcompat:$appcompat")
 
     implementation(project(":uikit"))
-
-    //implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleviewmodel")
-    //implementation("androidx.fragment:fragment-ktx:$fragment")
-    //implementation("android.arch.navigation:navigation-fragment:$navigationfragment")
-    //implementation("android.arch.navigation:navigation-ui:$navigationfragment")
 }
