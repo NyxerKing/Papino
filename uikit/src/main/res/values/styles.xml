@@ -43,4 +43,13 @@
         <item name="android:textAppearance">@style/PaPino.TextAppearances.Controller.Count</item>
         <item name="android:textColor">@color/backgroundTopColor</item>
     </style>
+
+    <style name="PaPino.EditText" />
+
+    <style name="PaPino.EditText.Registration">
+        <item name="android:textColor">@color/backgroundCardColor</item>
+        <item name="android:textColorHint">@color/backgroundCardColor</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:gravity">center</item>
+    </style>
 </resources>

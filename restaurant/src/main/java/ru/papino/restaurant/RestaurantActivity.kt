@@ -112,7 +112,7 @@ class RestaurantActivity : AppCompatActivity() {
     }
 
     companion object {
-        private const val ACTIVE_FRAGMENT = "ACTIVE_FRAGMENT"
+        const val ACTIVE_FRAGMENT = "ACTIVE_FRAGMENT"
 
         fun newIntent(context: Context?) = Intent(context, RestaurantActivity::class.java)
     }

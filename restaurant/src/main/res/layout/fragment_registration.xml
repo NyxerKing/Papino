@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/d_10"
+    android:paddingTop="@dimen/d_20">
+
+    <EditText
+        android:id="@+id/editFirstName"
+        style="@style/PaPino.EditText.Registration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_reg_first_name"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/editSecondName"
+        style="@style/PaPino.EditText.Registration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/d_20"
+        android:hint="@string/hint_reg_second_name"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/editMiddleName"
+        style="@style/PaPino.EditText.Registration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/d_20"
+        android:hint="@string/hint_reg_middle_name"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/editPhone"
+        style="@style/PaPino.EditText.Registration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/d_20"
+        android:hint="@string/hint_reg_phone"
+        android:inputType="phone" />
+
+    <EditText
+        android:id="@+id/editAddress"
+        style="@style/PaPino.EditText.Registration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/d_20"
+        android:hint="@string/hint_reg_address"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/editPassword"
+        style="@style/PaPino.EditText.Registration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/d_20"
+        android:hint="@string/hint_reg_password"
+        android:inputType="textPassword" />
+
+    <ru.papino.uikit.components.Button
+        android:id="@+id/buttonRegistration"
+        style="@style/PaPino.Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/d_20"
+        android:text="@string/button_reg" />
+
+</LinearLayout>

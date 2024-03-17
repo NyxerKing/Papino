@@ -13,4 +13,12 @@
     <string name="welcome_text">Добро пожаловать</string>
     <string name="hint_phone">Введите номер телефона</string>
     <string name="hint_password">Введите пароль</string>
+
+    <string name="hint_reg_first_name">Фамилия</string>
+    <string name="hint_reg_second_name">Имя</string>
+    <string name="hint_reg_middle_name">Отчество</string>
+    <string name="hint_reg_phone">Телефон</string>
+    <string name="hint_reg_address">Адрес</string>
+    <string name="hint_reg_password">Пароль</string>
+    <string name="button_reg">Регистрация</string>
 </resources>
