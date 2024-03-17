@@ -33,4 +33,8 @@ internal class UserRepositoryImpl(
     override fun getUserByPassword(login: String, password: String): UserResponse {
         TODO("Not yet implemented")
     }
+
+    companion object {
+        fun getInstance() = UserRepositoryImpl(NetDataSource.getInstance(), UserMapper())
+    }
 }

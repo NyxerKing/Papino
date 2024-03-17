@@ -16,12 +16,14 @@ import ru.papino.restaurant.presentation.basket.views.BasketFragment
 import ru.papino.restaurant.presentation.menu.views.MenuFragment
 import ru.papino.restaurant.presentation.profile.views.ProfileFragment
 import ru.papino.uikit.components.navigation.NavigationItem
+import ru.papino.uikit.extensions.fullscreen
 
 class RestaurantActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRestaurantBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         RoomDependencies.init(applicationContext)
+        window.fullscreen()
         super.onCreate(savedInstanceState)
 
         binding = ActivityRestaurantBinding.inflate(layoutInflater)

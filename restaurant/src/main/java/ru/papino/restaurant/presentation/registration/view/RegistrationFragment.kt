@@ -16,7 +16,7 @@ internal class RegistrationFragment : Fragment() {
     private val viewModel by lazy {
         RegistrationViewModel(
             createUserUseCase = CreateUserUseCase(
-                UserRepositoryImpl()
+                UserRepositoryImpl.getInstance()
             )
         )
     }
