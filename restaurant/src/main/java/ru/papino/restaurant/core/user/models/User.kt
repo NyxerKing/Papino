@@ -1,6 +1,6 @@
 package ru.papino.restaurant.core.user.models
 
-data class User(
+internal data class User(
     val firstName: String,
     val secondName: String,
     val middleName: String,

@@ -9,7 +9,9 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 import ru.papino.restaurant.core.room.RoomDependencies
+import ru.papino.restaurant.core.user.di.UserDI
 import ru.papino.restaurant.databinding.ActivityRestaurantBinding
+import ru.papino.restaurant.presentation.authorization.views.AuthorizationFragment
 import ru.papino.restaurant.presentation.basket.views.BasketFragment
 import ru.papino.restaurant.presentation.menu.views.MenuFragment
 import ru.papino.restaurant.presentation.profile.views.ProfileFragment
@@ -76,7 +78,11 @@ class RestaurantActivity : AppCompatActivity() {
             }
 
             NavigationItem.PROFILE -> {
-                ProfileFragment()
+                if (UserDI.isUserInitializer()) {
+                    ProfileFragment()
+                } else {
+                    AuthorizationFragment()
+                }
             }
         }
 
