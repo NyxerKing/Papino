@@ -5,6 +5,7 @@
         <activity
             android:name="ru.papino.restaurant.RestaurantActivity"
             android:exported="true"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Papino" />
     </application>
 
