@@ -11,12 +11,28 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/d_14">
 
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmerImagePreview"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <View
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@drawable/bg_rect_corner_20"
+                android:backgroundTint="@color/backgroundNavigationColor" />
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
         <ImageView
             android:id="@+id/imagePreview"
             android:layout_width="100dp"
             android:layout_height="100dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/description_cover"
             tools:src="@drawable/pizza_pepperoni_2" />
 
         <TextView

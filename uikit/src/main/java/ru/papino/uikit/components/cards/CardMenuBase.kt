@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
+import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.card.MaterialCardView
 import ru.papino.uikit.R
 import ru.papino.uikit.components.Button
@@ -41,6 +42,7 @@ class CardMenuBase @JvmOverloads constructor(
     private val textPrice = findViewById<TextView>(R.id.textPrice)
     private val textPriceCount = findViewById<TextView>(R.id.textPriceCount)
     private val buttonAddCart = findViewById<Button>(R.id.buttonAddCart)
+    private val shimmerImage = findViewById<ShimmerFrameLayout>(R.id.shimmerImagePreview)
 
     init {
         this.radius = TypedValue.applyDimension(
@@ -54,6 +56,37 @@ class CardMenuBase @JvmOverloads constructor(
 
         layoutParams =
             LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+    }
+
+    fun showShimmer() {
+        shimmerImage.startShimmer()
+        shimmerImage.visibility = VISIBLE
+        imagePreview.visibility = INVISIBLE
+    }
+
+    fun hideShimmer() {
+        shimmerImage.stopShimmer()
+        shimmerImage.visibility = GONE
+        imagePreview.visibility = VISIBLE
+    }
+
+    fun setType(type: MenuButtonType) {
+        var buttonText: String
+        var buttonColor: Int
+        when (type) {
+            MenuButtonType.BASE -> {
+                buttonText = resources.getString(ru.papino.uikit.R.string.add_to_cart)
+                buttonColor = ru.papino.uikit.R.color.backgroundButtonColor
+            }
+
+            MenuButtonType.BASKET -> {
+                buttonText = resources.getString(ru.papino.uikit.R.string.to_cart)
+                buttonColor = ru.papino.uikit.R.color.backgroundButtonGreyMedium
+            }
+        }
+
+        buttonAddCart.text = buttonText
+        buttonAddCart.setBackgroundColor(resources.getColor(buttonColor, context.theme))
     }
 
     /**
@@ -111,4 +144,9 @@ class CardMenuBase @JvmOverloads constructor(
     companion object {
         private const val CORNER_RADIUS = 10f
     }
+}
+
+enum class MenuButtonType {
+    BASE,
+    BASKET
 }

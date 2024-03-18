@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="tab_menu_pizza">Пиццы</string>
+    <string name="tab_menu_burger">Бургеры</string>
+    <string name="tab_menu_salad">Салаты</string>
+    <string name="tab_menu_meat">Шашлыки</string>
+    <string name="tab_menu_sandwich">Лаваш/Сэндвич</string>
+    <string name="tab_menu_soup">Суп</string>
+    <string name="tab_menu_snacks">Закуски</string>
+    <string name="tab_menu_drink">Напитки</string>
+    <string name="tab_menu_bread">Хлеб</string>
+
+    <string name="welcome_text">Добро пожаловать</string>
+    <string name="hint_phone">Введите номер телефона</string>
+    <string name="hint_password">Введите пароль</string>
+
+    <string name="hint_reg_first_name">Фамилия</string>
+    <string name="hint_reg_second_name">Имя</string>
+    <string name="hint_reg_middle_name">Отчество</string>
+    <string name="hint_reg_phone">Телефон</string>
+    <string name="hint_reg_address">Адрес</string>
+    <string name="hint_reg_password">Пароль</string>
+    <string name="button_reg">Регистрация</string>
+</resources>

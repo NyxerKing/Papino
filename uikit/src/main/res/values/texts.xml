@@ -81,6 +81,14 @@
         <item name="android:lineHeight" tools:ignore="NewApi">36sp</item>
     </style>
 
+    <style name="PaPino.TextAppearances.Menu.Title.Bold">
+        <item name="android:textColor">@color/textPrimaryColor</item>
+        <item name="android:textFontWeight" tools:ignore="NewApi">700</item>
+        <item name="android:textSize">26sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:lineHeight" tools:ignore="NewApi">36sp</item>
+    </style>
+
     <style name="PaPino.TextAppearances.Navigation" />
 
     <style name="PaPino.TextAppearances.Navigation.Text">

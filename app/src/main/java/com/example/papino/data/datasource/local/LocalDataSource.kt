@@ -1,7 +1,6 @@
 package com.example.papino.data.datasource.local
 
 import android.content.res.Resources
-import com.example.papino.R
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.io.StringWriter
@@ -9,7 +8,7 @@ import java.io.StringWriter
 class LocalDataSource private constructor(private val resource: Resources) {
 
     fun getData(): String {
-        val inputStream = resource.openRawResource(R.raw.data_menu)
+        val inputStream = resource.openRawResource(ru.papino.restaurant.R.raw.data_menu)
         val writer = StringWriter()
         val buffer = CharArray(1024)
         inputStream.use { rawData ->

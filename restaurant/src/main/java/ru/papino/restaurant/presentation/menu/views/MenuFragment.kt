@@ -1,0 +1,111 @@
+package ru.papino.restaurant.presentation.menu.views
+
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
+import ru.papino.restaurant.core.imageLoader.ImageLoaderImpl
+import ru.papino.restaurant.core.recycler.decorations.CoreDividerItemDecoration
+import ru.papino.restaurant.core.room.RoomDependencies
+import ru.papino.restaurant.data.di.RepositoryManager
+import ru.papino.restaurant.data.repository.ProductTypesRepositoryImpl
+import ru.papino.restaurant.databinding.FragmentMenuBinding
+import ru.papino.restaurant.domain.usecases.GetMenuUseCase
+import ru.papino.restaurant.domain.usecases.GetProductTypesUseCase
+import ru.papino.restaurant.presentation.menu.adapters.MenuAdapter
+import ru.papino.restaurant.presentation.menu.mappers.MenuMapper
+import ru.papino.restaurant.presentation.menu.models.ProductTypeUIModel
+import ru.papino.restaurant.presentation.menu.models.ProductUIModel
+import ru.papino.restaurant.presentation.menu.viewmodels.MenuViewModel
+
+internal class MenuFragment : Fragment() {
+
+    private val viewModel by lazy {
+        MenuViewModel(
+            getProductTypesUseCase = GetProductTypesUseCase(
+                repository = ProductTypesRepositoryImpl(
+                    resources
+                )
+            ),
+            getMenuUseCase = GetMenuUseCase(repository = RepositoryManager(resources).getInstance()),
+            mapper = MenuMapper(),
+            basketRepository = RoomDependencies.basketRepository
+        )
+    }
+
+    private var binding: FragmentMenuBinding? = null
+    private val menuAdapter = MenuAdapter(::onClickProduct, imageLoader = ImageLoaderImpl())
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View =
+        FragmentMenuBinding.inflate(inflater, container, false)
+            .apply { binding = this }
+            .root
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        initUI()
+
+        lifecycleScope.launch {
+            viewModel.productTypes.collect(::initMenu)
+        }
+
+        lifecycleScope.launch {
+            viewModel.menu.collect(::updateUI)
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding = null
+    }
+
+    private fun initUI() {
+        binding?.run {
+            menuRecycler.adapter = menuAdapter
+            menuRecycler.addItemDecoration(CoreDividerItemDecoration(this.root.context))
+        }
+    }
+
+    private fun initMenu(productTypes: List<ProductTypeUIModel>?) {
+        binding?.run {
+            productTypes?.forEachIndexed { index, model ->
+                val chip =
+                    ru.papino.uikit.components.Chip<ProductTypeUIModel>(chipGroupMenu.context)
+                chip.setModel(model)
+                chip.text = model.title
+                chip.isChecked = index == 0
+                chipGroupMenu.addView(chip)
+            }
+
+            chipGroupMenu.setOnCheckedStateChangeListener { chipGroup, ints ->
+                if (ints.isNotEmpty()) {
+                    val index = ints.first()
+                    val item =
+                        chipGroup.findViewById<ru.papino.uikit.components.Chip<ProductTypeUIModel>>(
+                            index
+                        )
+                    titleMenu.text = item.getModel()?.title
+                    item.getModel()?.let { viewModel.filterProducts(it) }
+                }
+            }
+
+            titleMenu.text = productTypes?.first()?.title
+        }
+    }
+
+    private fun updateUI(products: List<ProductUIModel>?) {
+        menuAdapter.set(products)
+    }
+
+    private fun onClickProduct(product: ProductUIModel) {
+        viewModel.addBasket(product = product)
+    }
+}
