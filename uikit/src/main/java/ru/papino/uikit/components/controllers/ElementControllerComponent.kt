@@ -23,6 +23,7 @@ class ElementControllerComponent @JvmOverloads constructor(
     private val textCount = findViewById<TextView>(R.id.textCount)
     private val buttonPlus = findViewById<Button>(R.id.buttonPlus)
 
+
     fun set(
         data: Data? = null
     ) {
