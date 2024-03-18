@@ -11,6 +11,7 @@ import kotlinx.coroutines.launch
 import ru.papino.restaurant.core.room.RoomDependencies
 import ru.papino.restaurant.core.user.di.UserDI
 import ru.papino.restaurant.databinding.ActivityRestaurantBinding
+import ru.papino.restaurant.extensions.switchFragment
 import ru.papino.restaurant.presentation.authorization.views.AuthorizationFragment
 import ru.papino.restaurant.presentation.basket.views.BasketFragment
 import ru.papino.restaurant.presentation.menu.views.MenuFragment
@@ -88,16 +89,7 @@ class RestaurantActivity : AppCompatActivity() {
             }
         }
 
-        val fragmentManager = supportFragmentManager
-
-        val currentFragment = fragmentManager.findFragmentByTag(ACTIVE_FRAGMENT)
-        if (currentFragment != null && currentFragment::class.java == fragment::class.java) {
-            return
-        }
-
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.fragmentContainer, fragment, ACTIVE_FRAGMENT)
-        fragmentTransaction.commit()
+        switchFragment(fragment)
 
         setBackground(itemNavigation)
     }

@@ -5,9 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import ru.papino.restaurant.R
-import ru.papino.restaurant.RestaurantActivity
 import ru.papino.restaurant.databinding.FragmentAuthorizationBinding
+import ru.papino.restaurant.extensions.switchFragment
 import ru.papino.restaurant.presentation.authorization.viewmodels.AuthorizationViewModel
 import ru.papino.restaurant.presentation.registration.view.RegistrationFragment
 
@@ -35,12 +34,7 @@ internal class AuthorizationFragment : Fragment() {
 
     private fun registration() {
         binding.buttonRegistration.setOnClickListener {
-            val fragmentTransaction = parentFragmentManager.beginTransaction()
-            fragmentTransaction.replace(
-                R.id.fragmentContainer, RegistrationFragment(),
-                RestaurantActivity.ACTIVE_FRAGMENT
-            )
-            fragmentTransaction.commit()
+            switchFragment(RegistrationFragment())
         }
     }
 }

@@ -9,7 +9,10 @@ import ru.papino.restaurant.data.repository.UserRepositoryImpl
 import ru.papino.restaurant.databinding.FragmentRegistrationBinding
 import ru.papino.restaurant.domain.repository.models.UserModel
 import ru.papino.restaurant.domain.usecases.CreateUserUseCase
+import ru.papino.restaurant.extensions.switchFragment
+import ru.papino.restaurant.presentation.profile.views.ProfileFragment
 import ru.papino.restaurant.presentation.registration.viewmodels.RegistrationViewModel
+import ru.papino.uikit.extensions.showAlert
 
 internal class RegistrationFragment : Fragment() {
 
@@ -40,14 +43,19 @@ internal class RegistrationFragment : Fragment() {
     private fun onClickRegistration() {
         with(binding) {
             viewModel.createUser(
-                UserModel(
+                user = UserModel(
                     firstName = editFirstName.text.toString(),
                     secondName = editSecondName.text.toString(),
-                    middleName = editMiddleName.text.toString(),
                     phone = editPhone.text.toString(),
                     address = editAddress.text.toString(),
                     password = editPassword.text.toString()
-                )
+                ),
+                onSuccess = {
+                    switchFragment(ProfileFragment())
+                },
+                onFailure = {
+                    context?.showAlert(title = "Ошибка", message = "Произошла ошибка", onClick = {})
+                }
             )
         }
     }
