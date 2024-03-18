@@ -12,8 +12,7 @@ internal class UserMapper {
             firstName = data.firstName,
             secondName = data.secondName,
             phone = data.phone,
-            middleName = "",
-            address = ""
+            address = data.address
         ),
         token = Token(token = data.token)
     )

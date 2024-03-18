@@ -24,15 +24,6 @@
         android:inputType="text" />
 
     <EditText
-        android:id="@+id/editMiddleName"
-        style="@style/PaPino.EditText.Registration"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/d_20"
-        android:hint="@string/hint_reg_middle_name"
-        android:inputType="text" />
-
-    <EditText
         android:id="@+id/editPhone"
         style="@style/PaPino.EditText.Registration"
         android:layout_width="match_parent"

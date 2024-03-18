@@ -13,7 +13,7 @@ internal class RegistrationViewModel(
     private val createUserUseCase: CreateUserUseCase
 ) : ViewModel() {
 
-    fun createUser(user: UserModel) {
+    fun createUser(user: UserModel, onSuccess: () -> Unit, onFailure: (String) -> Unit) {
         viewModelScope.launch(Dispatchers.IO) {
             runCatching {
                 createUserUseCase(user = user)
@@ -21,12 +21,16 @@ internal class RegistrationViewModel(
                 when (response) {
                     is UserResponse.Success -> {
                         UserDI.init(response.user)
+                        UserDI.initToken(response.token)
+                        onSuccess()
                     }
 
-                    is UserResponse.Error -> {}
+                    is UserResponse.Error -> {
+                        onFailure(response.message)
+                    }
                 }
             }.onFailure {
-
+                onFailure(it.toString())
             }
         }
     }
