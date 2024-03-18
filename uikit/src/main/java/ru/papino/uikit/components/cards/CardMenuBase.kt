@@ -61,11 +61,13 @@ class CardMenuBase @JvmOverloads constructor(
     fun showShimmer() {
         shimmerImage.startShimmer()
         shimmerImage.visibility = VISIBLE
+        imagePreview.visibility = INVISIBLE
     }
 
     fun hideShimmer() {
         shimmerImage.stopShimmer()
         shimmerImage.visibility = GONE
+        imagePreview.visibility = VISIBLE
     }
 
     fun setType(type: MenuButtonType) {
