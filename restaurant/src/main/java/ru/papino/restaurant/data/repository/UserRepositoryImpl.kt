@@ -5,6 +5,7 @@ import ru.papino.restaurant.data.datasource.net.impl.NetDataSource
 import ru.papino.restaurant.data.datasource.net.services.UserService
 import ru.papino.restaurant.data.mappers.UserMapper
 import ru.papino.restaurant.domain.repository.UserRepository
+import ru.papino.restaurant.domain.repository.models.TokenResponse
 import ru.papino.restaurant.domain.repository.models.UserModel
 import ru.papino.restaurant.domain.repository.models.UserResponse
 
@@ -12,7 +13,7 @@ internal class UserRepositoryImpl(
     private val netDS: NetDataSource,
     private val mapper: UserMapper
 ) : UserRepository {
-    override fun create(user: UserModel): UserResponse {
+    override fun create(user: UserModel): TokenResponse {
         val service = netDS.getRetrofit().create(UserService::class.java)
         try {
             val result = service.createUser(
@@ -24,12 +25,12 @@ internal class UserRepositoryImpl(
                 address = user.address
             ).execute()
             result.body()?.let {
-                return mapper.toResponse(it)
+                return mapper.toTokenResponse(it)
             }
         } catch (ex: Exception) {
-            return UserResponse.Error("error create user")
+            return TokenResponse.Error("error create user")
         }
-        return UserResponse.Error("error create user")
+        return TokenResponse.Error("error create user")
     }
 
     override fun getUserByToken(token: String): UserResponse {

@@ -5,8 +5,9 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import ru.papino.restaurant.core.user.di.UserDI
+import ru.papino.restaurant.core.user.models.User
+import ru.papino.restaurant.domain.repository.models.TokenResponse
 import ru.papino.restaurant.domain.repository.models.UserModel
-import ru.papino.restaurant.domain.repository.models.UserResponse
 import ru.papino.restaurant.domain.usecases.CreateUserUseCase
 
 internal class RegistrationViewModel(
@@ -19,13 +20,20 @@ internal class RegistrationViewModel(
                 createUserUseCase(user = user)
             }.onSuccess { response ->
                 when (response) {
-                    is UserResponse.Success -> {
-                        UserDI.init(response.user)
+                    is TokenResponse.Success -> {
+                        UserDI.init(
+                            User(
+                                firstName = user.firstName,
+                                secondName = user.secondName,
+                                phone = user.phone,
+                                address = user.address
+                            )
+                        )
                         UserDI.initToken(response.token)
                         onSuccess()
                     }
 
-                    is UserResponse.Error -> {
+                    is TokenResponse.Error -> {
                         onFailure(response.message)
                     }
                 }
