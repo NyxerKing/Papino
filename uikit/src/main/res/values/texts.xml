@@ -33,6 +33,14 @@
         <item name="android:lineHeight" tools:ignore="NewApi">14sp</item>
     </style>
 
+    <style name="PaPino.TextAppearances.Order" />
+
+    <style name="PaPino.TextAppearances.Order.Status">
+        <item name="android:textFontWeight" tools:ignore="NewApi">600</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineHeight" tools:ignore="NewApi">20sp</item>
+    </style>
+
     <style name="PaPino.TextAppearances.Button">
         <item name="android:textColor">@color/textPrimaryColor</item>
         <item name="android:textFontWeight" tools:ignore="NewApi">700</item>

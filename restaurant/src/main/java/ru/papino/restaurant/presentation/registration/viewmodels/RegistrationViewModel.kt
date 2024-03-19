@@ -23,6 +23,7 @@ internal class RegistrationViewModel(
                     is TokenResponse.Success -> {
                         UserDI.init(
                             User(
+                                id = response.userId,
                                 firstName = user.firstName,
                                 secondName = user.secondName,
                                 phone = user.phone,

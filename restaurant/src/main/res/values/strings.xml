@@ -21,4 +21,9 @@
     <string name="hint_reg_address">Адрес</string>
     <string name="hint_reg_password">Пароль</string>
     <string name="button_reg">Регистрация</string>
+
+    <string name="error_request_title">Произошла ошибка</string>
+    <string name="error_request_message">Ведутся технические работы</string>
+
+    <string name="screen_orders_title">Мои заказы</string>
 </resources>

@@ -1,7 +1,5 @@
 package com.example.papino.presentation.basket
 
-import android.app.Application
-import android.content.Intent
 import android.os.Bundle
 import android.view.Gravity
 import android.view.View
@@ -19,10 +17,7 @@ import com.example.papino.presentation.basket.adapters.CardBasketAdapter
 import com.example.papino.presentation.basket.mappers.BasketMapper
 import com.example.papino.presentation.basket.model.FoodBasketModel
 import com.example.papino.presentation.basket.model.FoodBasketUI
-import com.example.papino.presentation.menu.MenuActivity
 import com.example.papino.presentation.recycler.decorations.MenuDividerItemDecoration
-import com.example.papino.presentation.regestration.EnterUserActivity
-import ru.papino.uikit.components.navigation.NavigationItem
 
 
 class BasketActivity : AppCompatActivity() {
@@ -42,16 +37,6 @@ class BasketActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         with(binding) {
-            navigation.setSelected(NavigationItem.BASKET)
-            navigation.set(
-                onClickMenu = {
-                    onBackPressed()
-                },
-                onClickProfile = {
-                    val intent = Intent(this@BasketActivity, EnterUserActivity::class.java)
-                    startActivity(intent)
-                }
-            )
             basketMapper = BasketMapper(resources)
             basketAdapter = CardBasketAdapter(basketMapper)
             basketRecyclerView.adapter = basketAdapter
@@ -159,7 +144,6 @@ class BasketActivity : AppCompatActivity() {
         )
 
         with(binding) {
-            navigation.setBasketCount(basketFoods.size)
             titleOrderFood.text =
                 resources.getString(
                     ru.papino.uikit.R.string.insert_products,

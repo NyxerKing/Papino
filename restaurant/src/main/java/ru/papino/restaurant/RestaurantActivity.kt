@@ -6,21 +6,22 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.badge.BadgeDrawable
 import kotlinx.coroutines.launch
 import ru.papino.restaurant.core.room.RoomDependencies
 import ru.papino.restaurant.core.user.di.UserDI
+import ru.papino.restaurant.core.user.models.User
 import ru.papino.restaurant.databinding.ActivityRestaurantBinding
 import ru.papino.restaurant.extensions.switchFragment
-import ru.papino.restaurant.presentation.authorization.views.AuthorizationFragment
-import ru.papino.restaurant.presentation.basket.views.BasketFragment
-import ru.papino.restaurant.presentation.menu.views.MenuFragment
-import ru.papino.restaurant.presentation.profile.views.ProfileFragment
-import ru.papino.uikit.components.navigation.NavigationItem
 import ru.papino.uikit.extensions.fullscreen
 
 class RestaurantActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRestaurantBinding
+    private lateinit var badge: BadgeDrawable
+
+    private val screenManager = ScreenManager.getManager()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         RoomDependencies.init(applicationContext)
@@ -32,8 +33,18 @@ class RestaurantActivity : AppCompatActivity() {
 
         clearDatabase()
 
-        initObserver()
         initNavigation()
+        initObserver()
+
+        UserDI.init(
+            User(
+                id = 1,
+                firstName = "Alexandr",
+                secondName = "Терехин",
+                phone = "+7 937 036 25 00",
+                address = "Братская 21 55"
+            )
+        )
     }
 
     private fun clearDatabase() {
@@ -50,52 +61,58 @@ class RestaurantActivity : AppCompatActivity() {
 
     private fun initNavigation() {
         with(binding) {
-            val onClick = { item: NavigationItem ->
-                navigation.setSelected(item)
-                replaceFragment(item)
+            badge = navigation.getOrCreateBadge(R.id.basket)
+            badge.isVisible = true
+            badge.number = 0
+
+            navigation.setOnItemSelectedListener { item ->
+                when (item.itemId) {
+                    R.id.menu -> {
+                        replaceFragment(screenManager.menuFragment)
+                        true
+                    }
+
+                    R.id.basket -> {
+                        replaceFragment(screenManager.basketFragment)
+                        true
+                    }
+
+                    R.id.orders -> {
+                        replaceFragment(screenManager.ordersFragment)
+                        true
+                    }
+
+                    R.id.profile -> {
+                        val fragment = if (UserDI.isUserInitializer()) {
+                            screenManager.profileFragment
+                        } else {
+                            screenManager.authorizationFragment
+                        }
+                        replaceFragment(fragment, true)
+                        true
+                    }
+
+                    else -> false
+                }
             }
 
-            navigation.set(
-                onClickMenu = onClick,
-                onClickBasket = onClick,
-                onClickProfile = onClick
-            )
-
-            onClick(NavigationItem.MENU)
+            replaceFragment(screenManager.menuFragment)
         }
     }
 
     private suspend fun basketChange(id: Int) {
         val count = RoomDependencies.basketRepository.getCountAll()
-        binding.navigation.setBasketCount(count)
+        badge.number = count
     }
 
-    private fun replaceFragment(itemNavigation: NavigationItem) {
-        val fragment = when (itemNavigation) {
-            NavigationItem.MENU -> {
-                MenuFragment()
-            }
-
-            NavigationItem.BASKET -> {
-                BasketFragment()
-            }
-
-            NavigationItem.PROFILE -> {
-                if (UserDI.isUserInitializer()) {
-                    ProfileFragment()
-                } else {
-                    AuthorizationFragment()
-                }
-            }
-        }
-
+    private fun replaceFragment(fragment: Fragment, isDark: Boolean = false) {
         switchFragment(fragment)
 
-        setBackground(itemNavigation)
+        setBackground(isDark)
     }
 
-    private fun setBackground(item: NavigationItem) {
-        if (item == NavigationItem.PROFILE) {
+    private fun setBackground(isDarkBackground: Boolean) {
+        if (isDarkBackground) {
             binding.root.background = ResourcesCompat.getDrawable(
                 resources,
                 ru.papino.uikit.R.drawable.bg_rect_base,

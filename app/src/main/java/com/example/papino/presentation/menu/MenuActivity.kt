@@ -1,6 +1,5 @@
 package com.example.papino.presentation.menu
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.Window
@@ -17,16 +16,12 @@ import com.example.papino.data.repository.MenuRepository
 import com.example.papino.databinding.ActivityMenuBinding
 import com.example.papino.net.ListFood
 import com.example.papino.net.User
-import com.example.papino.presentation.basket.BasketActivity
 import com.example.papino.presentation.mappers.FoodMapper
 import com.example.papino.presentation.menu.adapters.CardMenuAdapter
 import com.example.papino.presentation.menu.models.FoodUI
 import com.example.papino.presentation.menu.models.PackFoodBaskedModel
 import com.example.papino.presentation.recycler.decorations.MenuDividerItemDecoration
-import com.example.papino.presentation.regestration.EnterUserActivity
-import com.example.papino.presentation.regestration.RegistrationActivity
 import com.google.android.material.chip.Chip
-import ru.papino.uikit.components.navigation.NavigationItem
 
 class MenuActivity : AppCompatActivity() {
 
@@ -53,19 +48,9 @@ class MenuActivity : AppCompatActivity() {
 
         with(binding)
         {
-            navigation.setSelected(NavigationItem.MENU)
-            navigation.set(
-                    onClickBasket = {
-                    val intent = Intent(this@MenuActivity, BasketActivity::class.java)
-                    startActivity(intent)
-                },
-                    onClickProfile = {
-                    val intent = Intent(this@MenuActivity, EnterUserActivity::class.java)
-                    startActivity(intent)
-                }
-            )
 
-            if (getUser()?.surname.isNullOrEmpty())
+
+        if (getUser()?.surname.isNullOrEmpty())
             {
                 nameUserHello.text = ""
                 countBonusUser.text = ""
@@ -203,9 +188,9 @@ class MenuActivity : AppCompatActivity() {
 
         coreSP.getBasket()
             ?.let { basket ->
-                binding.navigation.setBasketCount(basket.dataList.size)
 
-                adapterMenu.checkInBasket(
+
+            adapterMenu.checkInBasket(
                     listBasketId = mapperFood.toUI(basket).map { foodUI -> foodUI.id }
                 )
             }

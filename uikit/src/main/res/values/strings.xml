@@ -16,6 +16,7 @@
     <string name="menu_text">Меню</string>
     <string name="basket_text">Корзина</string>
     <string name="basket_count_text">Корзина (%1$s)</string>
+    <string name="order_text">Мои заказы</string>
     <string name="profile_text">Профиль</string>
 
     <string name="insert_products">Товары (%1$s)</string>
@@ -26,4 +27,9 @@
     <string name="description_cover">Изображение</string>
 
     <string name="dialog_button_positive">ОК</string>
+
+    <string name="order_number">Заказ № %1$s</string>
+    <string name="order_status_created">Создан</string>
+    <string name="order_status_delivered">Доставляется</string>
+    <string name="order_status_completed">Завершен</string>
 </resources>

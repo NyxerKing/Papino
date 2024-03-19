@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_rect_10"
+    android:backgroundTint="@color/backgroundCardColor"
+    android:padding="@dimen/d_14"
+    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+    <TextView
+        android:id="@+id/textViewOrderNumber"
+        style="@style/PaPino.Text.Order.Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Заказ № 65489" />
+
+    <TextView
+        android:id="@+id/textViewOrderDate"
+        style="@style/PaPino.Text.Order.Subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewOrderNumber"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewOrderNumber"
+        tools:text="10.03.2024 11:57" />
+
+    <TextView
+        android:id="@+id/textViewOrderList"
+        style="@style/PaPino.Text.Order.Subtitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:lines="3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewOrderNumber"
+        tools:text="- Пепперони 40 см\n- Пепперони 40 см\n- Пепперони 40 см\nПепперони 40 см" />
+
+    <TextView
+        android:id="@+id/textViewSumOrder"
+        style="@style/PaPino.Text.Order.Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewStatus"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewStatus"
+        tools:text="90 000 сум" />
+
+    <TextView
+        android:id="@+id/textViewStatus"
+        style="@style/PaPino.Text.Order.Status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/d_10"
+        app:drawableStartCompat="@drawable/ic_20_order"
+        app:drawableTint="@color/backgroundTopColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewOrderList"
+        tools:text="Доставляется" />
+
+</merge>

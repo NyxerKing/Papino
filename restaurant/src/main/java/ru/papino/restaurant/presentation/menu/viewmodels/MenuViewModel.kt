@@ -3,7 +3,9 @@ package ru.papino.restaurant.presentation.menu.viewmodels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import ru.papino.restaurant.domain.repository.BasketRepository
@@ -27,11 +29,10 @@ internal class MenuViewModel(
     private val _menu = MutableStateFlow<List<ProductUIModel>?>(null)
     val menu = _menu.asStateFlow()
 
-    private var products: List<ProductUIModel>? = null
+    private val _error = MutableSharedFlow<Throwable>()
+    val error = _error.asSharedFlow()
 
-    init {
-        loadData()
-    }
+    private var products: List<ProductUIModel>? = null
 
     fun filterProducts(selectType: ProductTypeUIModel) {
         viewModelScope.launch {
@@ -63,7 +64,7 @@ internal class MenuViewModel(
         return filterProducts
     }
 
-    private fun loadData() {
+    fun loadData() {
         viewModelScope.launch(Dispatchers.IO) {
             loadProductTypes()
             loadMenu()
@@ -106,9 +107,7 @@ internal class MenuViewModel(
                 }
             }
         }.onFailure { ex: Throwable? ->
-            ex?.let {
-
-            }
+            _error.emit(ex ?: Throwable("no data"))
         }
     }
 }

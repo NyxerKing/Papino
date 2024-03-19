@@ -52,4 +52,23 @@
         <item name="android:textAlignment">center</item>
         <item name="android:gravity">center</item>
     </style>
+
+    <style name="PaPino.Input" />
+
+    <style name="PaPino.Input.Base" parent="@style/Widget.Material3.TextInputLayout.FilledBox">
+        <item name="shapeAppearance">@style/PaPino.ShapeAppearance</item>
+        <item name="shapeAppearanceOverlay">@style/PaPino.ShapeAppearance</item>
+        <item name="hintTextAppearance">@style/PaPino.TextAppearances.Card.Subtitle</item>
+        <item name="android:textColorHint">@color/text3Color</item>
+        <item name="boxStrokeWidth">0dp</item>
+    </style>
+
+    <style name="PaPino.Input.EditText">
+        <item name="android:textAppearance">@style/PaPino.TextAppearances.Card.Title</item>
+    </style>
+
+    <style name="PaPino.ShapeAppearance">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/d_10</item>
+    </style>
 </resources>

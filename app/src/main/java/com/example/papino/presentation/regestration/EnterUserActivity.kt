@@ -14,10 +14,8 @@ import com.example.papino.R
 import com.example.papino.databinding.ActivityEnterUserBinding
 import com.example.papino.net.ListUser
 import com.example.papino.net.User
-import com.example.papino.presentation.basket.BasketActivity
 import com.example.papino.presentation.menu.MenuActivity
 import com.example.papino.presentation.regestration.controlles.ControllerUser
-import ru.papino.uikit.components.navigation.NavigationItem
 
 class EnterUserActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEnterUserBinding
@@ -44,13 +42,6 @@ class EnterUserActivity : AppCompatActivity() {
                 val intent = Intent(this@EnterUserActivity, RegistrationActivity::class.java)
                 startActivity(intent)
             }
-
-            navigationEnterUser.setSelected(NavigationItem.PROFILE)
-            navigationEnterUser.set(
-                    onClickMenu = {onBackPressed()},
-                    onClickBasket = {onBackPressed()
-                }
-            )
         }
     }
 
