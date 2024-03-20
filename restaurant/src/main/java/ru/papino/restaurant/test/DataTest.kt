@@ -1,5 +1,7 @@
 package ru.papino.restaurant.test
 
+import ru.papino.restaurant.core.user.di.UserDI
+import ru.papino.restaurant.core.user.models.User
 import ru.papino.restaurant.domain.repository.models.OrderModel
 import ru.papino.restaurant.domain.repository.models.status.OrderStatus
 import java.text.SimpleDateFormat
@@ -30,5 +32,17 @@ internal object DataTest {
         }
 
         return orders
+    }
+
+    fun initUser() {
+        UserDI.init(
+            User(
+                id = 1,
+                firstName = "Alexandr",
+                secondName = "Терехин",
+                phone = "+7 937 036 25 00",
+                address = "Братская 21 55"
+            )
+        )
     }
 }

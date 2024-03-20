@@ -12,7 +12,6 @@ import com.google.android.material.badge.BadgeDrawable
 import kotlinx.coroutines.launch
 import ru.papino.restaurant.core.room.RoomDependencies
 import ru.papino.restaurant.core.user.di.UserDI
-import ru.papino.restaurant.core.user.models.User
 import ru.papino.restaurant.databinding.ActivityRestaurantBinding
 import ru.papino.restaurant.extensions.switchFragment
 import ru.papino.uikit.extensions.fullscreen
@@ -35,16 +34,6 @@ class RestaurantActivity : AppCompatActivity() {
 
         initNavigation()
         initObserver()
-
-        UserDI.init(
-            User(
-                id = 1,
-                firstName = "Alexandr",
-                secondName = "Терехин",
-                phone = "+7 937 036 25 00",
-                address = "Братская 21 55"
-            )
-        )
     }
 
     private fun clearDatabase() {
