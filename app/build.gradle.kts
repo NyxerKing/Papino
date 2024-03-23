@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.papino"
+    namespace = "ru.papino.restaurant"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.papino"
+        applicationId = "ru.papino.restaurant"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
