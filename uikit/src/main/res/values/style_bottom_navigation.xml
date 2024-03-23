@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Widget.Papino.BottomNavigationView" parent="Widget.Material3.BottomNavigationView">
+        <item name="itemActiveIndicatorStyle">@null</item>
+        <item name="android:background">@drawable/bg_rect_corner_top_15</item>
+        <item name="labelVisibilityMode">labeled</item>
+        <item name="itemIconTint">@color/selector_navigation_color</item>
+        <item name="itemTextColor">@color/selector_navigation_color</item>
+    </style>
+</resources>

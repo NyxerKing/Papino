@@ -5,6 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
+import ru.papino.restaurant.core.user.models.User
 import ru.papino.restaurant.databinding.FragmentProfileBinding
 import ru.papino.restaurant.presentation.profile.viewmodels.ProfileViewModel
 
@@ -25,5 +28,23 @@ internal class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initObserver()
+
+        viewModel.loadUser()
+    }
+
+    private fun initObserver() {
+        lifecycleScope.launch {
+            viewModel.user.collect(::updateUI)
+        }
+    }
+
+    private fun updateUI(user: User) {
+        with(binding) {
+            textViewFirstName.text = user.firstName
+            textViewSecondName.text = user.secondName
+            textViewPhone.text = user.phone
+            textViewAddress.text = user.address
+        }
     }
 }

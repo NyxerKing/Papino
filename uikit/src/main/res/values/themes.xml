@@ -7,5 +7,7 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
-    <style name="Theme.Papino" parent="Base.Theme.Papino" />
+    <style name="Theme.Papino" parent="Base.Theme.Papino">
+        <item name="bottomNavigationStyle">@style/Widget.Papino.BottomNavigationView</item>
+    </style>
 </resources>
