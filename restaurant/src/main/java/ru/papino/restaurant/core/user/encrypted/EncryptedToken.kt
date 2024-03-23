@@ -1,6 +1,5 @@
 package ru.papino.restaurant.core.user.encrypted
 
-import android.content.Context
 import android.content.SharedPreferences
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
@@ -12,28 +11,24 @@ internal object EncryptedToken {
     private const val ENCRYPTED_FILE_NAME = "papino_token"
     private const val ENCRYPTED_TOKEN_KEY = "papino_token_secret_key"
 
-    /**
-     * Сохранить токен
-     *
-     * @param context только applicationContext
-     * @param token
-     */
-    fun save(context: Context, token: Token) {
-        App().applicationContext
-        getSharedPreferences(context)
+    fun save(token: Token) {
+        getSharedPreferences()
             .edit()
             .apply {
                 putString(ENCRYPTED_TOKEN_KEY, token.token)
             }.apply()
     }
 
-    fun getToken(context: Context): Token {
-        val sharedPreferences = getSharedPreferences(context)
-        val token = sharedPreferences.getString(ENCRYPTED_TOKEN_KEY, "").orEmpty()
-        return Token(token = token)
+    fun getToken(): Token? {
+        val sharedPreferences = getSharedPreferences()
+        val token = sharedPreferences.getString(ENCRYPTED_TOKEN_KEY, "")
+        token?.let {
+            return Token(token = it)
+        } ?: return null
     }
 
-    private fun getSharedPreferences(context: Context): SharedPreferences {
+    private fun getSharedPreferences(): SharedPreferences {
+        val context = App().applicationContext
         val masterKey: MasterKey = MasterKey.Builder(context)
             .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
             .build()

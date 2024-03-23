@@ -7,5 +7,6 @@ import ru.papino.restaurant.domain.repository.models.UserResponse
 internal class GetUserByTokenUseCase(
     private val userRepository: UserRepository
 ) {
-    operator fun invoke(token: Token): UserResponse = userRepository.getUserByToken(token.token)
+    suspend operator fun invoke(token: Token): UserResponse =
+        userRepository.getUserByToken(token.token)
 }

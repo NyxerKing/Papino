@@ -7,5 +7,5 @@ import ru.papino.restaurant.domain.repository.models.UserModel
 internal class CreateUserUseCase(
     private val userRepository: UserRepository
 ) {
-    operator fun invoke(user: UserModel): TokenResponse = userRepository.create(user)
+    suspend operator fun invoke(user: UserModel): TokenResponse = userRepository.create(user)
 }
