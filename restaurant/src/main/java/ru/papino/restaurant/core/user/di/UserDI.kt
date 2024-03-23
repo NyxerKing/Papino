@@ -1,5 +1,6 @@
 package ru.papino.restaurant.core.user.di
 
+import ru.papino.restaurant.core.user.encrypted.EncryptedToken
 import ru.papino.restaurant.core.user.models.Token
 import ru.papino.restaurant.core.user.models.User
 
@@ -20,6 +21,11 @@ internal object UserDI {
 
     fun initToken(data: Token) {
         _token = data
+        EncryptedToken.save(_token)
+    }
+
+    fun clear() {
+        // todo нужно реализовать очистку или заглушку
     }
 
     fun isUserInitializer() = _isUserInitializer

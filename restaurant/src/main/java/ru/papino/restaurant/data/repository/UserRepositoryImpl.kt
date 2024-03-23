@@ -13,7 +13,7 @@ internal class UserRepositoryImpl(
     private val netDS: NetDataSource,
     private val mapper: UserMapper
 ) : UserRepository {
-    override fun create(user: UserModel): TokenResponse {
+    override suspend fun create(user: UserModel): TokenResponse {
         val service = netDS.getRetrofit().create(UserService::class.java)
         try {
             val result = service.createUser(
@@ -33,7 +33,7 @@ internal class UserRepositoryImpl(
         return TokenResponse.Error("error create user")
     }
 
-    override fun getUserByToken(token: String): UserResponse {
+    override suspend fun getUserByToken(token: String): UserResponse {
         val service = netDS.getRetrofit().create(UserService::class.java)
         try {
             val result = service.getUserByToken(token).execute()
@@ -46,7 +46,7 @@ internal class UserRepositoryImpl(
         return UserResponse.Error("error create user")
     }
 
-    override fun getUserByPassword(login: String, password: String): UserResponse {
+    override suspend fun getUserByPassword(login: String, password: String): UserResponse {
         val service = netDS.getRetrofit().create(UserService::class.java)
         try {
             val result = service.getUser(login, password).execute()
