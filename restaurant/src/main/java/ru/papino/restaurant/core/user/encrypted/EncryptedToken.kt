@@ -13,32 +13,34 @@ internal object EncryptedToken {
 
     fun save(token: Token) {
         getSharedPreferences()
-            .edit()
-            .apply {
+            ?.edit()
+            ?.apply {
                 putString(ENCRYPTED_TOKEN_KEY, token.token)
-            }.apply()
+            }?.apply()
     }
 
     fun getToken(): Token? {
         val sharedPreferences = getSharedPreferences()
-        val token = sharedPreferences.getString(ENCRYPTED_TOKEN_KEY, "")
+        val token = sharedPreferences?.getString(ENCRYPTED_TOKEN_KEY, "")
         token?.let {
             return Token(token = it)
         } ?: return null
     }
 
-    private fun getSharedPreferences(): SharedPreferences {
-        val context = App().applicationContext
-        val masterKey: MasterKey = MasterKey.Builder(context)
-            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
-            .build()
+    private fun getSharedPreferences(): SharedPreferences? {
+        App.getApplicationContext()?.let { context ->
+            val masterKey: MasterKey = MasterKey.Builder(context)
+                .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+                .build()
 
-        return EncryptedSharedPreferences.create(
-            context,
-            ENCRYPTED_FILE_NAME,
-            masterKey,
-            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
-        )
+            return EncryptedSharedPreferences.create(
+                context,
+                ENCRYPTED_FILE_NAME,
+                masterKey,
+                EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+                EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+            )
+        }
+        return null
     }
 }
