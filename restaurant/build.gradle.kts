@@ -43,6 +43,7 @@ dependencies {
     val recyclerview = "1.3.2"
     val glide = "4.16.0"
     val room_version = "2.6.1"
+    val security_crypto = "1.1.0-alpha06"
 
     implementation("com.squareup.retrofit2:retrofit:$retrofit")
     implementation("com.squareup.retrofit2:converter-gson:$gson")
@@ -53,6 +54,7 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:$glide")
     implementation("androidx.constraintlayout:constraintlayout:$constraintlayout")
     implementation("androidx.recyclerview:recyclerview:$recyclerview")
+    implementation("androidx.security:security-crypto:$security_crypto")
 
     implementation("androidx.room:room-runtime:$room_version")
     kapt("androidx.room:room-compiler:$room_version")

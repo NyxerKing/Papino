@@ -17,11 +17,16 @@ internal class MenuRepositoryImpl(
 
     override suspend fun request(): MenuResponse {
         val menuService = netDS.getRetrofit().create(MenuService::class.java)
-        menuService.getMenu().execute().body()?.let {
-            return mapper.toDomain(it)
-        } ?: run {
+        try {
+            menuService.getMenu().execute().body()?.let {
+                return mapper.toDomain(it)
+            }
+        } catch (ex: Throwable) {
+            // todo Убрать после настройки сервака
             val list = Gson().fromJson(localDS.getData(), MenuJsonModel::class.java)
             return mapper.toDomainError(list)
         }
+        val list = Gson().fromJson(localDS.getData(), MenuJsonModel::class.java)
+        return mapper.toDomainError(list)
     }
 }

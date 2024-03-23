@@ -40,6 +40,8 @@ internal class BasketFragment : Fragment() {
 
         initUI()
         initObserver()
+
+        viewModel.loadBasket()
     }
 
     private fun initUI() {

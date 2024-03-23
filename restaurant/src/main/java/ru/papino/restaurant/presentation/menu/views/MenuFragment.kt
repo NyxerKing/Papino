@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
+import ru.papino.restaurant.R
 import ru.papino.restaurant.core.imageLoader.ImageLoaderImpl
 import ru.papino.restaurant.core.recycler.decorations.CoreDividerItemDecoration
 import ru.papino.restaurant.core.room.RoomDependencies
@@ -20,6 +21,7 @@ import ru.papino.restaurant.presentation.menu.mappers.MenuMapper
 import ru.papino.restaurant.presentation.menu.models.ProductTypeUIModel
 import ru.papino.restaurant.presentation.menu.models.ProductUIModel
 import ru.papino.restaurant.presentation.menu.viewmodels.MenuViewModel
+import ru.papino.uikit.dialogs.AlertDialog
 
 internal class MenuFragment : Fragment() {
 
@@ -30,7 +32,7 @@ internal class MenuFragment : Fragment() {
                     resources
                 )
             ),
-            getMenuUseCase = GetMenuUseCase(repository = RepositoryManager(resources).getInstance()),
+            getMenuUseCase = GetMenuUseCase(repository = RepositoryManager(resources).getMenuInstance()),
             mapper = MenuMapper(),
             basketRepository = RoomDependencies.basketRepository
         )
@@ -52,14 +54,9 @@ internal class MenuFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initUI()
+        initObserver()
 
-        lifecycleScope.launch {
-            viewModel.productTypes.collect(::initMenu)
-        }
-
-        lifecycleScope.launch {
-            viewModel.menu.collect(::updateUI)
-        }
+        viewModel.loadData()
     }
 
     override fun onDestroy() {
@@ -71,6 +68,20 @@ internal class MenuFragment : Fragment() {
         binding?.run {
             menuRecycler.adapter = menuAdapter
             menuRecycler.addItemDecoration(CoreDividerItemDecoration(this.root.context))
+        }
+    }
+
+    private fun initObserver() {
+        lifecycleScope.launch {
+            viewModel.productTypes.collect(::initMenu)
+        }
+
+        lifecycleScope.launch {
+            viewModel.menu.collect(::updateUI)
+        }
+
+        lifecycleScope.launch {
+            viewModel.error.collect(::showError)
         }
     }
 
@@ -103,6 +114,17 @@ internal class MenuFragment : Fragment() {
 
     private fun updateUI(products: List<ProductUIModel>?) {
         menuAdapter.set(products)
+    }
+
+    private fun showError(ex: Throwable) {
+        binding?.run {
+            AlertDialog(
+                context = root.context,
+                title = resources.getString(R.string.error_request_title),
+                message = resources.getString(R.string.error_request_message),
+                onClick = {}
+            ).show()
+        }
     }
 
     private fun onClickProduct(product: ProductUIModel) {

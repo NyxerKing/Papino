@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="PaPino.Text" />
+
+    <style name="PaPino.Text.Order" />
+
+    <style name="PaPino.Text.Order.Screen">
+        <item name="android:textAppearance">@style/PaPino.TextAppearances.Menu.Title</item>
+        <item name="android:textColor">@color/textSecondaryColor</item>
+    </style>
+
+    <style name="PaPino.Text.Order.Status">
+        <item name="android:textAppearance">@style/PaPino.TextAppearances.Order.Status</item>
+        <item name="android:textColor">@color/textPrimaryColor</item>
+        <item name="android:paddingHorizontal" tools:ignore="NewApi">@dimen/d_10</item>
+        <item name="android:paddingVertical" tools:ignore="NewApi">@dimen/d_6</item>
+        <item name="android:drawablePadding">@dimen/d_10</item>
+        <item name="android:background">@drawable/bg_rect_10</item>
+        <item name="android:backgroundTint">@color/backgroundMenuColor</item>
+    </style>
+
+    <style name="PaPino.Text.Order.Title">
+        <item name="android:textAppearance">@style/PaPino.TextAppearances.Button.Text</item>
+        <item name="android:textColor">@color/textPrimaryColor</item>
+    </style>
+
+    <style name="PaPino.Text.Order.Subtitle">
+        <item name="android:textAppearance">@style/PaPino.TextAppearances.Card.Subtitle</item>
+        <item name="android:textColor">@color/text3Color</item>
+    </style>
+</resources>

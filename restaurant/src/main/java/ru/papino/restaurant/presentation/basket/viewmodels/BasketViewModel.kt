@@ -15,10 +15,6 @@ internal class BasketViewModel(
     private val _basket = MutableSharedFlow<List<BasketUIModel>>()
     val basket = _basket.asSharedFlow()
 
-    init {
-        loadBasket()
-    }
-
     fun deleteProduct(model: BasketUIModel) {
         viewModelScope.launch {
             basketRepository.delete(model.id)
@@ -44,7 +40,7 @@ internal class BasketViewModel(
         }
     }
 
-    private fun loadBasket() {
+    fun loadBasket() {
         viewModelScope.launch {
             val list = mutableListOf<BasketUIModel>()
             val basketProducts = basketRepository.getAll()
