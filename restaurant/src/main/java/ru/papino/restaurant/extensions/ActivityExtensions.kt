@@ -15,7 +15,8 @@ internal fun AppCompatActivity.switchFragment(fragment: Fragment) {
 
     val fragmentTransaction = fragmentManager.beginTransaction()
     fragmentTransaction.replace(
-        R.id.fragmentContainer, fragment,
+        R.id.fragmentContainer,
+        fragment,
         RestaurantActivity.ACTIVE_FRAGMENT
     )
     fragmentTransaction.commit()

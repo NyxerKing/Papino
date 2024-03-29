@@ -55,8 +55,6 @@ internal class MenuFragment : Fragment() {
 
         initUI()
         initObserver()
-
-        viewModel.loadData()
     }
 
     override fun onDestroy() {
@@ -92,7 +90,7 @@ internal class MenuFragment : Fragment() {
                     ru.papino.uikit.components.Chip<ProductTypeUIModel>(chipGroupMenu.context)
                 chip.setModel(model)
                 chip.text = model.title
-                chip.isChecked = index == 0
+                chip.isChecked = model == viewModel.getSelectedProductType()
                 chipGroupMenu.addView(chip)
             }
 

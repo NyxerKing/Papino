@@ -64,6 +64,7 @@ internal class MenuAdapter(
                     buttonText = buttonText,
                     buttonColor = buttonColor,
                     buttonOnClick = {
+                        product.isBasket = true
                         onClickItem(product)
                         setType(MenuButtonType.BASKET)
                     }
