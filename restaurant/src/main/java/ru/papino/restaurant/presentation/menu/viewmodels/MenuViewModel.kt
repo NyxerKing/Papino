@@ -26,15 +26,24 @@ internal class MenuViewModel(
     private val _productTypes = MutableStateFlow<List<ProductTypeUIModel>?>(null)
     val productTypes = _productTypes.asStateFlow()
 
-    private val _menu = MutableStateFlow<List<ProductUIModel>?>(null)
-    val menu = _menu.asStateFlow()
+    private val _menu = MutableSharedFlow<List<ProductUIModel>?>()
+    val menu = _menu.asSharedFlow()
 
     private val _error = MutableSharedFlow<Throwable>()
     val error = _error.asSharedFlow()
 
     private var products: List<ProductUIModel>? = null
+    private var productTypeSelected: ProductTypeUIModel? = null
+
+    init {
+        viewModelScope.launch(Dispatchers.IO) {
+            loadProductTypes()
+            loadMenu()
+        }
+    }
 
     fun filterProducts(selectType: ProductTypeUIModel) {
+        productTypeSelected = selectType
         viewModelScope.launch {
             _menu.emit(getFilteredProducts(selectType.typeProduct))
         }
@@ -55,6 +64,8 @@ internal class MenuViewModel(
         }
     }
 
+    fun getSelectedProductType() = productTypeSelected
+
     private suspend fun getFilteredProducts(typeProductName: String): List<ProductUIModel>? {
         val basketProducts = basketRepository.getAll()
         val filterProducts = products?.filter { product -> product.typeProduct == typeProductName }
@@ -64,18 +75,14 @@ internal class MenuViewModel(
         return filterProducts
     }
 
-    fun loadData() {
-        viewModelScope.launch(Dispatchers.IO) {
-            loadProductTypes()
-            loadMenu()
-        }
-    }
-
     private suspend fun loadProductTypes() {
         runCatching {
             getProductTypesUseCase()
         }.onSuccess { response ->
-            _productTypes.emit(mapper.toProductTypesUI(response))
+            mapper.toProductTypesUI(response)?.let { productTypes ->
+                productTypeSelected = productTypes.first()
+                _productTypes.emit(productTypes)
+            }
         }.onFailure { ex: Throwable? ->
             _productTypes.emit(null)
         }
@@ -89,7 +96,7 @@ internal class MenuViewModel(
                 is MenuResponse.Success -> {
                     products = mapper.toUI(response)
 
-                    _productTypes.value?.first()?.let {
+                    productTypeSelected?.let {
                         filterProducts(it)
                     } ?: run {
                         _menu.emit(products)
@@ -99,7 +106,7 @@ internal class MenuViewModel(
                 is MenuResponse.Error -> {
                     products = mapper.toUI(response)
 
-                    _productTypes.value?.first()?.let {
+                    productTypeSelected?.let {
                         filterProducts(it)
                     } ?: run {
                         _menu.emit(products)

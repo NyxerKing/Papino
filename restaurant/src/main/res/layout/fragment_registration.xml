@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingHorizontal="@dimen/d_10"
-    android:paddingTop="@dimen/d_20">
+    android:paddingTop="@dimen/d_20"
+    android:background="@drawable/bg_rect_base">
 
     <EditText
         android:id="@+id/editFirstName"
