@@ -56,15 +56,23 @@
     <style name="PaPino.Input" />
 
     <style name="PaPino.Input.Base" parent="@style/Widget.Material3.TextInputLayout.FilledBox">
+        <item name="materialThemeOverlay">@style/PaPino.Input.Base.ThemeOverlay</item>
         <item name="shapeAppearance">@style/PaPino.ShapeAppearance</item>
         <item name="shapeAppearanceOverlay">@style/PaPino.ShapeAppearance</item>
         <item name="hintTextAppearance">@style/PaPino.TextAppearances.Card.Subtitle</item>
+        <item name="hintTextColor">@color/text3Color</item>
         <item name="android:textColorHint">@color/text3Color</item>
         <item name="boxStrokeWidth">0dp</item>
     </style>
 
-    <style name="PaPino.Input.EditText">
+    <style name="PaPino.Input.Base.ThemeOverlay">
+        <item name="editTextStyle">@style/PaPino.Input.EditText</item>
+    </style>
+
+    <style name="PaPino.Input.EditText" parent="Widget.Material3.TextInputEditText.FilledBox">
         <item name="android:textAppearance">@style/PaPino.TextAppearances.Card.Title</item>
+        <item name="android:textColor">@color/textPrimaryColor</item>
+        <item name="android:backgroundTint">@color/backgroundButtonGreyMedium</item>
     </style>
 
     <style name="PaPino.ShapeAppearance">

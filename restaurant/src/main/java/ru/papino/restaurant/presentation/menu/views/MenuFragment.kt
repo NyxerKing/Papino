@@ -119,7 +119,7 @@ internal class MenuFragment : Fragment() {
             AlertDialog(
                 context = root.context,
                 title = resources.getString(R.string.error_request_title),
-                message = resources.getString(R.string.error_request_message),
+                message = "${resources.getString(R.string.error_request_message)}\n${ex.message}",
                 onClick = {}
             ).show()
         }

@@ -3,36 +3,93 @@
     android:layout_width="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:paddingHorizontal="@dimen/d_20"
-    android:background="@drawable/bg_rect_base">
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textViewFirstName"
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/d_120"
+        android:background="@drawable/bg_rect_base"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/PaPino.Text.Order.Screen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_margin="@dimen/d_20"
+            android:text="@string/profile_text" />
+    </FrameLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputFirstName"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="@dimen/d_10"
+        android:layout_marginTop="@dimen/d_14"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_reg_second_name"
+        tools:parentTag="com.google.android.material.textfield.TextInputLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:paddingHorizontal="@dimen/d_20"
+            tools:text="10000" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputSecondName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="Фамилия" />
+        android:layout_marginHorizontal="@dimen/d_10"
+        android:layout_marginTop="@dimen/d_10"
+        android:hint="@string/hint_reg_first_name"
+        tools:parentTag="com.google.android.material.textfield.TextInputLayout">
 
-    <TextView
-        android:id="@+id/textViewSecondName"
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:paddingHorizontal="@dimen/d_20"
+            tools:text="10000" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputPhone"
+        android:layout_marginHorizontal="@dimen/d_10"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/d_20"
-        tools:text="Имя" />
+        android:layout_marginTop="@dimen/d_10"
+        android:hint="@string/hint_reg_phone"
+        tools:parentTag="com.google.android.material.textfield.TextInputLayout">
 
-    <TextView
-        android:id="@+id/textViewPhone"
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:paddingHorizontal="@dimen/d_20"
+            tools:text="10000" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/d_20"
-        tools:text="Телефон" />
+        android:layout_marginHorizontal="@dimen/d_10"
+        android:layout_marginTop="@dimen/d_10"
+        android:hint="@string/hint_reg_address"
+        tools:parentTag="com.google.android.material.textfield.TextInputLayout">
 
-    <TextView
-        android:id="@+id/textViewAddress"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/d_20"
-        tools:text="Адрес" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:paddingHorizontal="@dimen/d_20"
+            tools:text="10000" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
 </LinearLayout>
