@@ -4,7 +4,6 @@ import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
-import ru.papino.restaurant.data.datasource.net.models.TokenJsonModel
 import ru.papino.restaurant.data.datasource.net.models.UserJsonModel
 
 internal interface UserService {
@@ -17,7 +16,7 @@ internal interface UserService {
         @Query("password") password: String,
         @Query("bonus") bonus: Long,
         @Query("address") address: String,
-    ): Call<TokenJsonModel>
+    ): Call<UserJsonModel>
 
     @GET("/User")
     fun getUser(

@@ -9,6 +9,8 @@ data class UserJsonModel(
     @SerializedName("telephoneNumber") val phone: String,
     @SerializedName("password") val password: String,
     @SerializedName("bonus") val bonus: String,
+    @SerializedName("address") val address: String,
+    @SerializedName("dataCreated") val created: String,
     @SerializedName("token") val token: String,
-    @SerializedName("address") val address: String
+    @SerializedName("errorMessage") val error: String?,
 )
