@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
         object : CountDownTimer(500, 1000) {
             override fun onFinish() {
                 startActivity(RestaurantActivity.newIntent(this@MainActivity))
+                //startActivity(SandboxActivity.newIntent(this@MainActivity))
                 finish()
             }
 

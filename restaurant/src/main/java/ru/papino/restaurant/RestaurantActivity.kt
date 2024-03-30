@@ -20,7 +20,6 @@ import ru.papino.restaurant.databinding.ActivityRestaurantBinding
 import ru.papino.restaurant.domain.repository.models.UserResponse
 import ru.papino.restaurant.domain.usecases.GetUserByTokenUseCase
 import ru.papino.restaurant.extensions.switchFragment
-import ru.papino.uikit.extensions.fullscreen
 
 class RestaurantActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRestaurantBinding
@@ -31,7 +30,6 @@ class RestaurantActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         RoomDependencies.init(applicationContext)
         authorizationByToken()
-        window.fullscreen()
         super.onCreate(savedInstanceState)
 
         binding = ActivityRestaurantBinding.inflate(layoutInflater)

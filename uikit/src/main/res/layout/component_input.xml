@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.textfield.TextInputLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/inputLayout"
-    style="@style/PaPino.Input.Base"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    tools:parentTag="com.google.android.material.textfield.TextInputLayout"
     tools:hint="Значение:">
 
     <com.google.android.material.textfield.TextInputEditText
-        style="@style/PaPino.Input.EditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingHorizontal="@dimen/d_20"
         tools:text="10000" />
 
-</com.google.android.material.textfield.TextInputLayout>
+</merge>

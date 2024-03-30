@@ -104,6 +104,7 @@ internal class MenuViewModel(
                 }
 
                 is MenuResponse.Error -> {
+                    _error.emit(response.error)
                     products = mapper.toUI(response)
 
                     productTypeSelected?.let {

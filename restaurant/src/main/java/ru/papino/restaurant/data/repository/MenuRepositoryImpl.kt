@@ -24,7 +24,7 @@ internal class MenuRepositoryImpl(
         } catch (ex: Throwable) {
             // todo Убрать после настройки сервака
             val list = Gson().fromJson(localDS.getData(), MenuJsonModel::class.java)
-            return mapper.toDomainError(list)
+            return mapper.toDomainError(list, ex)
         }
         val list = Gson().fromJson(localDS.getData(), MenuJsonModel::class.java)
         return mapper.toDomainError(list)

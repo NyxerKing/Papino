@@ -10,6 +10,7 @@ import kotlinx.coroutines.launch
 import ru.papino.restaurant.core.user.models.User
 import ru.papino.restaurant.databinding.FragmentProfileBinding
 import ru.papino.restaurant.presentation.profile.viewmodels.ProfileViewModel
+import ru.papino.uikit.extensions.setText
 
 internal class ProfileFragment : Fragment() {
 
@@ -41,10 +42,10 @@ internal class ProfileFragment : Fragment() {
 
     private fun updateUI(user: User) {
         with(binding) {
-            textViewFirstName.text = user.firstName
-            textViewSecondName.text = user.secondName
-            textViewPhone.text = user.phone
-            textViewAddress.text = user.address
+            inputFirstName.setText(user.firstName)
+            inputSecondName.setText(user.secondName)
+            inputPhone.setText(user.phone)
+            inputAddress.setText(user.address)
         }
     }
 }
