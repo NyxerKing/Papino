@@ -5,5 +5,8 @@ internal data class User(
     val firstName: String,
     val secondName: String,
     val phone: String,
-    val address: String
-)
+    val address: String,
+    val bonus: Long
+) {
+    override fun toString() = "$firstName $secondName"
+}

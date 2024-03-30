@@ -1,6 +1,6 @@
 package ru.papino.restaurant.data.repository
 
-import ru.papino.restaurant.core.user.di.UserDI.BONUS
+import ru.papino.restaurant.core.user.di.UserDI.BONUS_DEFAULT
 import ru.papino.restaurant.data.datasource.net.impl.NetDataSource
 import ru.papino.restaurant.data.datasource.net.services.UserService
 import ru.papino.restaurant.data.mappers.UserMapper
@@ -20,7 +20,7 @@ internal class UserRepositoryImpl(
                 firstName = user.firstName,
                 phone = user.phone,
                 password = user.password,
-                bonus = BONUS,
+                bonus = BONUS_DEFAULT,
                 address = user.address
             ).execute()
             result.body()?.let {

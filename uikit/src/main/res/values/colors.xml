@@ -10,6 +10,7 @@
     <color name="backgroundMenuColor">#EEEEEE</color>
     <color name="backgroundButtonGreyMedium">#E0E0E0</color>
     <color name="backgroundNavigationColor">#424242</color>
+    <color name="backgroundNoActiveColor">#969696</color>
 
     <!-- Палитра для элементов экрана -->
     <color name="elementPrimaryColor">#FFFFFF</color>

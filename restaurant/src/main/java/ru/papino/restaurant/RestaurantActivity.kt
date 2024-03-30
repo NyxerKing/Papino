@@ -15,6 +15,7 @@ import kotlinx.coroutines.launch
 import ru.papino.restaurant.core.room.RoomDependencies
 import ru.papino.restaurant.core.user.di.UserDI
 import ru.papino.restaurant.core.user.encrypted.EncryptedToken
+import ru.papino.restaurant.core.user.models.User
 import ru.papino.restaurant.data.repository.UserRepositoryImpl
 import ru.papino.restaurant.databinding.ActivityRestaurantBinding
 import ru.papino.restaurant.domain.repository.models.UserResponse
@@ -50,6 +51,16 @@ class RestaurantActivity : AppCompatActivity() {
     private fun initObserver() {
         lifecycleScope.launch {
             RoomDependencies.basketRepository.changeBasket.collect(::basketChange)
+        }
+
+        lifecycleScope.launch {
+            UserDI.onInitUser.collect(::updateNavigation)
+        }
+    }
+
+    private fun updateNavigation(user: User?) {
+        binding.navigation.menu.findItem(R.id.orders).let { itemOrder ->
+            itemOrder.isEnabled = user != null
         }
     }
 

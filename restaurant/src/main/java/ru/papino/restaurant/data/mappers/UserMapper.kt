@@ -13,7 +13,8 @@ internal class UserMapper {
             firstName = data.firstName,
             secondName = data.secondName,
             phone = data.phone,
-            address = data.address
+            address = data.address,
+            bonus = data.bonus.toLongOrNull() ?: 0
         ),
         token = Token(token = data.token)
     )
@@ -23,6 +24,7 @@ internal class UserMapper {
         firstName = data.user.firstName,
         secondName = data.user.secondName,
         phone = data.user.phone,
-        address = data.user.address
+        address = data.user.address,
+        bonus = data.user.bonus
     )
 }
