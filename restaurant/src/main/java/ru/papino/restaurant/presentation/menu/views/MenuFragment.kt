@@ -11,6 +11,8 @@ import ru.papino.restaurant.R
 import ru.papino.restaurant.core.imageLoader.ImageLoaderImpl
 import ru.papino.restaurant.core.recycler.decorations.CoreDividerItemDecoration
 import ru.papino.restaurant.core.room.RoomDependencies
+import ru.papino.restaurant.core.user.di.UserDI
+import ru.papino.restaurant.core.user.models.User
 import ru.papino.restaurant.data.di.RepositoryManager
 import ru.papino.restaurant.data.repository.ProductTypesRepositoryImpl
 import ru.papino.restaurant.databinding.FragmentMenuBinding
@@ -71,6 +73,10 @@ internal class MenuFragment : Fragment() {
 
     private fun initObserver() {
         lifecycleScope.launch {
+            UserDI.onInitUser.collect(::updateUser)
+        }
+
+        lifecycleScope.launch {
             viewModel.productTypes.collect(::initMenu)
         }
 
@@ -80,6 +86,19 @@ internal class MenuFragment : Fragment() {
 
         lifecycleScope.launch {
             viewModel.error.collect(::showError)
+        }
+    }
+
+    private fun updateUser(user: User?) {
+        binding?.run {
+            user?.let {
+                textViewUserName.text = it.toString()
+                textViewBonus.text = resources.getString(R.string.title_bonus, it.bonus.toString())
+            } ?: run {
+                textViewUserName.text = ""
+                textViewBonus.text = ""
+
+            }
         }
     }
 

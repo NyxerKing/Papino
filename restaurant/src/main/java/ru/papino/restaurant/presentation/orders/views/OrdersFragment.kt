@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
-import ru.papino.restaurant.R
 import ru.papino.restaurant.core.recycler.decorations.CoreDividerItemDecoration
 import ru.papino.restaurant.data.di.RepositoryManager
 import ru.papino.restaurant.databinding.FragmentOrdersBinding
@@ -16,7 +15,6 @@ import ru.papino.restaurant.presentation.orders.adapters.OrdersAdapter
 import ru.papino.restaurant.presentation.orders.mappers.OrdersMapper
 import ru.papino.restaurant.presentation.orders.models.OrderUIModel
 import ru.papino.restaurant.presentation.orders.viewmodels.OrdersViewModel
-import ru.papino.uikit.dialogs.AlertDialog
 
 internal class OrdersFragment : Fragment() {
 
@@ -66,17 +64,21 @@ internal class OrdersFragment : Fragment() {
     }
 
     private fun initOrders(orders: List<OrderUIModel>) {
+        showNoOrders(false)
         ordersAdapter.set(orders)
     }
 
     private fun showError(ex: Throwable) {
+        showNoOrders(true)
+    }
+
+    private fun showNoOrders(isVisible: Boolean) {
         binding.run {
-            AlertDialog(
-                context = root.context,
-                title = resources.getString(R.string.error_request_title),
-                message = ex.message ?: resources.getString(R.string.error_request_message),
-                onClick = {}
-            ).show()
+            if (isVisible) {
+                imageViewErrorNoOrders.visibility = View.VISIBLE
+            } else {
+                imageViewErrorNoOrders.visibility = View.GONE
+            }
         }
     }
 }

@@ -5,6 +5,8 @@
         <item name="background">@drawable/il_basket_backgroud</item>
         <!-- Customize your light theme here. -->
         <item name="colorPrimary">@color/backgroundTopColor</item>
+        <item name="android:navigationBarColor">@color/backgroundNavigationColor</item>
+
         <item name="inputComponent">@style/PaPino.Input.Base</item>
     </style>
 

@@ -20,6 +20,14 @@
             android:text="@string/screen_orders_title" />
     </FrameLayout>
 
+    <ImageView
+        android:id="@+id/imageViewErrorNoOrders"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/accessibility_no_orders"
+        android:src="@drawable/il_no_orders"
+        android:visibility="gone" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/ordersRecycler"
         android:layout_width="match_parent"

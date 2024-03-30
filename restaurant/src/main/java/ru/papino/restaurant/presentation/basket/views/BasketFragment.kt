@@ -8,8 +8,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
+import ru.papino.restaurant.R
 import ru.papino.restaurant.core.recycler.decorations.CoreDividerItemDecoration
 import ru.papino.restaurant.core.room.RoomDependencies
+import ru.papino.restaurant.core.user.di.UserDI
+import ru.papino.restaurant.core.user.models.User
 import ru.papino.restaurant.databinding.FragmentBasketBinding
 import ru.papino.restaurant.extensions.toPrice
 import ru.papino.restaurant.presentation.basket.adapters.BasketAdapter
@@ -53,11 +56,28 @@ internal class BasketFragment : Fragment() {
 
     private fun initObserver() {
         lifecycleScope.launch {
+            UserDI.onInitUser.collect(::updateUser)
+        }
+
+        lifecycleScope.launch {
             RoomDependencies.basketRepository.changeBasket.collect(::basketChange)
         }
 
         lifecycleScope.launch {
             viewModel.basket.collect(::updateUI)
+        }
+    }
+
+    private fun updateUser(user: User?) {
+        binding.run {
+            user?.let {
+                textViewUserName.text = it.toString()
+                textViewBonus.text = resources.getString(R.string.title_bonus, it.bonus.toString())
+            } ?: run {
+                textViewUserName.text = ""
+                textViewBonus.text = ""
+
+            }
         }
     }
 
