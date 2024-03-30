@@ -2,9 +2,7 @@ package ru.papino.restaurant.data.mappers
 
 import ru.papino.restaurant.core.user.models.Token
 import ru.papino.restaurant.core.user.models.User
-import ru.papino.restaurant.data.datasource.net.models.TokenJsonModel
 import ru.papino.restaurant.data.datasource.net.models.UserJsonModel
-import ru.papino.restaurant.domain.repository.models.TokenResponse
 import ru.papino.restaurant.domain.repository.models.UserResponse
 
 internal class UserMapper {
@@ -20,8 +18,11 @@ internal class UserMapper {
         token = Token(token = data.token)
     )
 
-    fun toTokenResponse(data: TokenJsonModel) = TokenResponse.Success(
-        token = Token(data.token),
-        userId = data.userId
+    fun toUser(data: UserResponse.Success) = User(
+        id = data.user.id,
+        firstName = data.user.firstName,
+        secondName = data.user.secondName,
+        phone = data.user.phone,
+        address = data.user.address
     )
 }

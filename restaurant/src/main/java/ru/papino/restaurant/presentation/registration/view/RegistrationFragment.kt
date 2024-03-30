@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import ru.papino.restaurant.data.mappers.UserMapper
 import ru.papino.restaurant.data.repository.UserRepositoryImpl
 import ru.papino.restaurant.databinding.FragmentRegistrationBinding
 import ru.papino.restaurant.domain.repository.models.UserModel
@@ -18,9 +19,8 @@ internal class RegistrationFragment : Fragment() {
 
     private val viewModel by lazy {
         RegistrationViewModel(
-            createUserUseCase = CreateUserUseCase(
-                UserRepositoryImpl.getInstance()
-            )
+            createUserUseCase = CreateUserUseCase(UserRepositoryImpl.getInstance()),
+            userMapper = UserMapper()
         )
     }
 

@@ -124,7 +124,7 @@ class RestaurantActivity : AppCompatActivity() {
         }
     }
 
-    fun authorizationByToken() {
+    private fun authorizationByToken() {
         val getUserByTokenUseCase =
             GetUserByTokenUseCase(userRepository = UserRepositoryImpl.getInstance())
         val token = EncryptedToken.getToken()

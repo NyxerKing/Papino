@@ -5,13 +5,14 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import ru.papino.restaurant.core.user.di.UserDI
-import ru.papino.restaurant.core.user.models.User
-import ru.papino.restaurant.domain.repository.models.TokenResponse
+import ru.papino.restaurant.data.mappers.UserMapper
 import ru.papino.restaurant.domain.repository.models.UserModel
+import ru.papino.restaurant.domain.repository.models.UserResponse
 import ru.papino.restaurant.domain.usecases.CreateUserUseCase
 
 internal class RegistrationViewModel(
-    private val createUserUseCase: CreateUserUseCase
+    private val createUserUseCase: CreateUserUseCase,
+    private val userMapper: UserMapper
 ) : ViewModel() {
 
     fun createUser(user: UserModel, onSuccess: () -> Unit, onFailure: (String) -> Unit) {
@@ -20,21 +21,13 @@ internal class RegistrationViewModel(
                 createUserUseCase(user = user)
             }.onSuccess { response ->
                 when (response) {
-                    is TokenResponse.Success -> {
-                        UserDI.init(
-                            User(
-                                id = response.userId,
-                                firstName = user.firstName,
-                                secondName = user.secondName,
-                                phone = user.phone,
-                                address = user.address
-                            )
-                        )
+                    is UserResponse.Success -> {
+                        UserDI.init(userMapper.toUser(response))
                         UserDI.initToken(response.token)
                         onSuccess()
                     }
 
-                    is TokenResponse.Error -> {
+                    is UserResponse.Error -> {
                         onFailure(response.message)
                     }
                 }
