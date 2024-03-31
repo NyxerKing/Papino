@@ -13,6 +13,7 @@ internal interface OrdersService {
     @GET("/orders")
     fun getOrders(): Call<List<OrderJsonModel>>
 
-    @POST("/createOrder")
+    //{"group":[{"id":9,"isApplyBonus":false,"userId":10,"dateOrders":"2024-03-31T09:37:22.997","addressOrder":"dimitrovgrad","statusOrder":"Создан","summOrder":308000,"summDiscount":30800,"summOrderWithDiscount":277200}]}
+    @POST("/FoodMenu/CreateOrder")
     fun createOrder(@Body order: OrderRequestModel): Call<OrderJsonModel>
 }
