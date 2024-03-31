@@ -2,18 +2,40 @@ package ru.papino.restaurant.presentation.basket.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import ru.papino.restaurant.domain.repository.BasketRepository
+import ru.papino.restaurant.domain.repository.models.OrderRequestModel
+import ru.papino.restaurant.domain.usecases.CreateOrderUseCase
+import ru.papino.restaurant.presentation.basket.mappers.BasketMapper
 import ru.papino.restaurant.presentation.basket.models.BasketUIModel
 
 internal class BasketViewModel(
-    private val basketRepository: BasketRepository
+    private val basketRepository: BasketRepository,
+    private val createOrderUseCase: CreateOrderUseCase,
+    private val basketMapper: BasketMapper
 ) : ViewModel() {
 
     private val _basket = MutableSharedFlow<List<BasketUIModel>>()
     val basket = _basket.asSharedFlow()
+
+    private var bufferBasket: List<BasketUIModel> = listOf()
+
+    fun createOrder(userId: Long, useBonus: Boolean, address: String, sum: Double) {
+        val order = OrderRequestModel(
+            userId = userId,
+            useBonus = useBonus,
+            address = address,
+            sum = sum,
+            products = bufferBasket.map { product -> basketMapper.toDomain(product) }
+        )
+
+        viewModelScope.launch(Dispatchers.IO) {
+            createOrderUseCase(order)
+        }
+    }
 
     fun deleteProduct(model: BasketUIModel) {
         viewModelScope.launch {
@@ -60,6 +82,7 @@ internal class BasketViewModel(
                 }
             }
 
+            bufferBasket = list
             _basket.emit(list)
         }
     }

@@ -6,6 +6,7 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/topMenu"
         android:layout_width="match_parent"
         android:layout_height="@dimen/d_120"
         android:background="@drawable/bg_rect_base"
@@ -129,6 +130,16 @@
                 app:layout_constraintTop_toTopOf="@+id/titleOrderDiscount"
                 tools:text="15 000 сум" />
 
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/switchBonus"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/d_10"
+                android:text="@string/screen_basket_bonus_switch"
+                app:layout_constraintEnd_toEndOf="@+id/titleOrderDiscountSum"
+                app:layout_constraintStart_toStartOf="@+id/titleOrderDiscount"
+                app:layout_constraintTop_toBottomOf="@+id/titleOrderDiscount" />
+
             <Space
                 android:id="@+id/space1"
                 android:layout_width="0dp"
@@ -137,7 +148,7 @@
                 android:background="@color/backgroundButtonGreyMedium"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/titleOrderDiscount" />
+                app:layout_constraintTop_toBottomOf="@+id/switchBonus" />
 
             <TextView
                 android:id="@+id/titleToPay"

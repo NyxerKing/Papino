@@ -13,5 +13,10 @@
     <style name="Theme.Papino" parent="Base.Theme.Papino">
         <item name="bottomNavigationStyle">@style/Widget.Papino.BottomNavigationView</item>
         <item name="textInputStyle">@style/PaPino.Input.Base</item>
+        <item name="materialSwitchStyle">@style/PaPino.Switch</item>
     </style>
+
+    <style name="ThemeOverlay" />
+
+    <style name="ThemeOverlay.PaPino" />
 </resources>

@@ -55,7 +55,7 @@ internal class BasketAdapter :
                     priceAll = view.resources.getString(
                         ru.papino.uikit.R.string.insert_count_sum_all,
                         data.count.toString(),
-                        (data.price.toPrice() * data.count).toString()
+                        (data.price.toPrice() * data.count).toPrice()
                     ),
                     controllerItemData = ElementControllerComponent.Data(
                         count = data.count,

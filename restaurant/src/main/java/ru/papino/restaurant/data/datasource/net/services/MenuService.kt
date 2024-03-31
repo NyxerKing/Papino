@@ -6,6 +6,6 @@ import ru.papino.restaurant.data.datasource.net.models.MenuJsonModel
 
 internal interface MenuService {
 
-    @GET("FoodMenu")
+    @GET("/FoodMenu")
     fun getMenu(): Call<MenuJsonModel>
 }

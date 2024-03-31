@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="PaPino.Switch" parent="Widget.Material3.CompoundButton.MaterialSwitch">
+        <item name="android:textColor">@color/textPrimaryColor</item>
+    </style>
+</resources>

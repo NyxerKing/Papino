@@ -27,6 +27,8 @@
 
     <string name="screen_orders_title">Мои заказы</string>
 
+    <string name="screen_basket_bonus_switch">Потратить бонусы</string>
+
     <string name="title_bonus">%1$s бонусов</string>
 
     <string name="accessibility_no_orders">У Вас нет заказов</string>
