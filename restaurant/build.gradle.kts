@@ -44,7 +44,10 @@ dependencies {
     val glide = "4.16.0"
     val room_version = "2.6.1"
     val security_crypto = "1.1.0-alpha06"
+    val okhttp3 = "4.12.0"
 
+    implementation("com.squareup.okhttp3:okhttp:$okhttp3")
+    implementation("com.squareup.okhttp3:logging-interceptor:$okhttp3")
     implementation("com.squareup.retrofit2:retrofit:$retrofit")
     implementation("com.squareup.retrofit2:converter-gson:$gson")
     implementation("com.google.android.material:material:$material")

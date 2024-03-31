@@ -18,6 +18,7 @@ import ru.papino.restaurant.extensions.toPrice
 import ru.papino.restaurant.presentation.basket.adapters.BasketAdapter
 import ru.papino.restaurant.presentation.basket.models.BasketUIModel
 import ru.papino.restaurant.presentation.basket.viewmodels.BasketViewModel
+import ru.papino.uikit.extensions.setText
 
 internal class BasketFragment : Fragment() {
 
@@ -51,6 +52,10 @@ internal class BasketFragment : Fragment() {
         with(binding) {
             basketRecyclerView.adapter = basketAdapter
             basketRecyclerView.addItemDecoration(CoreDividerItemDecoration(this.root.context))
+
+            if (UserDI.isUserInitializer()) {
+                inputAddress.setText(UserDI.user.address)
+            }
         }
     }
 
