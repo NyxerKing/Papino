@@ -13,9 +13,12 @@ import ru.papino.restaurant.core.recycler.decorations.CoreDividerItemDecoration
 import ru.papino.restaurant.core.room.RoomDependencies
 import ru.papino.restaurant.core.user.di.UserDI
 import ru.papino.restaurant.core.user.models.User
+import ru.papino.restaurant.data.repository.OrdersRepositoryImpl
 import ru.papino.restaurant.databinding.FragmentBasketBinding
+import ru.papino.restaurant.domain.usecases.CreateOrderUseCase
 import ru.papino.restaurant.extensions.toPrice
 import ru.papino.restaurant.presentation.basket.adapters.BasketAdapter
+import ru.papino.restaurant.presentation.basket.mappers.BasketMapper
 import ru.papino.restaurant.presentation.basket.models.BasketUIModel
 import ru.papino.restaurant.presentation.basket.viewmodels.BasketViewModel
 import ru.papino.uikit.extensions.setText
@@ -24,12 +27,18 @@ internal class BasketFragment : Fragment() {
 
     private val viewModel by lazy {
         BasketViewModel(
-            basketRepository = RoomDependencies.basketRepository
+            basketRepository = RoomDependencies.basketRepository,
+            createOrderUseCase = CreateOrderUseCase(ordersRepository = OrdersRepositoryImpl.getInstance()),
+            basketMapper = BasketMapper()
         )
     }
 
     private lateinit var binding: FragmentBasketBinding
     private val basketAdapter = BasketAdapter()
+
+    private var sumProducts = 0.0
+    private var sumBonus = 0L
+    private var sumToPay = 0.0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,6 +61,29 @@ internal class BasketFragment : Fragment() {
         with(binding) {
             basketRecyclerView.adapter = basketAdapter
             basketRecyclerView.addItemDecoration(CoreDividerItemDecoration(this.root.context))
+
+            switchBonus.setOnCheckedChangeListener { buttonView, isChecked ->
+                if (isChecked) {
+                    if (UserDI.isUserInitializer()) {
+                        updateDiscount(UserDI.user.bonus)
+                    } else {
+                        updateDiscount()
+                    }
+                } else {
+                    updateDiscount()
+                }
+            }
+
+            buttonCheckout.setOnClickListener {
+                if (UserDI.isUserInitializer()) {
+                    viewModel.createOrder(
+                        userId = UserDI.user.id,
+                        useBonus = sumBonus > 0,
+                        address = inputAddress.editText?.text?.toString().orEmpty(),
+                        sum = sumToPay
+                    )
+                }
+            }
 
             if (UserDI.isUserInitializer()) {
                 inputAddress.setText(UserDI.user.address)
@@ -81,8 +113,18 @@ internal class BasketFragment : Fragment() {
             } ?: run {
                 textViewUserName.text = ""
                 textViewBonus.text = ""
-
             }
+        }
+    }
+
+    private fun updateSum() {
+        with(binding) {
+            sumToPay = if (sumProducts > sumBonus) sumProducts - sumBonus else 0.0
+
+            toPaySum.text = getPrice(sumToPay)
+            titleOrderFoodSum.text = getPrice(sumProducts)
+
+            orderForm.visibility = VISIBLE
         }
     }
 
@@ -94,15 +136,30 @@ internal class BasketFragment : Fragment() {
             viewModel::plusProduct
         )
 
+        binding.titleOrderFood.text =
+            resources.getString(
+                ru.papino.uikit.R.string.insert_products,
+                basket.sumOf { product -> product.count }.toString()
+            )
+
+        sumProducts = basket.sumOf { product -> product.price.toPrice() * product.count }
+        updateSum()
+    }
+
+    private fun updateDiscount(value: Long = 0) {
         with(binding) {
-            val sum = basket.sumOf { product -> product.price.toPrice() * product.count }.toString()
+            sumBonus = value
+            titleOrderDiscountSum.text = getPrice(sumBonus)
 
-            titleOrderFoodSum.text = sum
-            toPaySum.text = sum
-
-            orderForm.visibility = VISIBLE
+            updateSum()
         }
     }
+
+    private fun getPrice(value: Double) =
+        resources.getString(ru.papino.uikit.R.string.insert_sum, value.toPrice())
+
+    private fun getPrice(value: Long) =
+        resources.getString(ru.papino.uikit.R.string.insert_sum, value.toString())
 
     private suspend fun basketChange(id: Int) {
         val count = RoomDependencies.basketRepository.getCountAll()

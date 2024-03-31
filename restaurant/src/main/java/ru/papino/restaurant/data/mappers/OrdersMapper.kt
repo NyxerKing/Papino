@@ -5,7 +5,7 @@ import ru.papino.restaurant.domain.repository.models.OrderModel
 
 internal class OrdersMapper {
 
-    fun tuDomain(data: OrderJsonModel) = OrderModel(
+    fun toDomain(data: OrderJsonModel) = OrderModel(
         id = data.id,
         created = data.created,
         products = data.products,
