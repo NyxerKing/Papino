@@ -26,7 +26,7 @@ internal class MenuMapper {
             }
 
             is MenuResponse.Error -> {
-                data.buffer.map { domain ->
+                data.buffer?.map { domain ->
                     ProductUIModel(
                         id = domain.id,
                         name = domain.name,
