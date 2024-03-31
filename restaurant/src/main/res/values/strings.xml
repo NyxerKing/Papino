@@ -32,4 +32,7 @@
     <string name="title_bonus">%1$s бонусов</string>
 
     <string name="accessibility_no_orders">У Вас нет заказов</string>
+
+    <string name="dialog_warning_title">Предупреждение</string>
+    <string name="dialog_message_bascket_title">Не все поля заполнены</string>
 </resources>

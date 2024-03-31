@@ -86,4 +86,8 @@ internal class BasketViewModel(
             _basket.emit(list)
         }
     }
+
+    fun checkOrderParameters(userId: Long, address: String, sum: Double) =
+        bufferBasket.isNotEmpty() && userId > 0 && address.isNotEmpty() && sum > 0
+
 }

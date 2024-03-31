@@ -12,9 +12,9 @@
         android:background="@drawable/bg_rect_base"
         android:gravity="center"
         android:orientation="vertical"
+        android:paddingHorizontal="@dimen/d_20"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:paddingHorizontal="@dimen/d_20"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
@@ -41,8 +41,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/d_4"
             android:textColor="@color/backgroundButtonColor"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/logoMain"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewUserName" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -50,16 +50,16 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/topMenu">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/orderForm"
-            android:isScrollContainer="true"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:isScrollContainer="true"
             android:visibility="gone"
             tools:visibility="visible">
 
@@ -203,6 +203,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/d_30"
                 android:layout_marginTop="@dimen/d_20"
+                android:enabled="false"
                 android:text="@string/checkout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
