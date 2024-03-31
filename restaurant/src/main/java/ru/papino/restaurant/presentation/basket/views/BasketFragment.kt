@@ -21,6 +21,7 @@ import ru.papino.restaurant.presentation.basket.adapters.BasketAdapter
 import ru.papino.restaurant.presentation.basket.mappers.BasketMapper
 import ru.papino.restaurant.presentation.basket.models.BasketUIModel
 import ru.papino.restaurant.presentation.basket.viewmodels.BasketViewModel
+import ru.papino.uikit.dialogs.AlertDialog
 import ru.papino.uikit.extensions.setText
 
 internal class BasketFragment : Fragment() {
@@ -76,12 +77,27 @@ internal class BasketFragment : Fragment() {
 
             buttonCheckout.setOnClickListener {
                 if (UserDI.isUserInitializer()) {
-                    viewModel.createOrder(
-                        userId = UserDI.user.id,
-                        useBonus = sumBonus > 0,
-                        address = inputAddress.editText?.text?.toString().orEmpty(),
-                        sum = sumToPay
-                    )
+
+                    if (viewModel.checkOrderParameters(
+                            userId = UserDI.user.id,
+                            address = inputAddress.editText?.text?.toString().orEmpty(),
+                            sum = sumToPay
+                        )
+                    ) {
+                        viewModel.createOrder(
+                            userId = UserDI.user.id,
+                            useBonus = sumBonus > 0,
+                            address = inputAddress.editText?.text?.toString().orEmpty(),
+                            sum = sumToPay
+                        )
+                    } else {
+                        AlertDialog(
+                            context = this.root.context,
+                            title = resources.getString(R.string.dialog_warning_title),
+                            message = resources.getString(R.string.dialog_message_bascket_title),
+                            onClick = {}
+                        )
+                    }
                 }
             }
 
@@ -135,6 +151,8 @@ internal class BasketFragment : Fragment() {
             viewModel::minusProduct,
             viewModel::plusProduct
         )
+
+        binding.buttonCheckout.isEnabled = basket.isNotEmpty()
 
         binding.titleOrderFood.text =
             resources.getString(
