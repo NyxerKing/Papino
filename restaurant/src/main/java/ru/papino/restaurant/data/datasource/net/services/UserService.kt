@@ -10,8 +10,8 @@ internal interface UserService {
 
     @POST("/User/CreateUser")
     fun createUser(
-        @Query("surname") secondName: String,
-        @Query("name") firstName: String,
+        @Query("name") secondName: String,
+        @Query("surname") firstName: String,
         @Query("telephoneNumber") phone: String,
         @Query("password") password: String,
         @Query("bonus") bonus: Long,

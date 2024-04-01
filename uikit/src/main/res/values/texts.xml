@@ -112,4 +112,10 @@
         <item name="android:textSize">10sp</item>
         <item name="android:lineHeight" tools:ignore="NewApi">14sp</item>
     </style>
+
+    <style name="PaPino.TextAppearances.Loader">
+        <item name="android:textFontWeight" tools:ignore="NewApi">700</item>
+        <item name="android:textSize">40sp</item>
+        <item name="android:lineHeight" tools:ignore="NewApi">40sp</item>
+    </style>
 </resources>

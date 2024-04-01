@@ -18,5 +18,7 @@ internal class OrdersMapper {
         OrderStatus.CREATED -> ru.papino.uikit.constants.OrderStatus.CREATED
         OrderStatus.DELIVERED -> ru.papino.uikit.constants.OrderStatus.DELIVERED
         OrderStatus.COMPLETED -> ru.papino.uikit.constants.OrderStatus.COMPLETED
+        OrderStatus.WORKING -> ru.papino.uikit.constants.OrderStatus.WORKING
+        OrderStatus.CANCELED -> ru.papino.uikit.constants.OrderStatus.CANCELED
     }
 }

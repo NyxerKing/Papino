@@ -92,12 +92,15 @@ internal class MenuFragment : Fragment() {
     private fun updateUser(user: User?) {
         binding?.run {
             user?.let {
-                textViewUserName.text = it.toString()
-                textViewBonus.text = resources.getString(R.string.title_bonus, it.bonus.toString())
+                headerContainer.set(
+                    userName = it.toString(),
+                    bonus = resources.getString(R.string.title_bonus, it.bonus.toString())
+                )
             } ?: run {
-                textViewUserName.text = ""
-                textViewBonus.text = ""
-
+                headerContainer.set(
+                    userName = "",
+                    bonus = ""
+                )
             }
         }
     }
@@ -121,6 +124,7 @@ internal class MenuFragment : Fragment() {
                             index
                         )
                     titleMenu.text = item.getModel()?.title
+                    menuRecycler.scrollToPosition(0)
                     item.getModel()?.let { viewModel.filterProducts(it) }
                 }
             }

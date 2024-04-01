@@ -9,8 +9,7 @@ import ru.papino.restaurant.domain.repository.models.OrderRequestModel
 
 internal interface OrdersService {
 
-    // TODO параметры неизвестны
-    @GET("/orders")
+    @GET("/FoodMenu/GetOrderUser")
     fun getOrders(): Call<List<OrderJsonModel>>
 
     //{"group":[{"id":9,"isApplyBonus":false,"userId":10,"dateOrders":"2024-03-31T09:37:22.997","addressOrder":"dimitrovgrad","statusOrder":"Создан","summOrder":308000,"summDiscount":30800,"summOrderWithDiscount":277200}]}

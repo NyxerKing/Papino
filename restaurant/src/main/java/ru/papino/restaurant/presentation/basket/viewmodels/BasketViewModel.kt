@@ -23,7 +23,13 @@ internal class BasketViewModel(
 
     private var bufferBasket: List<BasketUIModel> = listOf()
 
-    fun createOrder(userId: Long, useBonus: Boolean, address: String, sum: Double) {
+    fun createOrder(
+        userId: Long,
+        useBonus: Boolean,
+        address: String,
+        sum: Double,
+        onComplete: (error: Throwable?) -> Unit
+    ) {
         val order = OrderRequestModel(
             userId = userId,
             useBonus = useBonus,
@@ -31,9 +37,14 @@ internal class BasketViewModel(
             sum = sum,
             products = bufferBasket.map { product -> basketMapper.toDomain(product) }
         )
-
         viewModelScope.launch(Dispatchers.IO) {
-            createOrderUseCase(order)
+            runCatching {
+                createOrderUseCase(order)
+            }.onSuccess {
+                onComplete(null)
+            }.onFailure {
+                onComplete(it)
+            }
         }
     }
 

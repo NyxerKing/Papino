@@ -1,8 +1,7 @@
 package ru.papino.restaurant.data.repository
 
-import android.util.Log
 import com.google.gson.Gson
-import kotlinx.coroutines.delay
+import ru.papino.restaurant.core.net.repeater.RequestRepeat
 import ru.papino.restaurant.data.datasource.local.impl.LocalDataSource
 import ru.papino.restaurant.data.datasource.net.impl.NetDataSource
 import ru.papino.restaurant.data.datasource.net.models.MenuJsonModel
@@ -17,21 +16,15 @@ internal class MenuRepositoryImpl(
     private val mapper: MenuMapper
 ) : MenuRepository {
 
+    private val requestRepeat = RequestRepeat<MenuResponse>()
+
     override suspend fun request(): MenuResponse {
-        var countRequests = 0
-        while (countRequests < COUNT_ATTEMPTS) {
-            countRequests++
-
-            Log.i(TAG, "attempt request = $countRequests")
-            when (val response = execute()) {
-                is MenuResponse.Success -> return response
-                is MenuResponse.Error -> delay(SLEEP_TIME)
-            }
-        }
-
-        // todo Убрать после настройки сервака
         val list = Gson().fromJson(localDS.getData(), MenuJsonModel::class.java)
-        return mapper.toDomainError(list)
+
+        return requestRepeat.execute(
+            onRequest = ::execute,
+            defaultResponse = mapper.toDomainError(list)
+        )
     }
 
     private fun execute(): MenuResponse {
@@ -56,4 +49,3 @@ internal class MenuRepositoryImpl(
         private const val COUNT_ATTEMPTS = 3
     }
 }
-//End of input at line 1 column 1 path $
