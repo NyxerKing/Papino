@@ -3,10 +3,12 @@ package ru.papino.restaurant.presentation.basket.views
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import ru.papino.restaurant.R
 import ru.papino.restaurant.core.recycler.decorations.CoreDividerItemDecoration
@@ -77,18 +79,34 @@ internal class BasketFragment : Fragment() {
 
             buttonCheckout.setOnClickListener {
                 if (UserDI.isUserInitializer()) {
-
                     if (viewModel.checkOrderParameters(
                             userId = UserDI.user.id,
                             address = inputAddress.editText?.text?.toString().orEmpty(),
                             sum = sumToPay
                         )
                     ) {
+                        textViewLoader.visibility = VISIBLE
                         viewModel.createOrder(
                             userId = UserDI.user.id,
                             useBonus = sumBonus > 0,
                             address = inputAddress.editText?.text?.toString().orEmpty(),
-                            sum = sumToPay
+                            sum = sumToPay,
+                            onComplete = { error ->
+                                lifecycleScope.launch(Dispatchers.Main) {
+                                    error?.let { ex ->
+                                        AlertDialog(
+                                            context = binding.root.context,
+                                            title = resources.getString(R.string.dialog_warning_title),
+                                            message = ex.message.orEmpty(),
+                                            onClick = {}
+                                        )
+                                    } ?: run {
+                                        RoomDependencies.basketRepository.clear()
+                                        viewModel.loadBasket()
+                                    }
+                                    textViewLoader.visibility = GONE
+                                }
+                            }
                         )
                     } else {
                         AlertDialog(
@@ -124,11 +142,15 @@ internal class BasketFragment : Fragment() {
     private fun updateUser(user: User?) {
         binding.run {
             user?.let {
-                textViewUserName.text = it.toString()
-                textViewBonus.text = resources.getString(R.string.title_bonus, it.bonus.toString())
+                headerContainer.set(
+                    userName = it.toString(),
+                    bonus = resources.getString(R.string.title_bonus, it.bonus.toString())
+                )
             } ?: run {
-                textViewUserName.text = ""
-                textViewBonus.text = ""
+                headerContainer.set(
+                    userName = "",
+                    bonus = ""
+                )
             }
         }
     }

@@ -35,4 +35,6 @@
 
     <string name="dialog_warning_title">Предупреждение</string>
     <string name="dialog_message_bascket_title">Не все поля заполнены</string>
+
+    <string name="loader_order_create_message">Нужно немного подождать.\nМы оформляем Ваш заказ.</string>
 </resources>

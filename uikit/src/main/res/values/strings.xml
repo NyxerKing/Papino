@@ -30,6 +30,8 @@
 
     <string name="order_number">Заказ № %1$s</string>
     <string name="order_status_created">Создан</string>
+    <string name="order_status_working">В работе</string>
     <string name="order_status_delivered">Доставляется</string>
     <string name="order_status_completed">Завершен</string>
+    <string name="order_status_canceled">Отменено</string>
 </resources>

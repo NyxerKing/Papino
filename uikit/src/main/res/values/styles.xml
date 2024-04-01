@@ -5,6 +5,7 @@
 
     <style name="PaPino.Button" parent="Widget.Material3.Button">
         <item name="backgroundTint">@color/selector_button_color</item>
+        <item name="android:textColor">@color/textPrimaryColor</item>
         <item name="cornerRadius">@dimen/d_10</item>
         <item name="android:paddingTop">@dimen/d_12</item>
         <item name="android:paddingBottom">@dimen/d_16</item>
