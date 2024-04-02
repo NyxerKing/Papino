@@ -64,7 +64,7 @@ internal class OrdersFragment : Fragment() {
     }
 
     private fun initOrders(orders: List<OrderUIModel>) {
-        showNoOrders(false)
+        showNoOrders(orders.isEmpty())
         ordersAdapter.set(orders)
     }
 
