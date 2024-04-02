@@ -2,6 +2,7 @@ package ru.papino.restaurant.domain.repository
 
 import kotlinx.coroutines.flow.SharedFlow
 import ru.papino.restaurant.domain.repository.models.ProductModel
+import ru.papino.restaurant.domain.repository.models.status.BasketActionStatus
 
 internal interface BasketRepository {
 
@@ -19,5 +20,5 @@ internal interface BasketRepository {
 
     suspend fun clear()
 
-    val changeBasket: SharedFlow<Int>
+    val changeBasket: SharedFlow<BasketActionStatus>
 }

@@ -14,7 +14,7 @@ internal class OrdersRepositoryImpl(
     override suspend fun getOrders(userId: Long): OrdersResponse {
         val service = netDS.getRetrofit().create(OrdersService::class.java)
         try {
-            service.getOrders().execute().body()
+            service.getOrders(userId).execute().body()
                 ?.map {
                     mapper.toDomain(it)
                 }?.let {

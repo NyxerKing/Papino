@@ -8,7 +8,7 @@ internal class OrdersMapper {
     fun toDomain(data: OrderJsonModel) = OrderModel(
         id = data.id,
         created = data.created,
-        products = data.products,
+        products = data.products.map { product -> product.name },
         sum = data.sum,
         status = data.status
     )

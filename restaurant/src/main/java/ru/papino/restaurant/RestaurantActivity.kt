@@ -19,6 +19,7 @@ import ru.papino.restaurant.core.user.models.User
 import ru.papino.restaurant.data.repository.UserRepositoryImpl
 import ru.papino.restaurant.databinding.ActivityRestaurantBinding
 import ru.papino.restaurant.domain.repository.models.UserResponse
+import ru.papino.restaurant.domain.repository.models.status.BasketActionStatus
 import ru.papino.restaurant.domain.usecases.GetUserByTokenUseCase
 import ru.papino.restaurant.extensions.switchFragment
 
@@ -105,7 +106,7 @@ class RestaurantActivity : AppCompatActivity() {
         }
     }
 
-    private suspend fun basketChange(id: Int) {
+    private suspend fun basketChange(basketStatus: BasketActionStatus) {
         val count = RoomDependencies.basketRepository.getCountAll()
         badge.number = count
     }
