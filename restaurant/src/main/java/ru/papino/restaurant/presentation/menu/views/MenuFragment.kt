@@ -30,9 +30,7 @@ internal class MenuFragment : Fragment() {
     private val viewModel by lazy {
         MenuViewModel(
             getProductTypesUseCase = GetProductTypesUseCase(
-                repository = ProductTypesRepositoryImpl(
-                    resources
-                )
+                repository = ProductTypesRepositoryImpl.getInstance()
             ),
             getMenuUseCase = GetMenuUseCase(repository = RepositoryManager(resources).getMenuInstance()),
             mapper = MenuMapper(),

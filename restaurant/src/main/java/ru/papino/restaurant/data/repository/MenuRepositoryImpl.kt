@@ -42,10 +42,4 @@ internal class MenuRepositoryImpl(
             error = Exception(response?.code()?.toString() ?: "Неизвестная ошибка")
         )
     }
-
-    companion object {
-        private const val TAG = "MenuRepository"
-        private const val SLEEP_TIME = 500L
-        private const val COUNT_ATTEMPTS = 3
-    }
 }
