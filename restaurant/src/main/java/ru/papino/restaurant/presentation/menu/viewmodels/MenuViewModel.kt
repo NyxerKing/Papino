@@ -8,8 +8,11 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import ru.papino.restaurant.core.room.RoomDependencies
+import ru.papino.restaurant.core.statuses.ActionStatus
 import ru.papino.restaurant.domain.repository.BasketRepository
 import ru.papino.restaurant.domain.repository.models.MenuResponse
+import ru.papino.restaurant.domain.repository.models.status.BasketActionStatus
 import ru.papino.restaurant.domain.usecases.GetMenuUseCase
 import ru.papino.restaurant.domain.usecases.GetProductTypesUseCase
 import ru.papino.restaurant.presentation.menu.mappers.MenuMapper
@@ -40,6 +43,12 @@ internal class MenuViewModel(
             loadProductTypes()
             loadMenu()
         }
+
+        initObservers()
+    }
+
+    private fun initObservers() {
+        basketChangeObserver()
     }
 
     fun filterProducts(selectType: ProductTypeUIModel) {
@@ -117,5 +126,22 @@ internal class MenuViewModel(
         }.onFailure { ex: Throwable? ->
             _error.emit(ex ?: Throwable("no data"))
         }
+    }
+
+    private fun basketChangeObserver() {
+        viewModelScope.launch {
+            RoomDependencies.basketRepository.changeBasket.collect(::changeProductStatus)
+        }
+    }
+
+    private fun changeProductStatus(basketActionStatus: BasketActionStatus) {
+        productTypeSelected?.let { productType ->
+            when (basketActionStatus.status) {
+                ActionStatus.DELETE -> filterProducts(productType)
+                ActionStatus.CLEAR -> filterProducts(productType)
+                else -> {}
+            }
+        }
+
     }
 }
