@@ -175,7 +175,7 @@ internal class BasketFragment : Fragment() {
             viewModel::plusProduct
         )
 
-        binding.buttonCheckout.isEnabled = basket.isNotEmpty()
+        binding.buttonCheckout.isEnabled = basket.isNotEmpty() && UserDI.isUserInitializer()
 
         binding.titleOrderFood.text =
             resources.getString(
