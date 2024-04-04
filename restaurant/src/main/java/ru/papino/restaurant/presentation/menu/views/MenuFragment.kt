@@ -71,6 +71,10 @@ internal class MenuFragment : Fragment() {
 
     private fun initObserver() {
         lifecycleScope.launch {
+            viewModel.loader.collect(::showLoader)
+        }
+
+        lifecycleScope.launch {
             UserDI.onInitUser.collect(::updateUser)
         }
 
@@ -148,5 +152,17 @@ internal class MenuFragment : Fragment() {
 
     private fun onClickProduct(product: ProductUIModel) {
         viewModel.addBasket(product = product)
+    }
+
+    private fun showLoader(isShow: Boolean) {
+        binding?.run {
+            if (isShow) {
+                frameProgressIndicator.visibility = View.VISIBLE
+                containerMenu.visibility = View.GONE
+            } else {
+                frameProgressIndicator.visibility = View.GONE
+                containerMenu.visibility = View.VISIBLE
+            }
+        }
     }
 }

@@ -12,11 +12,20 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/d_120" />
 
+    <ru.papino.uikit.components.loaders.BaseLoaderComponent
+        android:id="@+id/frameProgressIndicator"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/backgroundLoaderColor"
+        android:visibility="gone" />
+
     <LinearLayout
+        android:id="@+id/containerMenu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/backgroundMenuColor"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="visible">
 
         <HorizontalScrollView
             android:layout_width="match_parent"
@@ -43,10 +52,10 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/menuRecycler"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="5dp"
-            android:paddingHorizontal="@dimen/d_10" />
+            android:paddingHorizontal="@dimen/d_10"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
     </LinearLayout>
 </LinearLayout>

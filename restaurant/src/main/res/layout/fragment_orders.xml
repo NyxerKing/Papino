@@ -36,4 +36,11 @@
         android:paddingTop="@dimen/d_14"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
+    <ru.papino.uikit.components.loaders.BaseLoaderComponent
+        android:id="@+id/frameProgressIndicator"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/backgroundLoaderColor"
+        android:visibility="gone" />
+
 </LinearLayout>

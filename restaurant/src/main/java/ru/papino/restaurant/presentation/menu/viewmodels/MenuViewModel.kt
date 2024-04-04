@@ -35,11 +35,15 @@ internal class MenuViewModel(
     private val _error = MutableSharedFlow<Throwable>()
     val error = _error.asSharedFlow()
 
+    private val _loader = MutableStateFlow(false)
+    val loader = _loader.asStateFlow()
+
     private var products: List<ProductUIModel>? = null
     private var productTypeSelected: ProductTypeUIModel? = null
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
+            _loader.emit(true)
             loadProductTypes()
             loadMenu()
         }
@@ -123,8 +127,10 @@ internal class MenuViewModel(
                     }
                 }
             }
+            _loader.emit(false)
         }.onFailure { ex: Throwable? ->
             _error.emit(ex ?: Throwable("no data"))
+            _loader.emit(false)
         }
     }
 
