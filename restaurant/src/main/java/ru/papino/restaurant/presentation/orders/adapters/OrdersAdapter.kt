@@ -2,6 +2,7 @@ package ru.papino.restaurant.presentation.orders.adapters
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import ru.papino.restaurant.extensions.toPrice
 import ru.papino.restaurant.presentation.orders.mappers.OrdersMapper
 import ru.papino.restaurant.presentation.orders.models.OrderUIModel
 import ru.papino.uikit.components.cards.CardOrderComponent
@@ -37,7 +38,7 @@ internal class OrdersAdapter(private val mapper: OrdersMapper) :
                 products = order.products,
                 sum = orderView.resources.getString(
                     ru.papino.uikit.R.string.insert_sum,
-                    String.format("%.2f", order.sum)
+                    order.sum.toPrice()
                 ),
                 status = mapper.toStatusKit(order.status)
             )
