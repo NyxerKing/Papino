@@ -54,6 +54,8 @@ internal class OrdersFragment : Fragment() {
             swipeRefreshLayout.setOnRefreshListener {
                 viewModel.loadOrders()
             }
+
+            swipeRefreshLayout.setColorSchemeResources(ru.papino.uikit.R.color.backgroundButtonColor)
         }
     }
 
@@ -93,10 +95,9 @@ internal class OrdersFragment : Fragment() {
     private fun showLoader(isShow: Boolean) {
         binding.run {
             if (isShow) {
-                frameProgressIndicator.visibility = View.VISIBLE
+                swipeRefreshLayout.isRefreshing = true
                 ordersRecycler.visibility = View.GONE
             } else {
-                frameProgressIndicator.visibility = View.GONE
                 ordersRecycler.visibility = View.VISIBLE
                 swipeRefreshLayout.isRefreshing = false
             }
