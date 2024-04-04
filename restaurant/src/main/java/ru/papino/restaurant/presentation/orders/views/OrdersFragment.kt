@@ -50,6 +50,10 @@ internal class OrdersFragment : Fragment() {
         with(binding) {
             ordersRecycler.adapter = ordersAdapter
             ordersRecycler.addItemDecoration(CoreDividerItemDecoration(this.root.context))
+
+            swipeRefreshLayout.setOnRefreshListener {
+                viewModel.loadOrders()
+            }
         }
     }
 
@@ -94,6 +98,7 @@ internal class OrdersFragment : Fragment() {
             } else {
                 frameProgressIndicator.visibility = View.GONE
                 ordersRecycler.visibility = View.VISIBLE
+                swipeRefreshLayout.isRefreshing = false
             }
         }
     }
