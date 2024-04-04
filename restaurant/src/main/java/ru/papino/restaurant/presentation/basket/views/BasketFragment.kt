@@ -86,7 +86,7 @@ internal class BasketFragment : Fragment() {
                             sum = sumToPay
                         )
                     ) {
-                        textViewLoader.visibility = VISIBLE
+                        frameProgressIndicator.visibility = VISIBLE
                         viewModel.createOrder(
                             userId = UserDI.user.id,
                             useBonus = sumBonus > 0,
@@ -105,7 +105,7 @@ internal class BasketFragment : Fragment() {
                                         RoomDependencies.basketRepository.clear()
                                         viewModel.loadBasket()
                                     }
-                                    textViewLoader.visibility = GONE
+                                    frameProgressIndicator.visibility = GONE
                                 }
                             }
                         )

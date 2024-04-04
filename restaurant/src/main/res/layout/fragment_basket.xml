@@ -7,10 +7,10 @@
 
     <ru.papino.uikit.components.headers.HeaderContainerComponent
         android:id="@+id/headerContainer"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/d_120"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_width="match_parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.core.widget.NestedScrollView
@@ -177,14 +177,10 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <TextView
-        android:id="@+id/textViewLoader"
+    <ru.papino.uikit.components.loaders.BaseLoaderComponent
+        android:id="@+id/frameProgressIndicator"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/backgroundLoaderColor"
-        android:gravity="center"
-        android:text="@string/loader_order_create_message"
-        android:textAppearance="@style/PaPino.TextAppearances.Loader"
-        android:textColor="@color/textSecondaryColor"
         android:visibility="gone" />
 </androidx.constraintlayout.widget.ConstraintLayout>

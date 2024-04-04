@@ -4,7 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import ru.papino.restaurant.core.user.di.UserDI
 import ru.papino.restaurant.domain.repository.models.OrdersResponse
@@ -23,8 +25,12 @@ internal class OrdersViewModel(
     private val _error = MutableSharedFlow<Throwable>()
     val error = _error.asSharedFlow()
 
+    private val _loader = MutableStateFlow(false)
+    val loader = _loader.asStateFlow()
+
     fun loadOrders() {
         viewModelScope.launch(Dispatchers.IO) {
+            _loader.emit(true)
             runCatching {
                 if (UserDI.isUserInitializer()) {
                     getOrdersUseCase(UserDI.user.id)
@@ -43,8 +49,10 @@ internal class OrdersViewModel(
                         _error.emit(Throwable(response.error))
                     }
                 }
+                _loader.emit(false)
             }.onFailure {
                 _error.emit(it)
+                _loader.emit(false)
             }
         }
     }

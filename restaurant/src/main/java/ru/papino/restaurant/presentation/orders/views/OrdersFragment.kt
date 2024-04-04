@@ -61,6 +61,10 @@ internal class OrdersFragment : Fragment() {
         lifecycleScope.launch {
             viewModel.error.collect(::showError)
         }
+
+        lifecycleScope.launch {
+            viewModel.loader.collect(::showLoader)
+        }
     }
 
     private fun initOrders(orders: List<OrderUIModel>) {
@@ -78,6 +82,18 @@ internal class OrdersFragment : Fragment() {
                 imageViewErrorNoOrders.visibility = View.VISIBLE
             } else {
                 imageViewErrorNoOrders.visibility = View.GONE
+            }
+        }
+    }
+
+    private fun showLoader(isShow: Boolean) {
+        binding.run {
+            if (isShow) {
+                frameProgressIndicator.visibility = View.VISIBLE
+                ordersRecycler.visibility = View.GONE
+            } else {
+                frameProgressIndicator.visibility = View.GONE
+                ordersRecycler.visibility = View.VISIBLE
             }
         }
     }
