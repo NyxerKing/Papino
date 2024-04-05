@@ -5,14 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import androidx.lifecycle.LifecycleOwner
 import ru.papino.restaurant.ScreenManager
+import ru.papino.restaurant.core.CoroutineProperty
 import ru.papino.restaurant.core.user.models.User
 import ru.papino.restaurant.data.mappers.UserMapper
 import ru.papino.restaurant.data.repository.UserRepositoryImpl
 import ru.papino.restaurant.databinding.FragmentSettingsBinding
+import ru.papino.restaurant.domain.repository.models.UserResponse
 import ru.papino.restaurant.domain.usecases.UpdateUserUseCase
 import ru.papino.restaurant.extensions.switchFragment
 import ru.papino.restaurant.presentation.settings.viewmodels.SettingsViewModel
@@ -20,7 +20,7 @@ import ru.papino.uikit.extensions.getText
 import ru.papino.uikit.extensions.setText
 import ru.papino.uikit.extensions.showAlert
 
-class SettingsFragment : Fragment() {
+class SettingsFragment : Fragment(), CoroutineProperty {
 
     private val viewModel by lazy {
         SettingsViewModel(
@@ -31,6 +31,9 @@ class SettingsFragment : Fragment() {
 
     private lateinit var binding: FragmentSettingsBinding
     private val screenManager = ScreenManager.getManager()
+
+    override val parentLifecycle: LifecycleOwner
+        get() = viewLifecycleOwner
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,9 +52,9 @@ class SettingsFragment : Fragment() {
     }
 
     private fun initObserver() {
-        lifecycleScope.launch {
-            viewModel.user.collect(::updateUI)
-        }
+        viewModel.user.bind(::updateUI)
+        viewModel.onSuccess.bind { switchFragment(screenManager.profileFragment) }
+        viewModel.onFailure.bind(::showError)
     }
 
     private fun updateUI(user: User) {
@@ -69,21 +72,17 @@ class SettingsFragment : Fragment() {
                 viewModel.updateUser(
                     secondName = secondName,
                     firstName = firstName,
-                    address = address,
-                    onSuccess = {
-                        switchFragment(screenManager.profileFragment)
-                    },
-                    onFailure = {
-                        lifecycleScope.launch(Dispatchers.Main) {
-                            context?.showAlert(
-                                title = "Ошибка",
-                                message = "Произошла ошибка",
-                                onClick = {})
-                        }
-                    }
+                    address = address
                 )
             }
         }
+    }
+
+    private fun showError(error: UserResponse.Error) {
+        context?.showAlert(
+            title = "Ошибка",
+            message = error.message,
+            onClick = {})
     }
 
     companion object {

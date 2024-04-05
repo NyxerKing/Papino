@@ -20,6 +20,12 @@ internal class SettingsViewModel(
     private val _user = MutableSharedFlow<User>()
     val user = _user.asSharedFlow()
 
+    private val _onSuccess = MutableSharedFlow<UserResponse.Success>()
+    val onSuccess = _onSuccess.asSharedFlow()
+
+    private val _onFailure = MutableSharedFlow<UserResponse.Error>()
+    val onFailure = _onFailure.asSharedFlow()
+
     fun loadUser() {
         viewModelScope.launch {
             if (UserDI.isUserInitializer()) _user.emit(UserDI.user)
@@ -29,9 +35,7 @@ internal class SettingsViewModel(
     fun updateUser(
         secondName: String?,
         firstName: String?,
-        address: String?,
-        onSuccess: () -> Unit,
-        onFailure: (String) -> Unit
+        address: String?
     ) {
         viewModelScope.launch(Dispatchers.IO) {
             runCatching {
@@ -41,15 +45,15 @@ internal class SettingsViewModel(
                     is UserResponse.Success -> {
                         UserDI.init(userMapper.toUser(response))
                         UserDI.initToken(response.token)
-                        onSuccess()
+                        _onSuccess.emit(response)
                     }
 
                     is UserResponse.Error -> {
-                        onFailure(response.message)
+                        _onFailure.emit(response)
                     }
                 }
             }.onFailure {
-                onFailure(it.toString())
+                _onFailure.emit(UserResponse.Error(message = it.toString()))
             }
         }
     }

@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
-import kotlinx.coroutines.launch
+import androidx.lifecycle.LifecycleOwner
+import ru.papino.restaurant.core.CoroutineProperty
 import ru.papino.restaurant.core.recycler.decorations.CoreDividerItemDecoration
 import ru.papino.restaurant.data.di.RepositoryManager
 import ru.papino.restaurant.databinding.FragmentOrdersBinding
@@ -16,7 +16,7 @@ import ru.papino.restaurant.presentation.orders.mappers.OrdersMapper
 import ru.papino.restaurant.presentation.orders.models.OrderUIModel
 import ru.papino.restaurant.presentation.orders.viewmodels.OrdersViewModel
 
-internal class OrdersFragment : Fragment() {
+internal class OrdersFragment : Fragment(), CoroutineProperty {
 
     private val viewModel by lazy {
         OrdersViewModel(
@@ -28,6 +28,9 @@ internal class OrdersFragment : Fragment() {
     private val ordersAdapter = OrdersAdapter(mapper = OrdersMapper())
 
     private lateinit var binding: FragmentOrdersBinding
+
+    override val parentLifecycle: LifecycleOwner
+        get() = viewLifecycleOwner
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -60,17 +63,9 @@ internal class OrdersFragment : Fragment() {
     }
 
     private fun initObserver() {
-        lifecycleScope.launch {
-            viewModel.orders.collect(::initOrders)
-        }
-
-        lifecycleScope.launch {
-            viewModel.error.collect(::showError)
-        }
-
-        lifecycleScope.launch {
-            viewModel.loader.collect(::showLoader)
-        }
+        viewModel.orders.bind(::initOrders)
+        viewModel.error.bind(::showError)
+        viewModel.loader.bind(::showLoader)
     }
 
     private fun initOrders(orders: List<OrderUIModel>) {

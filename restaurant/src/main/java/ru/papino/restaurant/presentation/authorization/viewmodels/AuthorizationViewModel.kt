@@ -3,6 +3,8 @@ package ru.papino.restaurant.presentation.authorization.viewmodels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import ru.papino.restaurant.core.user.di.UserDI
 import ru.papino.restaurant.data.mappers.UserMapper
@@ -14,11 +16,15 @@ internal class AuthorizationViewModel(
     private val userMapper: UserMapper
 ) : ViewModel() {
 
+    private val _onSuccess = MutableSharedFlow<UserResponse.Success>()
+    val onSuccess = _onSuccess.asSharedFlow()
+
+    private val _onFailure = MutableSharedFlow<UserResponse.Error>()
+    val onFailure = _onFailure.asSharedFlow()
+
     fun loginUser(
         login: String,
-        password: String,
-        onSuccess: () -> Unit,
-        onFailure: (String) -> Unit
+        password: String
     ) {
         viewModelScope.launch(Dispatchers.IO) {
             runCatching {
@@ -28,15 +34,15 @@ internal class AuthorizationViewModel(
                     is UserResponse.Success -> {
                         UserDI.init(userMapper.toUser(response))
                         UserDI.initToken(response.token)
-                        onSuccess()
+                        _onSuccess.emit(response)
                     }
 
                     is UserResponse.Error -> {
-                        onFailure(response.message)
+                        _onFailure.emit(response)
                     }
                 }
             }.onFailure {
-                onFailure(it.toString())
+                _onFailure.emit(UserResponse.Error(message = it.toString()))
             }
         }
     }

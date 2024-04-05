@@ -5,9 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
-import kotlinx.coroutines.launch
+import androidx.lifecycle.LifecycleOwner
 import ru.papino.restaurant.R
+import ru.papino.restaurant.core.CoroutineProperty
 import ru.papino.restaurant.core.imageLoader.ImageLoaderImpl
 import ru.papino.restaurant.core.recycler.decorations.CoreDividerItemDecoration
 import ru.papino.restaurant.core.room.RoomDependencies
@@ -25,7 +25,7 @@ import ru.papino.restaurant.presentation.menu.models.ProductUIModel
 import ru.papino.restaurant.presentation.menu.viewmodels.MenuViewModel
 import ru.papino.uikit.dialogs.AlertDialog
 
-internal class MenuFragment : Fragment() {
+internal class MenuFragment : Fragment(), CoroutineProperty {
 
     private val viewModel by lazy {
         MenuViewModel(
@@ -40,6 +40,9 @@ internal class MenuFragment : Fragment() {
 
     private var binding: FragmentMenuBinding? = null
     private val menuAdapter = MenuAdapter(::onClickProduct, imageLoader = ImageLoaderImpl())
+
+    override val parentLifecycle: LifecycleOwner
+        get() = viewLifecycleOwner
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -70,25 +73,11 @@ internal class MenuFragment : Fragment() {
     }
 
     private fun initObserver() {
-        lifecycleScope.launch {
-            viewModel.loader.collect(::showLoader)
-        }
-
-        lifecycleScope.launch {
-            UserDI.onInitUser.collect(::updateUser)
-        }
-
-        lifecycleScope.launch {
-            viewModel.productTypes.collect(::initMenu)
-        }
-
-        lifecycleScope.launch {
-            viewModel.menu.collect(::updateUI)
-        }
-
-        lifecycleScope.launch {
-            viewModel.error.collect(::showError)
-        }
+        UserDI.onInitUser.bind(::updateUser)
+        viewModel.loader.bind(::showLoader)
+        viewModel.productTypes.bind(::initMenu)
+        viewModel.menu.bind(::updateUI)
+        viewModel.error.bind(::showError)
     }
 
     private fun updateUser(user: User?) {
