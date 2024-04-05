@@ -28,4 +28,11 @@ internal interface UserService {
     fun getUserByToken(
         @Query("token") token: String
     ): Call<UserJsonModel>
+
+    @POST("/update")
+    fun updateUser(
+        @Query("name") secondName: String?,
+        @Query("surname") firstName: String?,
+        @Query("address") address: String?
+    ): Call<UserJsonModel>
 }

@@ -5,13 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import ru.papino.restaurant.ScreenManager
 import ru.papino.restaurant.data.mappers.UserMapper
 import ru.papino.restaurant.data.repository.UserRepositoryImpl
 import ru.papino.restaurant.databinding.FragmentRegistrationBinding
 import ru.papino.restaurant.domain.repository.models.UserModel
 import ru.papino.restaurant.domain.usecases.CreateUserUseCase
 import ru.papino.restaurant.extensions.switchFragment
-import ru.papino.restaurant.presentation.profile.views.ProfileFragment
 import ru.papino.restaurant.presentation.registration.viewmodels.RegistrationViewModel
 import ru.papino.uikit.extensions.showAlert
 
@@ -25,6 +28,7 @@ internal class RegistrationFragment : Fragment() {
     }
 
     private lateinit var binding: FragmentRegistrationBinding
+    private val screenManager = ScreenManager.getManager()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,10 +55,15 @@ internal class RegistrationFragment : Fragment() {
                     password = editPassword.text.toString()
                 ),
                 onSuccess = {
-                    switchFragment(ProfileFragment())
+                    switchFragment(screenManager.profileFragment)
                 },
                 onFailure = {
-                    context?.showAlert(title = "Ошибка", message = "Произошла ошибка", onClick = {})
+                    lifecycleScope.launch(Dispatchers.Main) {
+                        context?.showAlert(
+                            title = "Ошибка",
+                            message = "Произошла ошибка",
+                            onClick = {})
+                    }
                 }
             )
         }

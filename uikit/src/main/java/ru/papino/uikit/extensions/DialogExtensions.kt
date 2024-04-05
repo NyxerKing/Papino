@@ -13,5 +13,5 @@ fun Context.showAlert(
         title = title,
         message = message,
         onClick = onClick
-    )
+    ).show()
 }

@@ -58,6 +58,23 @@ internal class UserRepositoryImpl(
         return UserResponse.Error("error create user")
     }
 
+    override suspend fun update(
+        secondName: String?,
+        firstName: String?,
+        address: String?
+    ): UserResponse {
+        val service = netDS.getRetrofit().create(UserService::class.java)
+        try {
+            val result = service.updateUser(secondName, firstName, address).execute()
+            result.body()?.let {
+                return mapper.toResponse(it)
+            }
+        } catch (ex: Exception) {
+            return UserResponse.Error("error update user")
+        }
+        return UserResponse.Error("error update user")
+    }
+
     companion object {
         fun getInstance() = UserRepositoryImpl(NetDataSource.getInstance(), UserMapper())
     }
