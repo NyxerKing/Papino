@@ -9,4 +9,6 @@ internal interface UserRepository {
     suspend fun getUserByToken(token: String): UserResponse
 
     suspend fun getUserByPassword(login: String, password: String): UserResponse
+
+    suspend fun update(secondName: String?, firstName: String?, address: String?): UserResponse
 }

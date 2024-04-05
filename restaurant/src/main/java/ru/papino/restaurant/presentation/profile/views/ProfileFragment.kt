@@ -7,12 +7,16 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
+import ru.papino.restaurant.ScreenManager
 import ru.papino.restaurant.core.user.models.User
 import ru.papino.restaurant.databinding.FragmentProfileBinding
+import ru.papino.restaurant.extensions.switchFragment
 import ru.papino.restaurant.presentation.profile.viewmodels.ProfileViewModel
 import ru.papino.uikit.extensions.setText
 
 internal class ProfileFragment : Fragment() {
+
+    private val screenManager = ScreenManager.getManager()
 
     private val viewModel by lazy { ProfileViewModel() }
 
@@ -46,6 +50,9 @@ internal class ProfileFragment : Fragment() {
             inputSecondName.setText(user.secondName)
             inputPhone.setText(user.phone)
             inputAddress.setText(user.address)
+
+            imageSettings.visibility = View.VISIBLE
+            imageSettings.setOnClickListener { switchFragment(screenManager.settingsFragment) }
         }
     }
 }
