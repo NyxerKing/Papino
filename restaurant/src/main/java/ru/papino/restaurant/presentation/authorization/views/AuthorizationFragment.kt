@@ -70,4 +70,9 @@ internal class AuthorizationFragment : Fragment() {
             switchFragment(screenManager.registrationManager)
         }
     }
+
+    companion object {
+
+        fun getInstance() = AuthorizationFragment()
+    }
 }

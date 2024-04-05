@@ -85,4 +85,9 @@ class SettingsFragment : Fragment() {
             }
         }
     }
+
+    companion object {
+
+        fun getInstance() = SettingsFragment()
+    }
 }

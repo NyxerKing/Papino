@@ -55,4 +55,9 @@ internal class ProfileFragment : Fragment() {
             imageSettings.setOnClickListener { switchFragment(screenManager.settingsFragment) }
         }
     }
+
+    companion object {
+
+        fun getInstance() = ProfileFragment()
+    }
 }

@@ -207,4 +207,9 @@ internal class BasketFragment : Fragment() {
         binding.titleOrderFood.text =
             resources.getString(ru.papino.uikit.R.string.insert_products, count.toString())
     }
+
+    companion object {
+
+        fun getInstance() = BasketFragment()
+    }
 }
