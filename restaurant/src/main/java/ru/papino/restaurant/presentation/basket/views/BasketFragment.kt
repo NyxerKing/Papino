@@ -7,10 +7,12 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import ru.papino.restaurant.R
+import ru.papino.restaurant.core.CoroutineProperty
 import ru.papino.restaurant.core.recycler.decorations.CoreDividerItemDecoration
 import ru.papino.restaurant.core.room.RoomDependencies
 import ru.papino.restaurant.core.user.di.UserDI
@@ -27,7 +29,7 @@ import ru.papino.restaurant.presentation.basket.viewmodels.BasketViewModel
 import ru.papino.uikit.dialogs.AlertDialog
 import ru.papino.uikit.extensions.setText
 
-internal class BasketFragment : Fragment() {
+internal class BasketFragment : Fragment(), CoroutineProperty {
 
     private val viewModel by lazy {
         BasketViewModel(
@@ -43,6 +45,9 @@ internal class BasketFragment : Fragment() {
     private var sumProducts = 0.0
     private var sumBonus = 0L
     private var sumToPay = 0.0
+
+    override val parentLifecycle: LifecycleOwner
+        get() = viewLifecycleOwner
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -127,17 +132,9 @@ internal class BasketFragment : Fragment() {
     }
 
     private fun initObserver() {
-        lifecycleScope.launch {
-            UserDI.onInitUser.collect(::updateUser)
-        }
-
-        lifecycleScope.launch {
-            RoomDependencies.basketRepository.changeBasket.collect(::basketChange)
-        }
-
-        lifecycleScope.launch {
-            viewModel.basket.collect(::updateUI)
-        }
+        UserDI.onInitUser.bind(::updateUser)
+        RoomDependencies.basketRepository.changeBasket.bind(::basketChange)
+        viewModel.basket.bind(::updateUI)
     }
 
     private fun updateUser(user: User?) {

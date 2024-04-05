@@ -5,19 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import androidx.lifecycle.LifecycleOwner
 import ru.papino.restaurant.ScreenManager
+import ru.papino.restaurant.core.CoroutineProperty
 import ru.papino.restaurant.data.mappers.UserMapper
 import ru.papino.restaurant.data.repository.UserRepositoryImpl
 import ru.papino.restaurant.databinding.FragmentAuthorizationBinding
+import ru.papino.restaurant.domain.repository.models.UserResponse
 import ru.papino.restaurant.domain.usecases.GetUserByPasswordUseCase
 import ru.papino.restaurant.extensions.switchFragment
 import ru.papino.restaurant.presentation.authorization.viewmodels.AuthorizationViewModel
 import ru.papino.uikit.extensions.showAlert
 
-internal class AuthorizationFragment : Fragment() {
+internal class AuthorizationFragment : Fragment(), CoroutineProperty {
 
     private val viewModel by lazy {
         AuthorizationViewModel(
@@ -28,6 +28,9 @@ internal class AuthorizationFragment : Fragment() {
 
     private lateinit var binding: FragmentAuthorizationBinding
     private val screenManager = ScreenManager.getManager()
+
+    override val parentLifecycle: LifecycleOwner
+        get() = viewLifecycleOwner
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,35 +43,37 @@ internal class AuthorizationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        registration()
+        initClicks()
+        initObserver()
+    }
 
-        binding.buttonLogin.setOnClickListener { onClickAuthorization() }
+    private fun initObserver() {
+        viewModel.onSuccess.bind { switchFragment(screenManager.profileFragment) }
+        viewModel.onFailure.bind(::showError)
     }
 
     private fun onClickAuthorization() {
         with(binding) {
             viewModel.loginUser(
                 login = editTextPhone.text.toString(),
-                password = editTextPassword.text.toString(),
-                onSuccess = {
-                    switchFragment(screenManager.profileFragment)
-                },
-                onFailure = {
-                    lifecycleScope.launch(Dispatchers.Main) {
-                        context?.showAlert(
-                            title = "Ошибка",
-                            message = "Произошла ошибка",
-                            onClick = {})
-                    }
-                }
+                password = editTextPassword.text.toString()
             )
         }
     }
 
-    private fun registration() {
+    private fun showError(response: UserResponse.Error) {
+        context?.showAlert(
+            title = "Ошибка",
+            message = response.message,
+            onClick = {})
+    }
+
+    private fun initClicks() {
         binding.buttonRegistration.setOnClickListener {
             switchFragment(screenManager.registrationManager)
         }
+
+        binding.buttonLogin.setOnClickListener { onClickAuthorization() }
     }
 
     companion object {

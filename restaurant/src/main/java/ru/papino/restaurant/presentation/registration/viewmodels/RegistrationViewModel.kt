@@ -3,6 +3,8 @@ package ru.papino.restaurant.presentation.registration.viewmodels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import ru.papino.restaurant.core.user.di.UserDI
 import ru.papino.restaurant.data.mappers.UserMapper
@@ -15,7 +17,13 @@ internal class RegistrationViewModel(
     private val userMapper: UserMapper
 ) : ViewModel() {
 
-    fun createUser(user: UserModel, onSuccess: () -> Unit, onFailure: (String) -> Unit) {
+    private val _onSuccess = MutableSharedFlow<UserResponse.Success>()
+    val onSuccess = _onSuccess.asSharedFlow()
+
+    private val _onFailure = MutableSharedFlow<UserResponse.Error>()
+    val onFailure = _onFailure.asSharedFlow()
+
+    fun createUser(user: UserModel) {
         viewModelScope.launch(Dispatchers.IO) {
             runCatching {
                 createUserUseCase(user = user)
@@ -24,15 +32,15 @@ internal class RegistrationViewModel(
                     is UserResponse.Success -> {
                         UserDI.init(userMapper.toUser(response))
                         UserDI.initToken(response.token)
-                        onSuccess()
+                        _onSuccess.emit(response)
                     }
 
                     is UserResponse.Error -> {
-                        onFailure(response.message)
+                        _onFailure.emit(response)
                     }
                 }
             }.onFailure {
-                onFailure(it.toString())
+                _onFailure.emit(UserResponse.Error(message = it.toString()))
             }
         }
     }

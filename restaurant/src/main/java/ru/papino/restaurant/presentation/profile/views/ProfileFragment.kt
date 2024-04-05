@@ -5,22 +5,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
-import kotlinx.coroutines.launch
+import androidx.lifecycle.LifecycleOwner
 import ru.papino.restaurant.ScreenManager
+import ru.papino.restaurant.core.CoroutineProperty
 import ru.papino.restaurant.core.user.models.User
 import ru.papino.restaurant.databinding.FragmentProfileBinding
 import ru.papino.restaurant.extensions.switchFragment
 import ru.papino.restaurant.presentation.profile.viewmodels.ProfileViewModel
 import ru.papino.uikit.extensions.setText
 
-internal class ProfileFragment : Fragment() {
+internal class ProfileFragment : Fragment(), CoroutineProperty {
 
     private val screenManager = ScreenManager.getManager()
 
     private val viewModel by lazy { ProfileViewModel() }
 
     private lateinit var binding: FragmentProfileBinding
+
+    override val parentLifecycle: LifecycleOwner
+        get() = viewLifecycleOwner
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,9 +42,7 @@ internal class ProfileFragment : Fragment() {
     }
 
     private fun initObserver() {
-        lifecycleScope.launch {
-            viewModel.user.collect(::updateUI)
-        }
+        viewModel.user.bind(::updateUI)
     }
 
     private fun updateUI(user: User) {
