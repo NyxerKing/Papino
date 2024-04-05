@@ -103,4 +103,9 @@ internal class OrdersFragment : Fragment() {
             }
         }
     }
+
+    companion object {
+
+        fun getInstance() = OrdersFragment()
+    }
 }

@@ -165,4 +165,9 @@ internal class MenuFragment : Fragment() {
             }
         }
     }
+
+    companion object {
+
+        fun getInstance() = MenuFragment()
+    }
 }

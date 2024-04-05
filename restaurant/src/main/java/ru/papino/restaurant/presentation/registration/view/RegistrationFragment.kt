@@ -68,4 +68,9 @@ internal class RegistrationFragment : Fragment() {
             )
         }
     }
+
+    companion object {
+
+        fun getInstance() = RegistrationFragment()
+    }
 }

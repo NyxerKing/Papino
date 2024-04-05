@@ -10,13 +10,13 @@ import ru.papino.restaurant.presentation.settings.view.SettingsFragment
 
 internal class ScreenManager private constructor() {
 
-    val menuFragment by lazy { MenuFragment() }
-    val basketFragment by lazy { BasketFragment() }
-    val authorizationFragment by lazy { AuthorizationFragment() }
-    val registrationManager by lazy { RegistrationFragment() }
-    val profileFragment by lazy { ProfileFragment() }
-    val ordersFragment by lazy { OrdersFragment() }
-    val settingsFragment by lazy { SettingsFragment() }
+    val menuFragment by lazy { MenuFragment.getInstance() }
+    val basketFragment by lazy { BasketFragment.getInstance() }
+    val authorizationFragment by lazy { AuthorizationFragment.getInstance() }
+    val registrationManager by lazy { RegistrationFragment.getInstance() }
+    val profileFragment by lazy { ProfileFragment.getInstance() }
+    val ordersFragment by lazy { OrdersFragment.getInstance() }
+    val settingsFragment by lazy { SettingsFragment.getInstance() }
 
 
     companion object {
