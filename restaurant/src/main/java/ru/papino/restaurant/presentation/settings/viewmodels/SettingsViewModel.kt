@@ -33,13 +33,13 @@ internal class SettingsViewModel(
     }
 
     fun updateUser(
-        secondName: String?,
         firstName: String?,
+        secondName: String?,
         address: String?
     ) {
         viewModelScope.launch(Dispatchers.IO) {
             runCatching {
-                updateUserUseCase(secondName, firstName, address)
+                updateUserUseCase(UserDI.user.id, firstName, secondName, address)
             }.onSuccess { response ->
                 when (response) {
                     is UserResponse.Success -> {

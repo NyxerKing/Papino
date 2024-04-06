@@ -70,8 +70,8 @@ class SettingsFragment : Fragment(), CoroutineProperty {
                 val address = inputAddress.getText()
 
                 viewModel.updateUser(
-                    secondName = secondName,
                     firstName = firstName,
+                    secondName = secondName,
                     address = address
                 )
             }

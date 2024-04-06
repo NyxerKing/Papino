@@ -7,8 +7,9 @@ internal class UpdateUserUseCase(
     private val userRepository: UserRepository
 ) {
     suspend operator fun invoke(
-        secondName: String?,
+        id: Long,
         firstName: String?,
+        secondName: String?,
         address: String?
-    ): UserResponse = userRepository.update(secondName, firstName, address)
+    ): UserResponse = userRepository.update(id, firstName, secondName, address)
 }

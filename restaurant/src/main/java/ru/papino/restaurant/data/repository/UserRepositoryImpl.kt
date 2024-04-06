@@ -59,13 +59,14 @@ internal class UserRepositoryImpl(
     }
 
     override suspend fun update(
-        secondName: String?,
+        id: Long,
         firstName: String?,
+        secondName: String?,
         address: String?
     ): UserResponse {
         val service = netDS.getRetrofit().create(UserService::class.java)
         try {
-            val result = service.updateUser(secondName, firstName, address).execute()
+            val result = service.updateUser(id, secondName, firstName, address).execute()
             result.body()?.let {
                 return mapper.toResponse(it)
             }

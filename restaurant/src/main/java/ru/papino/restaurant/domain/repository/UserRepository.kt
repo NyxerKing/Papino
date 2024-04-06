@@ -10,5 +10,10 @@ internal interface UserRepository {
 
     suspend fun getUserByPassword(login: String, password: String): UserResponse
 
-    suspend fun update(secondName: String?, firstName: String?, address: String?): UserResponse
+    suspend fun update(
+        id: Long,
+        firstName: String?,
+        secondName: String?,
+        address: String?
+    ): UserResponse
 }
