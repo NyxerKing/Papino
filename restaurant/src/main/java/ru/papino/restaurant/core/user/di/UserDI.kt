@@ -14,8 +14,7 @@ internal object UserDI {
     private var _isUserInitializer = false
     private val _initUser = MutableStateFlow<User?>(null)
 
-    val user by lazy { _user }
-    val token by lazy { _token }
+    val user get() = _user
     val onInitUser = _initUser.asStateFlow()
 
     suspend fun init(data: User) {
