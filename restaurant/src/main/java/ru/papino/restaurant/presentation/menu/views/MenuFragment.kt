@@ -104,6 +104,7 @@ internal class MenuFragment : Fragment(), CoroutineProperty {
                 chip.setModel(model)
                 chip.text = model.title
                 chip.isChecked = model == viewModel.getSelectedProductType()
+                if (chip.isChecked) titleMenu.text = chip.text
                 chipGroupMenu.addView(chip)
             }
 
@@ -119,8 +120,6 @@ internal class MenuFragment : Fragment(), CoroutineProperty {
                     item.getModel()?.let { viewModel.filterProducts(it) }
                 }
             }
-
-            titleMenu.text = productTypes?.first()?.title
         }
     }
 
