@@ -13,6 +13,7 @@ import com.yandex.mapkit.MapKitFactory
 import com.yandex.mapkit.map.CameraListener
 import ru.papino.maps.core.MapPermissions
 import ru.papino.maps.core.contracts.AddressActivityContract
+import ru.papino.maps.core.preferences.MapSharedPreferences
 import ru.papino.maps.databinding.ActivityMapBinding
 import ru.papino.maps.listeners.MapCameraListener
 import ru.papino.maps.listeners.MapInputListener
@@ -26,6 +27,8 @@ class MapActivity : AppCompatActivity() {
     private lateinit var mapInputListener: MapInputListener
     private lateinit var mapLocationListener: MapLocationListener
     private lateinit var mapCameraListener: CameraListener
+
+    private lateinit var mapSharedPreferences: MapSharedPreferences
 
     private val viewModel by lazy { MapViewModel() }
 
@@ -53,6 +56,8 @@ class MapActivity : AppCompatActivity() {
     }
 
     private fun initReference() {
+        mapSharedPreferences = MapSharedPreferences.getInstance(context = this)
+
         mapKit = MapKitFactory.getInstance()
 
         mapInputListener = MapInputListener(
@@ -70,7 +75,10 @@ class MapActivity : AppCompatActivity() {
             })
 
         mapLocationListener = MapLocationListener(
-            onLocation = { viewModel.openMyLocation(getMap(), it) }
+            onLocation = { location ->
+                mapSharedPreferences.saveLocation(location.position)
+                viewModel.openMyLocation(getMap(), location)
+            }
         )
 
         mapCameraListener = MapCameraListener { updateNearMeTint(isClick = false) }
@@ -90,7 +98,11 @@ class MapActivity : AppCompatActivity() {
     }
 
     private fun initMapLocation() {
-        mapKit.createLocationManager().requestSingleUpdate(mapLocationListener)
+        mapSharedPreferences.getUserLocation()?.let { point ->
+            viewModel.openMyLocation(getMap(), point)
+        } ?: run {
+            mapKit.createLocationManager().requestSingleUpdate(mapLocationListener)
+        }
     }
 
     private fun initActions() {
