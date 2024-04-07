@@ -16,6 +16,7 @@
     <!-- Палитра для элементов экрана -->
     <color name="elementPrimaryColor">#FFFFFF</color>
     <color name="elementPrimaryDarkColor">#262626</color>
+    <color name="elementMapColor">#FC3F1D</color>
 
     <!-- Палитра для текста -->
     <color name="textPrimaryColor">#262626</color>

@@ -46,6 +46,7 @@ dependencies {
     val security_crypto = "1.1.0-alpha06"
     val okhttp3 = "4.12.0"
     val swiperefreshlayout = "1.1.0"
+    val yandex_map = "4.5.2-navikit"
 
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:$swiperefreshlayout")
     implementation("com.squareup.okhttp3:okhttp:$okhttp3")
@@ -68,5 +69,8 @@ dependencies {
     implementation("androidx.core:core-ktx:$corektx")
     implementation("androidx.appcompat:appcompat:$appcompat")
 
+    implementation("com.yandex.android:maps.mobile:$yandex_map")
+
+    implementation(project(":maps"))
     implementation(project(":uikit"))
 }

@@ -6,11 +6,13 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResultLauncher
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import ru.papino.maps.core.contracts.AddressActivityContract
 import ru.papino.restaurant.R
 import ru.papino.restaurant.core.CoroutineProperty
 import ru.papino.restaurant.core.recycler.decorations.CoreDividerItemDecoration
@@ -28,6 +30,7 @@ import ru.papino.restaurant.presentation.basket.models.BasketUIModel
 import ru.papino.restaurant.presentation.basket.viewmodels.BasketViewModel
 import ru.papino.uikit.dialogs.AlertDialog
 import ru.papino.uikit.extensions.setText
+import ru.papino.uikit.extensions.showAlert
 
 internal class BasketFragment : Fragment(), CoroutineProperty {
 
@@ -40,6 +43,7 @@ internal class BasketFragment : Fragment(), CoroutineProperty {
     }
 
     private lateinit var binding: FragmentBasketBinding
+    private lateinit var activityLauncher: ActivityResultLauncher<String>
     private val basketAdapter = BasketAdapter()
 
     private var sumProducts = 0.0
@@ -48,6 +52,17 @@ internal class BasketFragment : Fragment(), CoroutineProperty {
 
     override val parentLifecycle: LifecycleOwner
         get() = viewLifecycleOwner
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        activityLauncher =
+            registerForActivityResult(AddressActivityContract()) { result ->
+                result?.let {
+                    binding.inputAddress.setText(it)
+                }
+            }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -115,8 +130,7 @@ internal class BasketFragment : Fragment(), CoroutineProperty {
                             }
                         )
                     } else {
-                        AlertDialog(
-                            context = this.root.context,
+                        context?.showAlert(
                             title = resources.getString(R.string.dialog_warning_title),
                             message = resources.getString(R.string.dialog_message_bascket_title),
                             onClick = {}
@@ -127,6 +141,12 @@ internal class BasketFragment : Fragment(), CoroutineProperty {
 
             if (UserDI.isUserInitializer()) {
                 inputAddress.setText(UserDI.user.address)
+            }
+
+            inputAddress.setEndIconOnClickListener {
+                context?.run {
+                    activityLauncher.launch("")
+                }
             }
         }
     }

@@ -13,6 +13,8 @@
     <dimen name="d_32">32dp</dimen>
     <dimen name="d_40">40dp</dimen>
     <dimen name="d_42">42dp</dimen>
+    <dimen name="d_44">44dp</dimen>
+    <dimen name="d_50">50dp</dimen>
     <dimen name="d_60">60dp</dimen>
     <dimen name="d_120">120dp</dimen>
 </resources>
