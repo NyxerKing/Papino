@@ -12,6 +12,7 @@
     <color name="backgroundNavigationColor">#424242</color>
     <color name="backgroundNoActiveColor">#969696</color>
     <color name="backgroundLoaderColor">#99000000</color>
+    <color name="backgroundAccentColor">#3A83F1</color>
 
     <!-- Палитра для элементов экрана -->
     <color name="elementPrimaryColor">#FFFFFF</color>
