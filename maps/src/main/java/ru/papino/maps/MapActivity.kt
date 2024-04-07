@@ -3,15 +3,18 @@ package ru.papino.maps
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.yandex.mapkit.MapKit
 import com.yandex.mapkit.MapKitFactory
+import com.yandex.mapkit.map.CameraListener
 import ru.papino.maps.core.MapPermissions
 import ru.papino.maps.core.contracts.AddressActivityContract
 import ru.papino.maps.databinding.ActivityMapBinding
+import ru.papino.maps.listeners.MapCameraListener
 import ru.papino.maps.listeners.MapInputListener
 import ru.papino.maps.listeners.MapLocationListener
 import ru.papino.uikit.extensions.showAlert
@@ -22,7 +25,7 @@ class MapActivity : AppCompatActivity() {
     private lateinit var mapKit: MapKit
     private lateinit var mapInputListener: MapInputListener
     private lateinit var mapLocationListener: MapLocationListener
-    private lateinit var mapLocationManager: com.yandex.mapkit.location.LocationManager
+    private lateinit var mapCameraListener: CameraListener
 
     private val viewModel by lazy { MapViewModel() }
 
@@ -34,12 +37,8 @@ class MapActivity : AppCompatActivity() {
 
         MapKitFactory.initialize(this)
         initReference()
-
         initPermissions()
-
-
-
-        initClicks()
+        initActions()
     }
 
     override fun onStart() {
@@ -73,6 +72,8 @@ class MapActivity : AppCompatActivity() {
         mapLocationListener = MapLocationListener(
             onLocation = { viewModel.openMyLocation(getMap(), it) }
         )
+
+        mapCameraListener = MapCameraListener { updateNearMeTint(isClick = false) }
     }
 
     private fun initPermissions() {
@@ -92,16 +93,28 @@ class MapActivity : AppCompatActivity() {
         mapKit.createLocationManager().requestSingleUpdate(mapLocationListener)
     }
 
-    private fun initClicks() {
-        initMapClicks()
+    private fun initActions() {
+        initMapActions()
 
         with(binding) {
-            imageButtonNearMe.setOnClickListener { initMapLocation() }
+            imageButtonNearMe.setOnClickListener {
+                updateNearMeTint(true)
+                initMapLocation()
+            }
         }
     }
 
-    private fun initMapClicks() {
+    private fun initMapActions() {
         getMap().addInputListener(mapInputListener)
+        getMap().addCameraListener(mapCameraListener)
+    }
+
+    private fun updateNearMeTint(isClick: Boolean) {
+        val color = resources.getColor(
+            if (isClick) ru.papino.uikit.R.color.backgroundAccentColor else ru.papino.uikit.R.color.elementPrimaryColor,
+            theme
+        )
+        binding.imageButtonNearMe.imageTintList = ColorStateList.valueOf(color)
     }
 
     private fun getMap() = binding.mapview.mapWindow.map
