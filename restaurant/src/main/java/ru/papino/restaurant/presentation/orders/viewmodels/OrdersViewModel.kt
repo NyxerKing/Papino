@@ -41,7 +41,10 @@ internal class OrdersViewModel(
             }.onSuccess { response ->
                 when (response) {
                     is OrdersResponse.Success -> {
-                        val list = response.orders.map { orderModel -> mapper.toUI(orderModel) }
+                        val list = response
+                            .orders
+                            .map { orderModel -> mapper.toUI(orderModel) }
+                            .sortedByDescending { orderUIModel -> orderUIModel.id }
                         _orders.emit(list)
                     }
 

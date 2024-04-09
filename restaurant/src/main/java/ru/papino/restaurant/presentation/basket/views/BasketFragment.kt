@@ -103,7 +103,8 @@ internal class BasketFragment : Fragment(), CoroutineProperty {
                     if (viewModel.checkOrderParameters(
                             userId = UserDI.user.id,
                             address = inputAddress.editText?.text?.toString().orEmpty(),
-                            sum = sumToPay
+                            sum = sumToPay,
+                            useBonusSum = sumBonus
                         )
                     ) {
                         frameProgressIndicator.visibility = VISIBLE
@@ -207,7 +208,8 @@ internal class BasketFragment : Fragment(), CoroutineProperty {
     private fun updateDiscount(value: Long = 0) {
         with(binding) {
             sumBonus = value
-            titleOrderDiscountSum.text = getPrice(sumBonus)
+            titleOrderDiscountSum.text =
+                getPrice((if (sumProducts < sumBonus) sumProducts else sumBonus).toLong())
 
             updateSum()
         }
