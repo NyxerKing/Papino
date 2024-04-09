@@ -23,4 +23,10 @@
         android:icon="@drawable/ic_16_profile"
         android:title="@string/profile_text" />
 
+    <item
+        android:id="@+id/about"
+        android:enabled="true"
+        android:icon="@drawable/ic_24_info"
+        android:title="@string/about_text" />
+
 </menu>

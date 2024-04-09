@@ -98,6 +98,11 @@ class RestaurantActivity : AppCompatActivity() {
                         true
                     }
 
+                    R.id.about -> {
+                        replaceFragment(screenManager.aboutFragment)
+                        true
+                    }
+
                     else -> false
                 }
             }
