@@ -1,5 +1,6 @@
 package ru.papino.restaurant
 
+import ru.papino.restaurant.presentation.about.views.AboutFragment
 import ru.papino.restaurant.presentation.authorization.views.AuthorizationFragment
 import ru.papino.restaurant.presentation.basket.views.BasketFragment
 import ru.papino.restaurant.presentation.menu.views.MenuFragment
@@ -17,6 +18,7 @@ internal class ScreenManager private constructor() {
     val profileFragment by lazy { ProfileFragment.getInstance() }
     val ordersFragment by lazy { OrdersFragment.getInstance() }
     val settingsFragment by lazy { SettingsFragment.getInstance() }
+    val aboutFragment by lazy { AboutFragment.getInstance() }
 
 
     companion object {
