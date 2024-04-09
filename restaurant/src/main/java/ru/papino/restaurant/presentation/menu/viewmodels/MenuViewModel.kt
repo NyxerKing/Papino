@@ -93,8 +93,12 @@ internal class MenuViewModel(
             getProductTypesUseCase()
         }.onSuccess { response ->
             mapper.toProductTypesUI(response)?.let { productTypes ->
-                productTypeSelected = productTypes.first()
-                _productTypes.emit(productTypes)
+                if (productTypes.isEmpty()) {
+                    _productTypes.emit(null)
+                } else {
+                    productTypeSelected = productTypes.first()
+                    _productTypes.emit(productTypes)
+                }
             }
         }.onFailure { ex: Throwable? ->
             _productTypes.emit(null)
