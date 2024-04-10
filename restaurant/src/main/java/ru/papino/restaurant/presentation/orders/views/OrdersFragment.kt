@@ -20,7 +20,7 @@ internal class OrdersFragment : Fragment(), CoroutineProperty {
 
     private val viewModel by lazy {
         OrdersViewModel(
-            getOrdersUseCase = GetOrdersUseCase(repository = RepositoryManager(resources = resources).getOrdersInstance()),
+            getOrdersUseCase = GetOrdersUseCase(repository = RepositoryManager().getOrdersInstance()),
             mapper = OrdersMapper()
         )
     }

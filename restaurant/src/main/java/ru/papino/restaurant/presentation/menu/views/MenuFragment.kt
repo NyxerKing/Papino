@@ -32,7 +32,7 @@ internal class MenuFragment : Fragment(), CoroutineProperty {
             getProductTypesUseCase = GetProductTypesUseCase(
                 repository = ProductTypesRepositoryImpl.getInstance()
             ),
-            getMenuUseCase = GetMenuUseCase(repository = RepositoryManager(resources).getMenuInstance()),
+            getMenuUseCase = GetMenuUseCase(repository = RepositoryManager().getMenuInstance()),
             mapper = MenuMapper(),
             basketRepository = RoomDependencies.basketRepository
         )

@@ -6,4 +6,5 @@ internal data class AboutModel(
     val aboutOrganization: String,
     val latitude: String,
     val longitude: String,
+    val isClose: Boolean
 )

@@ -6,7 +6,7 @@ import ru.papino.uikit.dialogs.AlertDialog
 fun Context.showAlert(
     title: String,
     message: String,
-    onClick: () -> Unit
+    onClick: () -> Unit = {}
 ) {
     AlertDialog(
         context = this,

@@ -3,6 +3,7 @@ package ru.papino.restaurant
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
@@ -16,14 +17,23 @@ import ru.papino.restaurant.core.room.RoomDependencies
 import ru.papino.restaurant.core.user.di.UserDI
 import ru.papino.restaurant.core.user.encrypted.EncryptedToken
 import ru.papino.restaurant.core.user.models.User
+import ru.papino.restaurant.data.di.RepositoryManager
 import ru.papino.restaurant.data.repository.UserRepositoryImpl
 import ru.papino.restaurant.databinding.ActivityRestaurantBinding
+import ru.papino.restaurant.domain.repository.models.AboutResponse
 import ru.papino.restaurant.domain.repository.models.UserResponse
 import ru.papino.restaurant.domain.repository.models.status.BasketActionStatus
+import ru.papino.restaurant.domain.usecases.GetAboutUseCase
 import ru.papino.restaurant.domain.usecases.GetUserByTokenUseCase
 import ru.papino.restaurant.extensions.switchFragment
+import ru.papino.uikit.extensions.showAlert
 
 class RestaurantActivity : AppCompatActivity() {
+
+    private val viewModel by viewModels<RestaurantViewModel> {
+        RestaurantViewModelFactory(getAboutUseCase = GetAboutUseCase(aboutRepository = RepositoryManager().getAboutRepository()))
+    }
+
     private lateinit var binding: ActivityRestaurantBinding
     private lateinit var badge: BadgeDrawable
 
@@ -57,11 +67,20 @@ class RestaurantActivity : AppCompatActivity() {
         lifecycleScope.launch {
             UserDI.onInitUser.collect(::updateNavigation)
         }
+
+        lifecycleScope.launch {
+            viewModel.about.collect(::checkIsClose)
+        }
     }
 
     private fun updateNavigation(user: User?) {
+        updateNavigation(user != null)
+        if (user != null) viewModel.loadAbout()
+    }
+
+    private fun updateNavigation(isOpenOrders: Boolean) {
         binding.navigation.menu.findItem(R.id.orders).let { itemOrder ->
-            itemOrder.isEnabled = user != null
+            itemOrder.isEnabled = isOpenOrders
         }
     }
 
@@ -163,6 +182,27 @@ class RestaurantActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun checkIsClose(response: AboutResponse) {
+        when (response) {
+            is AboutResponse.Success -> {
+                updateNavigation(!response.data.isClose)
+                if (response.data.isClose) showMessage(resources.getString(R.string.error_request_message_about))
+            }
+
+            is AboutResponse.Error -> {
+                updateNavigation(false)
+                showMessage(resources.getString(R.string.error_request_message_about))
+            }
+        }
+    }
+
+    private fun showMessage(message: String) {
+        binding.root.context.showAlert(
+            title = resources.getString(R.string.warning_title),
+            message = message
+        )
     }
 
     companion object {

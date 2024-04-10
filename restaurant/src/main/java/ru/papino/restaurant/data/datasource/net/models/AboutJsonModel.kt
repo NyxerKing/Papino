@@ -13,4 +13,10 @@ internal data class AboutJsonModel(
     val latitude: String,
     @SerializedName("longitude")
     val longitude: String,
+    @SerializedName("workTimeFrom")
+    val workTimeFrom: String,
+    @SerializedName("workTimeTo")
+    val workTimeTo: String,
+    @SerializedName("isClose")
+    val isClose: Boolean
 )
