@@ -6,13 +6,11 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
-import androidx.activity.result.ActivityResultLauncher
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import ru.papino.maps.core.contracts.AddressActivityContract
 import ru.papino.restaurant.R
 import ru.papino.restaurant.core.CoroutineProperty
 import ru.papino.restaurant.core.recycler.decorations.CoreDividerItemDecoration
@@ -43,7 +41,8 @@ internal class BasketFragment : Fragment(), CoroutineProperty {
     }
 
     private lateinit var binding: FragmentBasketBinding
-    private lateinit var activityLauncher: ActivityResultLauncher<String>
+
+    //private lateinit var activityLauncher: ActivityResultLauncher<String>
     private val basketAdapter = BasketAdapter()
 
     private var sumProducts = 0.0
@@ -56,12 +55,12 @@ internal class BasketFragment : Fragment(), CoroutineProperty {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        activityLauncher =
+        /*activityLauncher =
             registerForActivityResult(AddressActivityContract()) { result ->
                 result?.let {
                     binding.inputAddress.setText(it)
                 }
-            }
+            }*/
     }
 
     override fun onCreateView(
@@ -146,7 +145,7 @@ internal class BasketFragment : Fragment(), CoroutineProperty {
 
             inputAddress.setEndIconOnClickListener {
                 context?.run {
-                    activityLauncher.launch("")
+                    // todo activityLauncher.launch("")
                 }
             }
         }
