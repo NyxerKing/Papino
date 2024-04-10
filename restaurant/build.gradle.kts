@@ -69,8 +69,8 @@ dependencies {
     implementation("androidx.core:core-ktx:$corektx")
     implementation("androidx.appcompat:appcompat:$appcompat")
 
-    implementation("com.yandex.android:maps.mobile:$yandex_map")
+    //implementation("com.yandex.android:maps.mobile:$yandex_map")
 
-    implementation(project(":maps"))
+    //implementation(project(":maps"))
     implementation(project(":uikit"))
 }
