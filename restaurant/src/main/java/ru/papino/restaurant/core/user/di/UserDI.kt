@@ -18,12 +18,21 @@ internal object UserDI {
     val onInitUser = _initUser.asStateFlow()
 
     suspend fun init(data: User) {
+        if (!data.error.isNullOrEmpty()) {
+            clear()
+            return
+        }
         _user = data
         _isUserInitializer = true
         _initUser.emit(_user)
     }
 
     fun initToken(data: Token) {
+        if (data.token.isEmpty()) {
+            clear()
+            return
+        }
+
         _token = data
         EncryptedToken.save(_token)
     }
