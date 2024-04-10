@@ -32,9 +32,13 @@ internal class AuthorizationViewModel(
             }.onSuccess { response ->
                 when (response) {
                     is UserResponse.Success -> {
-                        UserDI.init(userMapper.toUser(response))
-                        UserDI.initToken(response.token)
-                        _onSuccess.emit(response)
+                        response.user.error?.let { errorMessage ->
+                            _onFailure.emit(UserResponse.Error(message = errorMessage))
+                        } ?: run {
+                            UserDI.init(userMapper.toUser(response))
+                            UserDI.initToken(response.token)
+                            _onSuccess.emit(response)
+                        }
                     }
 
                     is UserResponse.Error -> {

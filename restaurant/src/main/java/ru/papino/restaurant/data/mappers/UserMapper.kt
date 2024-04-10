@@ -9,12 +9,13 @@ internal class UserMapper {
 
     fun toResponse(data: UserJsonModel) = UserResponse.Success(
         user = User(
-            id = data.id.toLong(),
+            id = data.id.toLongOrNull() ?: 0,
             firstName = data.firstName,
             secondName = data.secondName,
             phone = data.phone,
             address = data.address,
-            bonus = data.bonus.toLongOrNull() ?: 0
+            bonus = data.bonus.toLongOrNull() ?: 0,
+            error = if (data.error.isNullOrEmpty()) null else data.error
         ),
         token = Token(token = data.token)
     )
@@ -25,6 +26,7 @@ internal class UserMapper {
         secondName = data.user.secondName,
         phone = data.user.phone,
         address = data.user.address,
-        bonus = data.user.bonus
+        bonus = data.user.bonus,
+        error = if (data.user.error.isNullOrEmpty()) null else data.user.error
     )
 }
