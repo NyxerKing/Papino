@@ -47,6 +47,7 @@ dependencies {
     val okhttp3 = "4.12.0"
     val swiperefreshlayout = "1.1.0"
     val yandex_map = "4.5.2-navikit"
+    val activity_ktx = "1.8.2"
 
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:$swiperefreshlayout")
     implementation("com.squareup.okhttp3:okhttp:$okhttp3")
@@ -61,6 +62,9 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:$constraintlayout")
     implementation("androidx.recyclerview:recyclerview:$recyclerview")
     implementation("androidx.security:security-crypto:$security_crypto")
+    // https://mvnrepository.com/artifact/androidx.activity/activity-ktx
+    implementation("androidx.activity:activity-ktx:$activity_ktx")
+
 
     implementation("androidx.room:room-runtime:$room_version")
     kapt("androidx.room:room-compiler:$room_version")

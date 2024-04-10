@@ -1,8 +1,6 @@
 package ru.papino.restaurant.data.repository
 
-import com.google.gson.Gson
 import ru.papino.restaurant.core.net.repeater.RequestRepeat
-import ru.papino.restaurant.data.datasource.local.impl.LocalDataSource
 import ru.papino.restaurant.data.datasource.net.impl.NetDataSource
 import ru.papino.restaurant.data.datasource.net.models.MenuJsonModel
 import ru.papino.restaurant.data.datasource.net.services.MenuService
@@ -11,7 +9,6 @@ import ru.papino.restaurant.domain.repository.MenuRepository
 import ru.papino.restaurant.domain.repository.models.MenuResponse
 
 internal class MenuRepositoryImpl(
-    private val localDS: LocalDataSource,
     private val netDS: NetDataSource,
     private val mapper: MenuMapper
 ) : MenuRepository {
@@ -19,11 +16,9 @@ internal class MenuRepositoryImpl(
     private val requestRepeat = RequestRepeat<MenuResponse>()
 
     override suspend fun request(): MenuResponse {
-        val list = Gson().fromJson(localDS.getData(), MenuJsonModel::class.java)
-
         return requestRepeat.execute(
             onRequest = ::execute,
-            defaultResponse = mapper.toDomainError(list)
+            defaultResponse = mapper.toDomainError(Exception("Данные не получены"))
         )
     }
 

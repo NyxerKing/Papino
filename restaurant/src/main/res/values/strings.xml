@@ -22,8 +22,10 @@
     <string name="hint_reg_password">Пароль</string>
     <string name="button_reg">Регистрация</string>
 
+    <string name="warning_title">Предупреждение</string>
     <string name="error_request_title">Произошла ошибка</string>
     <string name="error_request_message">Ведутся технические работы</string>
+    <string name="error_request_message_about">Заведение закрыто\nЗаказы не принимаются</string>
 
     <string name="screen_orders_title">Мои заказы</string>
 

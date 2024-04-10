@@ -19,7 +19,7 @@ internal class AboutFragment() : Fragment(), CoroutineProperty {
 
     private val viewModel by lazy {
         AboutViewModel(
-            getAboutUseCase = GetAboutUseCase(aboutRepository = RepositoryManager(resources).getAboutRepository())
+            getAboutUseCase = GetAboutUseCase(aboutRepository = RepositoryManager().getAboutRepository())
         )
     }
 

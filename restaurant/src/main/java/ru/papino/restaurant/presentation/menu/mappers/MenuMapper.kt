@@ -26,17 +26,7 @@ internal class MenuMapper {
             }
 
             is MenuResponse.Error -> {
-                data.buffer?.map { domain ->
-                    ProductUIModel(
-                        id = domain.id,
-                        name = domain.name,
-                        size = domain.size,
-                        price = domain.price,
-                        details = domain.details,
-                        typeProduct = domain.typeProduct,
-                        linkCover = BASE_URL + domain.linkCover
-                    )
-                }
+                null
             }
         }
     }

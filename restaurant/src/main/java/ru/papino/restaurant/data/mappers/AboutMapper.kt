@@ -10,6 +10,7 @@ internal class AboutMapper {
         name = data.name,
         aboutOrganization = data.aboutOrganization,
         latitude = data.latitude,
-        longitude = data.longitude
+        longitude = data.longitude,
+        isClose = data.isClose
     )
 }

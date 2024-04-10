@@ -20,18 +20,7 @@ internal class MenuMapper {
         }
     )
 
-    fun toDomainError(data: MenuJsonModel?, th: Throwable? = null) = MenuResponse.Error(
-        Exception("Данные взяты из локального хранилища\n${th?.message}"),
-        data?.products?.map { dto ->
-            ProductModel(
-                id = dto.id,
-                name = dto.name,
-                size = dto.size,
-                price = dto.price,
-                details = dto.details,
-                typeProduct = dto.typeProduct,
-                linkCover = dto.linkCover
-            )
-        }
+    fun toDomainError(th: Throwable? = null) = MenuResponse.Error(
+        Exception("Данные взяты из локального хранилища\n${th?.message}")
     )
 }
