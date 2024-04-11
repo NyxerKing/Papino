@@ -1,6 +1,7 @@
 package ru.papino.restaurant.presentation.menu.adapters
 
 import android.graphics.drawable.Drawable
+import android.util.Log
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ru.papino.restaurant.core.imageLoader.ImageLoader
@@ -40,7 +41,12 @@ internal class MenuAdapter(
             product.linkCover?.let { url ->
                 imageLoader.getDrawable(context = cardMenu.context, url) { drawable ->
                     drawable?.let { cover ->
-                        initView(product = product, drawable = cover)
+                        if (products.orEmpty().any { obj -> obj.id == product.id }) {
+                            initView(product = product, drawable = cover)
+                        } else {
+                            // todo придумать более элегантное решение
+                            Log.d(TAG, "product ${product.name} not contained in list")
+                        }
                     }
                 }
             }
@@ -73,5 +79,9 @@ internal class MenuAdapter(
                 if (drawable == null) showShimmer() else hideShimmer()
             }
         }
+    }
+
+    companion object {
+        private const val TAG = "MenuAdapter"
     }
 }
