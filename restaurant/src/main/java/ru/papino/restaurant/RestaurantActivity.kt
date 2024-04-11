@@ -159,12 +159,10 @@ class RestaurantActivity : AppCompatActivity() {
     private fun checkIsClose(response: AboutResponse) {
         when (response) {
             is AboutResponse.Success -> {
-                updateNavigation(!response.data.isClose)
                 if (response.data.isClose) showMessage(resources.getString(R.string.error_request_message_about))
             }
 
             is AboutResponse.Error -> {
-                updateNavigation(false)
                 showMessage(resources.getString(R.string.error_request_message_about))
             }
         }

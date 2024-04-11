@@ -17,6 +17,7 @@ import ru.papino.restaurant.core.recycler.decorations.CoreDividerItemDecoration
 import ru.papino.restaurant.core.room.RoomDependencies
 import ru.papino.restaurant.core.user.di.UserDI
 import ru.papino.restaurant.core.user.models.User
+import ru.papino.restaurant.core.verifications.OrderVerification
 import ru.papino.restaurant.data.repository.OrdersRepositoryImpl
 import ru.papino.restaurant.databinding.FragmentBasketBinding
 import ru.papino.restaurant.domain.status.BasketActionStatus
@@ -98,7 +99,7 @@ internal class BasketFragment : Fragment(), CoroutineProperty {
             }
 
             buttonCheckout.setOnClickListener {
-                if (UserDI.isUserInitializer()) {
+                if (allowedOrder()) {
                     if (viewModel.checkOrderParameters(
                             userId = UserDI.user.id,
                             address = inputAddress.editText?.text?.toString().orEmpty(),
@@ -192,7 +193,7 @@ internal class BasketFragment : Fragment(), CoroutineProperty {
             viewModel::plusProduct
         )
 
-        binding.buttonCheckout.isEnabled = basket.isNotEmpty() && UserDI.isUserInitializer()
+        binding.buttonCheckout.isEnabled = basket.isNotEmpty() && allowedOrder()
 
         binding.titleOrderFood.text =
             resources.getString(
@@ -219,6 +220,8 @@ internal class BasketFragment : Fragment(), CoroutineProperty {
 
     private fun getPrice(value: Long) =
         resources.getString(ru.papino.uikit.R.string.insert_sum, value.toString())
+
+    private fun allowedOrder() = OrderVerification().allowed()
 
     private suspend fun basketChange(basketStatus: BasketActionStatus) {
         val count = RoomDependencies.basketRepository.getCountAll()
