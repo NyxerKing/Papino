@@ -3,6 +3,7 @@ package ru.papino.restaurant
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -159,11 +160,12 @@ class RestaurantActivity : AppCompatActivity() {
     private fun checkIsClose(response: AboutResponse) {
         when (response) {
             is AboutResponse.Success -> {
+                Log.d(TAG, "about success; isClose = ${response.data.isClose}")
                 if (response.data.isClose) showMessage(resources.getString(R.string.error_request_message_about))
             }
 
             is AboutResponse.Error -> {
-                showMessage(resources.getString(R.string.error_request_message_about))
+                Log.d(TAG, "about error;")
             }
         }
     }
@@ -176,6 +178,8 @@ class RestaurantActivity : AppCompatActivity() {
     }
 
     companion object {
+        private const val TAG = "RestaurantActivity"
+
         const val ACTIVE_FRAGMENT = "ACTIVE_FRAGMENT"
 
         fun newIntent(context: Context?) = Intent(context, RestaurantActivity::class.java)

@@ -1,5 +1,6 @@
 package ru.papino.restaurant
 
+import android.util.Log
 import ru.papino.restaurant.presentation.about.views.AboutFragment
 import ru.papino.restaurant.presentation.authorization.views.AuthorizationFragment
 import ru.papino.restaurant.presentation.basket.views.BasketFragment
@@ -10,6 +11,10 @@ import ru.papino.restaurant.presentation.registration.view.RegistrationFragment
 import ru.papino.restaurant.presentation.settings.view.SettingsFragment
 
 internal class ScreenManager private constructor() {
+
+    init {
+        Log.d(TAG, "init")
+    }
 
     val menuFragment by lazy { MenuFragment.getInstance() }
     val basketFragment by lazy { BasketFragment.getInstance() }
@@ -22,6 +27,9 @@ internal class ScreenManager private constructor() {
 
 
     companion object {
-        fun getManager() = ScreenManager()
+        private const val TAG = "ScreenManager"
+        private val screenManager = ScreenManager()
+
+        fun getManager() = screenManager
     }
 }
