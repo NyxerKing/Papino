@@ -8,9 +8,11 @@ import ru.papino.restaurant.data.mappers.OrdersMapper
 import ru.papino.restaurant.data.repository.AboutRepositoryImpl
 import ru.papino.restaurant.data.repository.MenuRepositoryImpl
 import ru.papino.restaurant.data.repository.OrdersRepositoryImpl
+import ru.papino.restaurant.data.repository.UserRepositoryImpl
 import ru.papino.restaurant.domain.repository.AboutRepository
 import ru.papino.restaurant.domain.repository.MenuRepository
 import ru.papino.restaurant.domain.repository.OrdersRepository
+import ru.papino.restaurant.domain.repository.UserRepository
 
 internal class RepositoryManager {
     fun getMenuInstance(): MenuRepository = MenuRepositoryImpl(
@@ -28,4 +30,6 @@ internal class RepositoryManager {
         netDS = NetDataSource.getInstance(),
         aboutMapper = AboutMapper()
     )
+
+    fun getUserRepository(): UserRepository = UserRepositoryImpl.getInstance()
 }

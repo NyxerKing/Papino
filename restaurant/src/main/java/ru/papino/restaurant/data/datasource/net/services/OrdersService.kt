@@ -6,7 +6,7 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
 import ru.papino.restaurant.data.datasource.net.models.OrderJsonModel
-import ru.papino.restaurant.domain.repository.models.OrderRequestModel
+import ru.papino.restaurant.domain.models.OrderRequestModel
 
 internal interface OrdersService {
 

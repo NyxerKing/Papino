@@ -1,8 +1,8 @@
 package ru.papino.restaurant.domain.usecases
 
+import ru.papino.restaurant.domain.models.UserModel
 import ru.papino.restaurant.domain.repository.UserRepository
-import ru.papino.restaurant.domain.repository.models.UserModel
-import ru.papino.restaurant.domain.repository.models.UserResponse
+import ru.papino.restaurant.domain.response.UserResponse
 
 internal class CreateUserUseCase(
     private val userRepository: UserRepository

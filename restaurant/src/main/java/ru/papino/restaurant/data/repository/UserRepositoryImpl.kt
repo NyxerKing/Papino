@@ -4,9 +4,9 @@ import ru.papino.restaurant.core.user.di.UserDI.BONUS_DEFAULT
 import ru.papino.restaurant.data.datasource.net.impl.NetDataSource
 import ru.papino.restaurant.data.datasource.net.services.UserService
 import ru.papino.restaurant.data.mappers.UserMapper
+import ru.papino.restaurant.domain.models.UserModel
 import ru.papino.restaurant.domain.repository.UserRepository
-import ru.papino.restaurant.domain.repository.models.UserModel
-import ru.papino.restaurant.domain.repository.models.UserResponse
+import ru.papino.restaurant.domain.response.UserResponse
 
 internal class UserRepositoryImpl(
     private val netDS: NetDataSource,

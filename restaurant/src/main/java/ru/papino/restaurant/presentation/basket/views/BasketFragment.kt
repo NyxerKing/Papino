@@ -19,7 +19,7 @@ import ru.papino.restaurant.core.user.di.UserDI
 import ru.papino.restaurant.core.user.models.User
 import ru.papino.restaurant.data.repository.OrdersRepositoryImpl
 import ru.papino.restaurant.databinding.FragmentBasketBinding
-import ru.papino.restaurant.domain.repository.models.status.BasketActionStatus
+import ru.papino.restaurant.domain.status.BasketActionStatus
 import ru.papino.restaurant.domain.usecases.CreateOrderUseCase
 import ru.papino.restaurant.extensions.toPrice
 import ru.papino.restaurant.presentation.basket.adapters.BasketAdapter

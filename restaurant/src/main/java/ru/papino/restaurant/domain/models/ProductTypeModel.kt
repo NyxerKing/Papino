@@ -1,4 +1,4 @@
-package ru.papino.restaurant.domain.repository.models
+package ru.papino.restaurant.domain.models
 
 internal data class ProductTypeModel(
     val name: String,

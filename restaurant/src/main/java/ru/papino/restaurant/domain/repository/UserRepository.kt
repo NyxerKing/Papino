@@ -1,7 +1,7 @@
 package ru.papino.restaurant.domain.repository
 
-import ru.papino.restaurant.domain.repository.models.UserModel
-import ru.papino.restaurant.domain.repository.models.UserResponse
+import ru.papino.restaurant.domain.models.UserModel
+import ru.papino.restaurant.domain.response.UserResponse
 
 internal interface UserRepository {
     suspend fun create(user: UserModel): UserResponse

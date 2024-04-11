@@ -1,6 +1,6 @@
 package ru.papino.restaurant.domain.repository
 
-import ru.papino.restaurant.domain.repository.models.AboutResponse
+import ru.papino.restaurant.domain.response.AboutResponse
 
 internal interface AboutRepository {
 

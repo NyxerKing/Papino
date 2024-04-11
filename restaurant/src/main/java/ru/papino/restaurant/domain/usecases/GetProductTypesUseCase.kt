@@ -1,7 +1,7 @@
 package ru.papino.restaurant.domain.usecases
 
 import ru.papino.restaurant.domain.repository.ProductTypesRepository
-import ru.papino.restaurant.domain.repository.models.ProductTypesResponse
+import ru.papino.restaurant.domain.response.ProductTypesResponse
 
 internal class GetProductTypesUseCase(private val repository: ProductTypesRepository) {
 

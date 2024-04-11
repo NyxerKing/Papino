@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import ru.papino.restaurant.core.user.di.UserDI
-import ru.papino.restaurant.domain.repository.models.OrdersResponse
+import ru.papino.restaurant.domain.response.OrdersResponse
 import ru.papino.restaurant.domain.usecases.GetOrdersUseCase
 import ru.papino.restaurant.presentation.orders.mappers.OrdersMapper
 import ru.papino.restaurant.presentation.orders.models.OrderUIModel

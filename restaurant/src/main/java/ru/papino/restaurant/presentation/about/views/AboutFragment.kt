@@ -10,7 +10,7 @@ import ru.papino.restaurant.R
 import ru.papino.restaurant.core.CoroutineProperty
 import ru.papino.restaurant.data.di.RepositoryManager
 import ru.papino.restaurant.databinding.FragmentAboutBinding
-import ru.papino.restaurant.domain.repository.models.AboutModel
+import ru.papino.restaurant.domain.models.AboutModel
 import ru.papino.restaurant.domain.usecases.GetAboutUseCase
 import ru.papino.restaurant.presentation.about.viewmodels.AboutViewModel
 import ru.papino.uikit.dialogs.AlertDialog

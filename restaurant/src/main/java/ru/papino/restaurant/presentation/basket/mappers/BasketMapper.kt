@@ -1,6 +1,6 @@
 package ru.papino.restaurant.presentation.basket.mappers
 
-import ru.papino.restaurant.domain.repository.models.OrderProductRequestModel
+import ru.papino.restaurant.domain.models.OrderProductRequestModel
 import ru.papino.restaurant.presentation.basket.models.BasketUIModel
 
 internal class BasketMapper {

@@ -1,7 +1,7 @@
 package ru.papino.restaurant.data.mappers
 
 import ru.papino.restaurant.data.datasource.net.models.OrderJsonModel
-import ru.papino.restaurant.domain.repository.models.OrderModel
+import ru.papino.restaurant.domain.models.OrderModel
 
 internal class OrdersMapper {
 

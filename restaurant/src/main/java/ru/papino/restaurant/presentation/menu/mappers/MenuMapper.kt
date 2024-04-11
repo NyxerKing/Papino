@@ -1,9 +1,9 @@
 package ru.papino.restaurant.presentation.menu.mappers
 
 import ru.papino.restaurant.core.net.BASE_URL
-import ru.papino.restaurant.domain.repository.models.MenuResponse
-import ru.papino.restaurant.domain.repository.models.ProductModel
-import ru.papino.restaurant.domain.repository.models.ProductTypesResponse
+import ru.papino.restaurant.domain.models.ProductModel
+import ru.papino.restaurant.domain.response.MenuResponse
+import ru.papino.restaurant.domain.response.ProductTypesResponse
 import ru.papino.restaurant.presentation.menu.models.ProductTypeUIModel
 import ru.papino.restaurant.presentation.menu.models.ProductUIModel
 

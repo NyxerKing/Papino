@@ -12,7 +12,7 @@ import ru.papino.restaurant.core.user.models.User
 import ru.papino.restaurant.data.mappers.UserMapper
 import ru.papino.restaurant.data.repository.UserRepositoryImpl
 import ru.papino.restaurant.databinding.FragmentSettingsBinding
-import ru.papino.restaurant.domain.repository.models.UserResponse
+import ru.papino.restaurant.domain.response.UserResponse
 import ru.papino.restaurant.domain.usecases.UpdateUserUseCase
 import ru.papino.restaurant.extensions.switchFragment
 import ru.papino.restaurant.presentation.settings.viewmodels.SettingsViewModel

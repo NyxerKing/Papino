@@ -8,8 +8,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import ru.papino.restaurant.domain.repository.models.AboutModel
-import ru.papino.restaurant.domain.repository.models.AboutResponse
+import ru.papino.restaurant.domain.models.AboutModel
+import ru.papino.restaurant.domain.response.AboutResponse
 import ru.papino.restaurant.domain.usecases.GetAboutUseCase
 
 internal class AboutViewModel(

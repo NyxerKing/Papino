@@ -8,9 +8,9 @@ import kotlinx.coroutines.withContext
 import ru.papino.restaurant.core.statuses.ActionStatus
 import ru.papino.restaurant.data.datasource.room.dao.BasketDao
 import ru.papino.restaurant.data.datasource.room.mappers.RoomBasketMapper
+import ru.papino.restaurant.domain.models.ProductModel
 import ru.papino.restaurant.domain.repository.BasketRepository
-import ru.papino.restaurant.domain.repository.models.ProductModel
-import ru.papino.restaurant.domain.repository.models.status.BasketActionStatus
+import ru.papino.restaurant.domain.status.BasketActionStatus
 
 internal class BasketRepositoryImpl(
     private val basketDao: BasketDao,

@@ -10,19 +10,14 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.badge.BadgeDrawable
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import ru.papino.restaurant.core.room.RoomDependencies
 import ru.papino.restaurant.core.user.di.UserDI
-import ru.papino.restaurant.core.user.encrypted.EncryptedToken
 import ru.papino.restaurant.core.user.models.User
 import ru.papino.restaurant.data.di.RepositoryManager
-import ru.papino.restaurant.data.repository.UserRepositoryImpl
 import ru.papino.restaurant.databinding.ActivityRestaurantBinding
-import ru.papino.restaurant.domain.repository.models.AboutResponse
-import ru.papino.restaurant.domain.repository.models.UserResponse
-import ru.papino.restaurant.domain.repository.models.status.BasketActionStatus
+import ru.papino.restaurant.domain.response.AboutResponse
+import ru.papino.restaurant.domain.status.BasketActionStatus
 import ru.papino.restaurant.domain.usecases.GetAboutUseCase
 import ru.papino.restaurant.domain.usecases.GetUserByTokenUseCase
 import ru.papino.restaurant.extensions.switchFragment
@@ -31,7 +26,10 @@ import ru.papino.uikit.extensions.showAlert
 class RestaurantActivity : AppCompatActivity() {
 
     private val viewModel by viewModels<RestaurantViewModel> {
-        RestaurantViewModelFactory(getAboutUseCase = GetAboutUseCase(aboutRepository = RepositoryManager().getAboutRepository()))
+        RestaurantViewModelFactory(
+            getAboutUseCase = GetAboutUseCase(aboutRepository = RepositoryManager().getAboutRepository()),
+            getUserByTokenUseCase = GetUserByTokenUseCase(userRepository = RepositoryManager().getUserRepository())
+        )
     }
 
     private lateinit var binding: ActivityRestaurantBinding
@@ -41,7 +39,7 @@ class RestaurantActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         RoomDependencies.init(applicationContext)
-        authorizationByToken()
+        viewModel.authorizationByToken()
         super.onCreate(savedInstanceState)
 
         binding = ActivityRestaurantBinding.inflate(layoutInflater)
@@ -155,32 +153,6 @@ class RestaurantActivity : AppCompatActivity() {
                     ru.papino.uikit.R.color.backgroundMenuColor
                 )
             )
-        }
-    }
-
-    private fun authorizationByToken() {
-        val getUserByTokenUseCase =
-            GetUserByTokenUseCase(userRepository = UserRepositoryImpl.getInstance())
-        val token = EncryptedToken.getToken()
-        token?.let {
-            CoroutineScope(Dispatchers.IO).launch {
-                runCatching {
-                    getUserByTokenUseCase(it)
-                }.onSuccess { response ->
-                    when (response) {
-                        is UserResponse.Success -> {
-                            UserDI.init(response.user)
-                            UserDI.initToken(response.token)
-                        }
-
-                        is UserResponse.Error -> {
-                            UserDI.clear()
-                        }
-                    }
-                }.onFailure {
-                    UserDI.clear()
-                }
-            }
         }
     }
 
