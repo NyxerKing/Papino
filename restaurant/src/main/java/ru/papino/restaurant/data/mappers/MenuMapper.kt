@@ -1,8 +1,8 @@
 package ru.papino.restaurant.data.mappers
 
 import ru.papino.restaurant.data.datasource.net.models.MenuJsonModel
-import ru.papino.restaurant.domain.repository.models.MenuResponse
-import ru.papino.restaurant.domain.repository.models.ProductModel
+import ru.papino.restaurant.domain.models.ProductModel
+import ru.papino.restaurant.domain.response.MenuResponse
 
 internal class MenuMapper {
 

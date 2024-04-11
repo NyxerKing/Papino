@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import ru.papino.restaurant.core.user.di.UserDI
 import ru.papino.restaurant.data.mappers.UserMapper
-import ru.papino.restaurant.domain.repository.models.UserResponse
+import ru.papino.restaurant.domain.response.UserResponse
 import ru.papino.restaurant.domain.usecases.GetUserByPasswordUseCase
 
 internal class AuthorizationViewModel(

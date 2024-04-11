@@ -1,6 +1,6 @@
 package ru.papino.restaurant.presentation.orders.models
 
-import ru.papino.restaurant.domain.repository.models.status.OrderStatus
+import ru.papino.restaurant.domain.status.OrderStatus
 
 internal data class OrderUIModel(
     val id: Long,

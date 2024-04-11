@@ -6,8 +6,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
+import ru.papino.restaurant.domain.models.OrderRequestModel
 import ru.papino.restaurant.domain.repository.BasketRepository
-import ru.papino.restaurant.domain.repository.models.OrderRequestModel
 import ru.papino.restaurant.domain.usecases.CreateOrderUseCase
 import ru.papino.restaurant.presentation.basket.mappers.BasketMapper
 import ru.papino.restaurant.presentation.basket.models.BasketUIModel

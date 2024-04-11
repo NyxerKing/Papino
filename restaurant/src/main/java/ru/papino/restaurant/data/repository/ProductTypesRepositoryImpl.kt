@@ -6,7 +6,7 @@ import ru.papino.restaurant.data.datasource.net.models.ProductTypesJsonModel
 import ru.papino.restaurant.data.datasource.net.services.ProductTypeService
 import ru.papino.restaurant.data.mappers.ProductTypesMapper
 import ru.papino.restaurant.domain.repository.ProductTypesRepository
-import ru.papino.restaurant.domain.repository.models.ProductTypesResponse
+import ru.papino.restaurant.domain.response.ProductTypesResponse
 
 internal class ProductTypesRepositoryImpl(
     private val netDS: NetDataSource,

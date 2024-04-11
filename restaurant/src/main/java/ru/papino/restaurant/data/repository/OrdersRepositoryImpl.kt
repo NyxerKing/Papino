@@ -3,9 +3,9 @@ package ru.papino.restaurant.data.repository
 import ru.papino.restaurant.data.datasource.net.impl.NetDataSource
 import ru.papino.restaurant.data.datasource.net.services.OrdersService
 import ru.papino.restaurant.data.mappers.OrdersMapper
+import ru.papino.restaurant.domain.models.OrderRequestModel
 import ru.papino.restaurant.domain.repository.OrdersRepository
-import ru.papino.restaurant.domain.repository.models.OrderRequestModel
-import ru.papino.restaurant.domain.repository.models.OrdersResponse
+import ru.papino.restaurant.domain.response.OrdersResponse
 
 internal class OrdersRepositoryImpl(
     private val netDS: NetDataSource,

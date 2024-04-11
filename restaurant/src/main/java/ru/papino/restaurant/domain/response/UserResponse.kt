@@ -1,4 +1,4 @@
-package ru.papino.restaurant.domain.repository.models
+package ru.papino.restaurant.domain.response
 
 import ru.papino.restaurant.core.net.repeater.RequestRepeatError
 import ru.papino.restaurant.core.user.models.Token

@@ -11,8 +11,8 @@ import kotlinx.coroutines.launch
 import ru.papino.restaurant.core.room.RoomDependencies
 import ru.papino.restaurant.core.statuses.ActionStatus
 import ru.papino.restaurant.domain.repository.BasketRepository
-import ru.papino.restaurant.domain.repository.models.MenuResponse
-import ru.papino.restaurant.domain.repository.models.status.BasketActionStatus
+import ru.papino.restaurant.domain.response.MenuResponse
+import ru.papino.restaurant.domain.status.BasketActionStatus
 import ru.papino.restaurant.domain.usecases.GetMenuUseCase
 import ru.papino.restaurant.domain.usecases.GetProductTypesUseCase
 import ru.papino.restaurant.presentation.menu.mappers.MenuMapper

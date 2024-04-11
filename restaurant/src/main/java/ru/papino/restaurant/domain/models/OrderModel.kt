@@ -1,6 +1,6 @@
-package ru.papino.restaurant.domain.repository.models
+package ru.papino.restaurant.domain.models
 
-import ru.papino.restaurant.domain.repository.models.status.OrderStatus
+import ru.papino.restaurant.domain.status.OrderStatus
 
 internal data class OrderModel(
     val id: Long,

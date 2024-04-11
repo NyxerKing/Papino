@@ -6,7 +6,7 @@ import ru.papino.restaurant.data.datasource.net.models.MenuJsonModel
 import ru.papino.restaurant.data.datasource.net.services.MenuService
 import ru.papino.restaurant.data.mappers.MenuMapper
 import ru.papino.restaurant.domain.repository.MenuRepository
-import ru.papino.restaurant.domain.repository.models.MenuResponse
+import ru.papino.restaurant.domain.response.MenuResponse
 
 internal class MenuRepositoryImpl(
     private val netDS: NetDataSource,

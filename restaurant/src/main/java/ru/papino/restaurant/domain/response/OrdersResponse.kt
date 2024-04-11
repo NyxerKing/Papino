@@ -1,6 +1,7 @@
-package ru.papino.restaurant.domain.repository.models
+package ru.papino.restaurant.domain.response
 
 import ru.papino.restaurant.core.net.repeater.RequestRepeatError
+import ru.papino.restaurant.domain.models.OrderModel
 
 internal sealed class OrdersResponse {
 

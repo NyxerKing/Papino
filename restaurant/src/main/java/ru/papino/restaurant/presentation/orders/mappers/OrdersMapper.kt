@@ -1,7 +1,7 @@
 package ru.papino.restaurant.presentation.orders.mappers
 
-import ru.papino.restaurant.domain.repository.models.OrderModel
-import ru.papino.restaurant.domain.repository.models.status.OrderStatus
+import ru.papino.restaurant.domain.models.OrderModel
+import ru.papino.restaurant.domain.status.OrderStatus
 import ru.papino.restaurant.presentation.orders.models.OrderUIModel
 
 internal class OrdersMapper {

@@ -11,8 +11,8 @@ import ru.papino.restaurant.core.CoroutineProperty
 import ru.papino.restaurant.data.mappers.UserMapper
 import ru.papino.restaurant.data.repository.UserRepositoryImpl
 import ru.papino.restaurant.databinding.FragmentRegistrationBinding
-import ru.papino.restaurant.domain.repository.models.UserModel
-import ru.papino.restaurant.domain.repository.models.UserResponse
+import ru.papino.restaurant.domain.models.UserModel
+import ru.papino.restaurant.domain.response.UserResponse
 import ru.papino.restaurant.domain.usecases.CreateUserUseCase
 import ru.papino.restaurant.extensions.switchFragment
 import ru.papino.restaurant.presentation.registration.viewmodels.RegistrationViewModel

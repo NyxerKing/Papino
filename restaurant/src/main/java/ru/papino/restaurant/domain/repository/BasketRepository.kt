@@ -1,8 +1,8 @@
 package ru.papino.restaurant.domain.repository
 
 import kotlinx.coroutines.flow.SharedFlow
-import ru.papino.restaurant.domain.repository.models.ProductModel
-import ru.papino.restaurant.domain.repository.models.status.BasketActionStatus
+import ru.papino.restaurant.domain.models.ProductModel
+import ru.papino.restaurant.domain.status.BasketActionStatus
 
 internal interface BasketRepository {
 

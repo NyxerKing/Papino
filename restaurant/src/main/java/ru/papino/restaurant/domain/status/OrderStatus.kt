@@ -1,4 +1,4 @@
-package ru.papino.restaurant.domain.repository.models.status
+package ru.papino.restaurant.domain.status
 
 import com.google.gson.annotations.SerializedName
 

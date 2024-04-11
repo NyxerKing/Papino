@@ -5,7 +5,7 @@ import ru.papino.restaurant.data.datasource.net.impl.NetDataSource
 import ru.papino.restaurant.data.datasource.net.services.AboutService
 import ru.papino.restaurant.data.mappers.AboutMapper
 import ru.papino.restaurant.domain.repository.AboutRepository
-import ru.papino.restaurant.domain.repository.models.AboutResponse
+import ru.papino.restaurant.domain.response.AboutResponse
 
 internal class AboutRepositoryImpl(
     private val local: AboutLocalDataSource,

@@ -1,7 +1,7 @@
 package ru.papino.restaurant.data.datasource.room.mappers
 
 import ru.papino.restaurant.data.datasource.room.models.BasketProductEntity
-import ru.papino.restaurant.domain.repository.models.ProductModel
+import ru.papino.restaurant.domain.models.ProductModel
 
 internal class RoomBasketMapper {
 
