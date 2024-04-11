@@ -1,5 +1,6 @@
 package ru.papino.restaurant.data.repository
 
+import ru.papino.restaurant.core.settings.CoreSettings
 import ru.papino.restaurant.data.datasource.local.AboutLocalDataSource
 import ru.papino.restaurant.data.datasource.net.impl.NetDataSource
 import ru.papino.restaurant.data.datasource.net.services.AboutService
@@ -22,6 +23,7 @@ internal class AboutRepositoryImpl(
             val response = service.getAbout().execute()
             response.body()?.let {
                 local.setBuffer(it)
+                CoreSettings.isPlaceOpen = !it.isClose
                 return AboutResponse.Success(data = aboutMapper.toDomain(it))
             } ?: return AboutResponse.Error(Exception("Данные не получены"))
         } catch (ex: Exception) {
