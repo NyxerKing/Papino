@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
+import ru.papino.restaurant.R
 import ru.papino.restaurant.ScreenManager
 import ru.papino.restaurant.core.CoroutineProperty
 import ru.papino.restaurant.data.mappers.UserMapper
@@ -43,8 +44,16 @@ internal class AuthorizationFragment : Fragment(), CoroutineProperty {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initViews()
         initClicks()
         initObserver()
+    }
+
+    private fun initViews() {
+        binding.editTextPhone.setMask(
+            mask = resources.getString(R.string.input_phone_mask),
+            pattern = resources.getString(R.string.input_phone_pattern_check)
+        )
     }
 
     private fun initObserver() {

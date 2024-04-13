@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import ru.papino.restaurant.R
 import ru.papino.restaurant.databinding.ActivitySandboxBinding
 
 class SandboxActivity : AppCompatActivity() {
@@ -14,6 +15,17 @@ class SandboxActivity : AppCompatActivity() {
 
         binding = ActivitySandboxBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        setData()
+    }
+
+    private fun setData() {
+        with(binding) {
+            editTextPhone.setMask(
+                resources.getString(R.string.input_phone_mask),
+                resources.getString(R.string.input_phone_pattern_check)
+            )
+        }
     }
 
     companion object {

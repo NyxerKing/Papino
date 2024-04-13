@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroundMenuColor"
+    android:background="@drawable/bg_rect_base"
     android:orientation="vertical"
     android:paddingHorizontal="@dimen/d_10"
     android:paddingTop="@dimen/d_20">
@@ -27,5 +27,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:indeterminate="true" />
+
+    <ru.papino.uikit.components.inputs.MaskedEditText
+        android:id="@+id/editTextPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/d_40"
+        android:inputType="phone"
+        android:textAppearance="@style/PaPino.TextAppearances.Controller.Count"
+        android:textColor="@color/backgroundCardColor"
+        android:textColorHint="@color/backgroundButtonGreyMedium" />
 
 </LinearLayout>

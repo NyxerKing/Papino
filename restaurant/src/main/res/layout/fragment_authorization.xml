@@ -36,7 +36,7 @@
             android:textAppearance="@style/PaPino.TextAppearances.Menu.Title.Bold"
             android:textColor="@color/backgroundCardColor" />
 
-        <EditText
+        <ru.papino.uikit.components.inputs.MaskedEditText
             android:id="@+id/editTextPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
