@@ -39,4 +39,7 @@
     <string name="dialog_message_bascket_title">Не все поля заполнены</string>
 
     <string name="loader_order_create_message">Нужно немного подождать.\nМы оформляем Ваш заказ.</string>
+
+    <string name="input_phone_mask">+998_________</string>
+    <string name="input_phone_pattern_check">^[+]998[0-9]*$</string>
 </resources>
